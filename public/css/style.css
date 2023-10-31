@@ -1,0 +1,24 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.form-group{
+    padding : 15px;
+    width: 400px;
+    height: 400px;
+    border: 2px solid #1ABC9C;
+    position: static;
+    border-radius: 20px;
+    box-shadow: 5px 10px #1ABC9C;
+    margin-left: 400px;
+}
+
+.form-group h2{
+    text-align: center;
+    color: #E67E22;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+}
