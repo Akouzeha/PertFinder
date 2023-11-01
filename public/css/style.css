@@ -24,7 +24,7 @@ body{
     color: #E67E22;
     font-size: 30px;
     font-weight: bold;
-    margin-top: 10px;
+    margin: 0 auto; 
 }
 .form-input{
     width: 300px;
@@ -52,7 +52,12 @@ body{
     font-size: 20px;
 }
 .form-group .btn{
-    margin-left: 40px;
+    margin-left: 100px;
+}
+
+.form-par{
+    font-size: 25px;
+    margin-left: 400px;
 }
 
 /* ============================================== */
@@ -65,9 +70,18 @@ body{
     font-size: 20px;
     font-weight: bold;
     border-radius: 10px;
-    width: 300px;
+    width: 200px;
     height: 40px;
-    padding: 10px;
+    padding-bottom: 20px;
+    transition-duration: 0.4s;
+    margin-top: 20px;
+    text-align: center;
+}
+.btn:hover{
+    background-color: white;
+    color:#E67E22;
+    border: 2px solid #E67E22;
+    cursor: pointer;
 }
 
 /* ============================================== */
