@@ -7,7 +7,6 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
 
     {{ form_errors(registrationForm) }}
 
@@ -27,9 +26,9 @@
                 {{ form_widget(registrationForm.plainPassword.first, { 'attr': {'class': 'form-input'} }) }}
 
                 {{ form_widget(registrationForm.plainPassword.second, { 'attr': {'class': 'form-input'} }) }}
-                {{ form_row(registrationForm.agreeTerms) }} <a href="">Conditions générales d'utilisation</a>
-
-
+                <div class="agree-terms">
+                <a href="">{{ form_row(registrationForm.agreeTerms) }} </a>
+                </div>
                 <button type="submit" class="btn">S'inscrire</button>
             
         </div>

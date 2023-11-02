@@ -3,6 +3,9 @@ body{
     padding: 0;
     box-sizing: border-box;
 }
+/* ============================================== */
+/* Navigation Bar */
+
 
 /* the forms  */
 
@@ -15,6 +18,7 @@ body{
     border-radius: 20px;
     box-shadow: 5px 10px #1ABC9C;
     margin-left: 400px;
+    margin-top: 50px;
     float: center;
 
 }
@@ -60,6 +64,13 @@ body{
     margin-left: 400px;
 }
 
+.agree-terms{
+    margin-left: 40px;
+    font-size: 16px;
+    color: #1ABC9C;
+}
+
+
 /* ============================================== */
 
 /* the buttons */
@@ -70,12 +81,10 @@ body{
     font-size: 20px;
     font-weight: bold;
     border-radius: 10px;
-    width: 200px;
-    height: 40px;
-    padding-bottom: 20px;
+    padding: 12px 50px;
     transition-duration: 0.4s;
     margin-top: 20px;
-    text-align: center;
+    box-shadow: 0 5px rgba(230, 125, 34, 0.447);
 }
 .btn:hover{
     background-color: white;
@@ -83,5 +92,9 @@ body{
     border: 2px solid #E67E22;
     cursor: pointer;
 }
+.btn:active {
+    box-shadow: 0 0;
+    transform: translateY(4px);
+  }
 
 /* ============================================== */
