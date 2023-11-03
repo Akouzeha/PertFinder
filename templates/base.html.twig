@@ -5,6 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/agencement.css') }}">
         {% block stylesheets %}
         {% endblock %}
 
@@ -12,10 +13,46 @@
         {% endblock %}
     </head>
     <body>
-        <a href="{{ path('app_home') }}">Home</a>
-        <a href="{{ path('app_register') }}">Register</a>
-        <a href="{{ path('app_login') }}">Login</a>
-        <a href="{{ path('app_logout') }}">Logout</a>
+                <img class="logo" src="{{ asset('img/logoVector.png') }}" alt="logo">
+        <header>
+            
+            <div class="navBar">
+                <ul class="navList">
+                    <li class="navItem"><a href="{{ path('app_home') }}">Home</a></li>
+                    <li class="navItem"><a href="{{ path('app_home') }}">Créer Projet</a></li>
+                    <li class="navItem"><a href="{{ path('app_home') }}">Projets</a></li>
+                    <li class="navItem"><a href="{{ path('app_home') }}">Mon Compte</a></li>
+                    <li class="navItem"><a href="{{ path('app_home') }}">Chat</a></li>
+                    {% if (app.user) %}  
+                        <li class="navItem"><a href="{{ path('app_logout') }}">logout</a></li>
+                        {% else %}
+                        <li class="navItem"><a href="{{ path('app_register') }}">Connexion</a></li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </header>
+
+        
         {% block body %}{% endblock %}
+        <footer>
+            <div class="row">
+                <ul class="left-list">
+                    <li><a href="{{ path('app_home') }}">Home</a></li>
+                    <li><a href="{{ path('app_home') }}">Créer Projet</a></li>
+                    <li><a href="{{ path('app_home') }}">Projets</a></li>
+                </ul>
+                <ul class="middle-list">
+                    <li><a href="{{ path('app_home') }}">Mon Compte</a></li>
+                    <li><a href="{{ path('app_home') }}">Chat</a></li>
+                    <li><a href="{{ path('app_home') }}">Connexion</a></li>
+                </ul>
+                <ul class="right-list">
+                    <li><a href="{{ path('app_home') }}">Mentions légales</a></li>
+                    <li><a href="{{ path('app_home') }}">CGU</a></li>
+                    <li><a href="{{ path('app_home') }}">Contact</a></li>
+                </ul>
+            </div>
+        </footer>
     </body>
 </html>
