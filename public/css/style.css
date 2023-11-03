@@ -59,6 +59,10 @@ header{
     border: 2px solid #E67E22;
     box-shadow: 0 5px #e67d22c4;
 }
+.activated a{
+    color: #E67E22;
+    cursor: pointer;
+}
 .navList a:active {
     box-shadow: 0 0;
     transform: translateY(4px);
