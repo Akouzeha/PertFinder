@@ -4,18 +4,26 @@
 body{
     margin: 0;
     padding: 0;
+    height: 100%;
     box-sizing: border-box;
     background-color: #ECE9E9;
     display: flex;
     flex-direction: column;
 }
 .logo{
-    width:22%;
+    width:200px;
     margin-top: 10px;
-    margin-left: 10px;
     float: left;
-    position: fixed;
+    
 }
+.logoDiv{
+    width:20%;
+    height:100px;
+    position: fixed;
+    top:0;
+    left:0;
+}
+
 header{
     width: 100%;
 
@@ -23,35 +31,42 @@ header{
 }
 /* ============================================== */
 /* Navigation Bar */
-.navBar{
-    width: 80%;
-    margin-bottom: 30px;
+.topnav li {
+    display: inline;
+  }
+  .topnav {
+    overflow: hidden;
+    background-color: #ECE9E9;
+  }
+  .topnav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 3px;
+    overflow: hidden;
     background-color: #ECE9E9;
     position: fixed;
-    float:right;
     top: 0;
-    margin-left: 220px;
-    z-index: 100;
-}
-.navList{
-    
-    float:left;
-    margin-top: 50px;
-}  
-.navList li{
-    display: inline-block;
-    margin-right: 20px;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 10px;
-    transition-duration: 0.4s;
-}
-.navList a{
-    text-decoration: none;
+    right: 0;
+    width: 80%;
+    border-bottom: 1px solid #1ABC9C;
+  }
+  
+  .topnav a {
+    float: left;
+    display: block;
     color: #1ABC9C;
-}
-.navList a:hover{
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    margin-left:30px;
+    font-size: 17px;
+  }
+  
+  .topnav .icon {
+    display: none;
+  }
+  .topnav a:hover{
     color: #E67E22;
     cursor: pointer;
     padding: 6px 8px;
@@ -63,17 +78,18 @@ header{
     color: #E67E22;
     cursor: pointer;
 }
-.navList a:active {
+.topnav a:active {
     box-shadow: 0 0;
     transform: translateY(4px);
   }
+
 
 /* the forms  */
 
 .form-group{
     padding : 15px;
     width:400px;
-    height: 500px;
+    height: auto;
     border: 2px solid #1ABC9C;
     border-radius: 20px;
     box-shadow: 5px 10px #1ABC9C;
@@ -102,12 +118,12 @@ header{
     margin-top: 20px;
     padding-left: 20px;
     font-size: 20px;
-    font-weight: bold;
-    color: #1ABC9C;
+    font-weight: semi-bold;
+    color: black;
     background-color: rgb(26, 188, 156, 0.14);
 }
 ::placeholder{
-    color:black;
+    color:rgba(0, 0, 0, 0.705);
     font-size: 15px;
     text-align: center;
     opacity: 0.5;
@@ -207,8 +223,6 @@ footer a:hover{
   }
 
 /* ============================================== */
-
-
 
 
 /* ============================================== */
