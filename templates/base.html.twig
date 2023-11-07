@@ -17,25 +17,23 @@
     <body>
         
             <header>
-                <div class="logoDiv">
-                    <img class="logo" src="{{ asset('img/logoVector.png') }}" alt="logo">
-                </div>
                 <div class="topnav" id="myNavBar">
                     <nav>
                         <ul>
+                            <img class="logo" src="{{ asset('img/logo.svg') }}" alt="logo">
                             {# check if the route is the current page, add a class to highlight it #}
-                            <li class={% if app.request.attributes.get('_route') == 'app_home' %} "activated" {% else %}"navItem"{% endif %}><a href="{{ path('app_home') }}">Home</a></li>
-                            <li class="navItem"><a href="">Créer Projet</a></li>
-                            <li class="navItem"><a href="">Projets</a></li>
-                            <li class="navItem"><a href="">Mon Compte</a></li>
-                            <li class="navItem"><a href="">Chat</a></li>
                             {% if (app.user) %}  
                                 <li class={% if app.request.attributes.get('_route') == 'app_logout' %} "activated" {% else %}"navItem"{% endif %}><a href="{{ path('app_logout') }}">logout</a></li>
                                 {% else %}
-                                <li class={% if app.request.attributes.get('_route') == 'app_register' %} "activated" {% else %}"navItem"{% endif %}><a href="{{ path('app_register') }}">Connexion</a></li>
+                                <li class={% if app.request.attributes.get('_route') == 'app_register' %} "activated" {% else %}"navItem"{% endif %}><a href="{{ path('app_register') }}">Inscription</a></li>
                                 <li class={% if app.request.attributes.get('_route') == 'app_login' %} "activated" {% else %}"navItem"{% endif %}><a href="{{ path('app_login') }}">login</a></li>
 
                             {% endif %}
+                            <li class="navItem"><a href="">Chat</a></li>
+                            <li class="navItem"><a href="">Mon Compte</a></li>
+                            <li class="navItem"><a href="">Projets</a></li>
+                            <li class="navItem"><a href="">Créer Projet</a></li>
+                            <li class={% if app.request.attributes.get('_route') == 'app_home' %} "activated" {% else %}"navItem"{% endif %}><a href="{{ path('app_home') }}">Home</a></li>
                             <li class="navItem"><a href="javascript:void(0);" class="icon" onclick="myFunction()">
                                 <i class="fa fa-bars"></i>
                                 </a>

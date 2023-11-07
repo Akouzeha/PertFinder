@@ -51,7 +51,7 @@
 
 }
 /* navBar and logo for mobile phones: */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .topnav a {display: none;}
     .topnav a.icon {
       float: right;
@@ -59,7 +59,7 @@
     }
   }
   
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 800px) {
     .topnav.responsive {position: relative;}
     .topnav.responsive .icon {
       position: absolute;
@@ -71,5 +71,25 @@
       display: block;
       text-align: left;
     }
+    .topnav ul{
+        width: 100%;
+    }
   }
+/* ============================================== */
+
+/* homePage */
+@media screen and (max-width: 800px) {
+    .homeContainer, .col-6{
+        width: 100%;
+        margin-left: 0px;
+    }
+    .homeContainer .btn{
+        margin-top : 20px;
+    }
+    .homeContainer .petitP{
+        margin-bottom: 10px;
+        height: 30px;
+    }
+}
+
 /* ============================================== */

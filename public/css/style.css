@@ -11,18 +11,11 @@ body{
     flex-direction: column;
 }
 .logo{
-    width:200px;
-    margin-top: 10px;
+    width:80px;
+    height: 60px;
     float: left;
-    
-}
-.logoDiv{
-    width:20%;
-    height:100px;
-    
     position: fixed;
-    top:0;
-    left:0;
+    
 }
 
 header{
@@ -34,6 +27,7 @@ header{
 /* Navigation Bar */
 .topnav li {
     display: inline;
+    
   }
   .topnav {
     overflow: hidden;
@@ -49,13 +43,14 @@ header{
     position: fixed;
     top: 0;
     right: 0;
-    width: 80%;
+    width: 100%;
     border-bottom: 1px solid #1ABC9C;
-  }
+    
+}
   
   .topnav a {
-    float: left;
-    display: block;
+    float: right;
+    display: inline-block;
     color: #1ABC9C;
     text-align: center;
     padding: 14px 16px;
@@ -94,7 +89,7 @@ header{
     border: 2px solid #1ABC9C;
     border-radius: 20px;
     box-shadow: 5px 10px #1ABC9C;
-    margin-left: 350px;
+    margin-left: 430px;
     margin-top: 150px;
 
     float: left;
