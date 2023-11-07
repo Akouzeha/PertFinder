@@ -90,6 +90,9 @@
         margin-bottom: 10px;
         height: 30px;
     }
+    .homeContainer .grandP{
+        text-align: center;
+    }
 }
 
 /* ============================================== */

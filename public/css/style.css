@@ -240,16 +240,6 @@ footer a:hover{
     font-size: 20px;
     color: #1ABC9C;
 }
-.grandP{
-    width: 60%;
-    height: 100%;
-    margin-left:220px;
-    text-align: center;
-    font-size: 18px;
-    margin-top:15px;
-    margin-bottom: 0px;
-    color: #E67E22;
-}
 .left-photo{
     width:100%;
     height: 380px;
@@ -257,6 +247,15 @@ footer a:hover{
 .right-photo{
     width:100%;
     height: 380px;
+}
+.homeContainer h5{
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    color: #E67E22;
 }
 .petitP {
     width: 100%;
