@@ -196,11 +196,13 @@ footer a:hover{
 
 /* the buttons */
 .btn{
+    text-decoration: none;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: lighter;
     border: #E67E22;
     background-color: #E67E22;
     color: white;
     font-size: 20px;
-    font-weight: bold;
     border-radius: 10px;
     padding: 12px 50px;
     transition-duration: 0.4s;
@@ -268,13 +270,148 @@ footer a:hover{
     color: #1ABC9C;
 }
 .homeContainer .btn{
-    text-decoration: none;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight: lighter;
-    margin-left: 180px;
+    margin-left: 100px;
     margin-top: 0;
-    width:100%;
+    width:50%;
 }
 
 
 /* ============================================== */
+
+/* project form */
+
+.project-form{
+    width: 80%;
+    height: 100%;
+    margin-left:150px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: #ECE9E9;
+}
+.project-form h2{
+    text-align: center;
+    color: #E67E22;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 auto; 
+}
+
+.form-textArea{
+    margin-top:20px;
+    width:320px;
+    height: 140px;
+    font-size: 20px;
+}
+
+
+.project-form .btn{
+    margin-left: 160px;
+    width: 60%;
+}
+
+.project-form-input{
+    width: 300px;
+    height: 30px;
+    border-radius:10px;
+    border: 2px solid #1ABC9C;
+    box-shadow: 0 5px #1ABC9C ;
+    margin-left: 40px;
+    
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: semi-bold;
+    color: black; 
+}
+.project-form .required{
+    color: black;
+    font-size: 20px;
+    margin-left: 40px;
+    margin-top: 50px;
+}
+.project-form .required::after{
+    content: " *";
+    color: red;
+}
+.project-form .form-row{
+    height: 80px;;
+    margin-left: 40px;
+}
+
+/* ============================================== */
+
+.list-projects{
+    width: 100%;
+    height: 100%;
+    float: left;
+    margin-top: 200px;
+    margin-bottom: 100px;
+    background-color: #ECE9E9;
+}
+
+/* ============================================== */
+/* project list */
+
+.list-projects{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    float: left;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: #ECE9E9;
+}
+.box-row{
+    width: 75%;
+    height:auto;
+    margin:auto;
+    margin-top:15px;
+    border: 2px solid #1ABC9C;
+    background-color: white;
+}
+.image{
+    width: 120px;
+    height: 120px;
+    float: left;
+    border-radius: 100px;
+    margin-top: 0px;
+    
+}
+
+.list-projects h5{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 10px;
+    float: left;
+    text-align: center;
+    font-size: 30px;
+    color: #1ABC9C;
+}
+.box-row a{
+    float:right;
+    margin-top: 3px;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.list-projects p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 20px;
+    padding-left: 10px;
+    float: left;
+    text-align: center;
+    font-size: 20px;
+    color: #E67E22;
+}
+
+/* ============================================== */
+
+.demande-connexion{
+    width: 100%;
+    height: 100%;
+    float: left;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: #ECE9E9;
+}

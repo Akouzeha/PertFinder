@@ -3,18 +3,35 @@
 {% block title %}Hello ProjectController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Applications/MAMP/htdocs/KOUZEHA_Ammar/PertFinder/src/Controller/ProjectController.php'|file_link(0) }}">src/Controller/ProjectController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Applications/MAMP/htdocs/KOUZEHA_Ammar/PertFinder/templates/project/index.html.twig'|file_link(0) }}">templates/project/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {% if app.user %}
+            <div class ="list-projects">
+                {% for project in projects %}
+                <div class="box-row">
+                    <div class="list-project-row-1">
+                        <div class="col-12">
+                            <a href="{{path('edit_project', {'id': project.id})}}">edit</a>
+                            <a href="{{path('delete_project', {'id': project.id})}}">delete</a>
+                            <a>test</a>
+                            <img class="image" src="{{ asset('img/pertFinderLogo.png') }}" alt="image"><br>
+                            <h5 style="width:70%;">{{project.title}}</h5>
+                            <p style="color:black;">{{project.description}}</p>   
+                        </div>
+                    </div>
+                    <div class="list-project-row-1">
+                        <div class="col-5">
+                           <p> a été créé par {{project.user}}</p>
+                        </div>
+                        <div class="col-6">
+                           <p> dernier message par {{project.user}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="demande-connexion">
+                <p>Vous devez être connecté pour voir les projets</p>
+                <a href="{{path('app_login')}}">Se connecter</a>
+            </div>
+    {% endif %}
 {% endblock %}

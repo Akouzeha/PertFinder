@@ -3,5 +3,31 @@
 {% block title %}Hello ProjectController!{% endblock %}
 
 {% block body %}
-    {{form(formProject)}}
+        <div class="project-form">
+        {{form_errors(formProject)}}
+        {{form_start(formProject)}}
+            <h2> Créez un nouveau projet ou listez tous les projets <a href="{{path('app_project')}}">ICI</a> </h2>
+            <div class="col-6">
+                <div class="form-row">
+                    {{form_label(formProject.title)}}
+                    {{form_widget(formProject.title)}}
+                </div>
+                <div class="form-row">
+                    {{form_label(formProject.dateDebut)}}
+                    {{form_widget(formProject.dateDebut)}}
+                </div>
+                <div class="form-row">
+                    {{form_label(formProject.dateFin)}}
+                    {{form_widget(formProject.dateFin)}}
+                </div>
+            </div>
+            <div class="col-6">
+                {{form_widget(formProject.description)}}
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn">Créer</button>
+            </div>
+
+        </div>
+        {{form_end(formProject)}}
 {% endblock %}

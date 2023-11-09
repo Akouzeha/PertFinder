@@ -34,6 +34,9 @@ class Project
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comment;
 
+    #[ORM\Column(length: 100)]
+    private ?string $title = null;
+
     public function __construct()
     {
         $this->diagrams = new ArrayCollection();
@@ -149,6 +152,18 @@ class Project
                 $comment->setProject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): static
+    {
+        $this->title = $title;
 
         return $this;
     }

@@ -39,14 +39,14 @@
 }
 
 /* Registeration et login forms For mobile phones: */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     .form-group, .form-input{
         width: 95%;
         margin-left:10px;
     }
     .form-group .btn{
         
-        margin-left: 200px;
+        width: 100%;
     }
 
 }
@@ -69,7 +69,7 @@
     .topnav.responsive a {
       float: none;
       display: block;
-      text-align: left;
+      text-align: center;
     }
     .topnav ul{
         width: 100%;
@@ -85,6 +85,8 @@
     }
     .homeContainer .btn{
         margin-top : 20px;
+        margin-left:0;
+        width: 100%;
     }
     .homeContainer .petitP{
         margin-bottom: 10px;
@@ -96,3 +98,25 @@
 }
 
 /* ============================================== */
+/* project form */
+
+@media screen and (max-width: 800px) {
+    .project-form{
+        width: 100%;
+        margin-left: 0px;
+    }
+    .project-form .btn{
+        margin-left:0;
+        width: 100%;
+    }
+    .form-textArea{
+        width: 100%;
+    }
+    .project-form-input{
+        width: 100%;
+    }
+    .project-form, .form-row, .project-form-input, .required{
+        margin-left: 0px;
+    }
+    
+}

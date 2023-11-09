@@ -7,11 +7,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/agencement.css') }}">
-        <link href="{{ asset('js/script.js') }}">
         {% block stylesheets %}
         {% endblock %}
 
         {% block javascripts %}
+        <script src="{{ asset('js/script.js') }}"></script>
         {% endblock %}
     </head>
     <body>
@@ -23,17 +23,17 @@
                             <img class="logo" src="{{ asset('img/logo.svg') }}" alt="logo">
                             {# check if the route is the current page, add a class to highlight it #}
                             {% if (app.user) %}  
-                                <li class={% if app.request.attributes.get('_route') == 'app_logout' %} "activated" {% else %}"navItem"{% endif %}><a href="{{ path('app_logout') }}">logout</a></li>
+                                <li class={% if app.request.attributes.get('_route') == 'app_logout' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_logout') }}">logout</a></li>
                                 {% else %}
-                                <li class={% if app.request.attributes.get('_route') == 'app_register' %} "activated" {% else %}"navItem"{% endif %}><a href="{{ path('app_register') }}">Inscription</a></li>
-                                <li class={% if app.request.attributes.get('_route') == 'app_login' %} "activated" {% else %}"navItem"{% endif %}><a href="{{ path('app_login') }}">login</a></li>
+                                <li class={% if app.request.attributes.get('_route') == 'app_register' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_register') }}">Inscription</a></li>
+                                <li class={% if app.request.attributes.get('_route') == 'app_login' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_login') }}">login</a></li>
 
                             {% endif %}
                             <li class="navItem"><a href="">Chat</a></li>
                             <li class="navItem"><a href="">Mon Compte</a></li>
-                            <li class="navItem"><a href="">Projets</a></li>
-                            <li class="navItem"><a href="">Créer Projet</a></li>
-                            <li class={% if app.request.attributes.get('_route') == 'app_home' %} "activated" {% else %}"navItem"{% endif %}><a href="{{ path('app_home') }}">Home</a></li>
+                            <li class={% if app.request.attributes.get('_route') == 'app_project' %} "activated" {% else %}""{% endif %}><a href="{{path('app_project')}}">Projets</a></li>
+                            <li class={% if app.request.attributes.get('_route') == 'create_project' %} "activated" {% else %}""{% endif %}><a href="{{path('create_project')}}">Créer Projet</a></li>
+                            <li class={% if app.request.attributes.get('_route') == 'app_home' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_home') }}">Home</a></li>
                             <li class="navItem"><a href="javascript:void(0);" class="icon" onclick="myFunction()">
                                 <i class="fa fa-bars"></i>
                                 </a>

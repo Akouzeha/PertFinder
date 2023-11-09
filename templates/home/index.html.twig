@@ -6,7 +6,7 @@
     <div class="homeContainer">
         <div class="row">
             <div class="col-12">
-                <h2>Bienvene</h2>
+                <h2>Bienvene {{app.user}}</h2>
                 <h3>PertFinder Application</h3>
                 <h5 class ="grandP">Le PERT, ou Program Evaluation and Review Technique 
                 <a style="color: blue; text-decoration: none; " 
@@ -18,12 +18,16 @@
             <div class="col-6">
                 <img src="{{ asset('img/pert.gif') }}" alt="pert" class="left-photo">
                 <p class="petitP">Découvrez la puissance des diagrammes PERT avec PertFinder</p>
-                <a href="" class="btn">Commencez</a>
+                <form action="{{ path('create_project') }}" method="post">
+                    <button type="submit" class="btn">Créer un Projet</button>
+                </form>
             </div>
             <div class="col-6">
                 <img src="{{ asset('img/pert-right.jpg') }}" alt="pert" class="right-photo">
                 <p class="petitP">Charger et discuter des projets créés par d'autres utilisateurs</p>
-                <a href="" class="btn">Allons-y !</a>
+                <form action="{{ path('app_project') }}" method="post">
+                    <button type="submit" class="btn">Allons-y !</button>
+                </form>
             </div>
         </div>
     </div>
