@@ -1,0 +1,27 @@
+{# templates/project/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    {# {# {# ... other project details ... #}
+
+    <div class="project-form">
+        {{form_errors(formDiagram)}}
+        {{ form_start(formDiagram) }}
+        <h2>Create a new Chart</h2>
+            <div class="col-12">
+                <div class="form-row">
+                    
+                    {{form_widget(formDiagram.title)}}
+                </div>
+                <div class="form-row">
+                    
+                    {{form_widget(formDiagram.description)}}
+                </div>
+            </div>
+            <div class="chart-btn col-12">
+                <button type="submit" class="btn">Create</button>
+            </div>
+    </div>
+        {{ form_end(formDiagram) }}
+{% endblock %}

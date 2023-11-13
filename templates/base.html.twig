@@ -18,29 +18,45 @@
         
             <header>
                 <div class="topnav" id="myNavBar">
-                    <nav>
-                        <ul>
-                            <img class="logo" src="{{ asset('img/logo.svg') }}" alt="logo">
-                            {# check if the route is the current page, add a class to highlight it #}
-                            {% if (app.user) %}  
-                                <li class={% if app.request.attributes.get('_route') == 'app_logout' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_logout') }}">logout</a></li>
-                                {% else %}
-                                <li class={% if app.request.attributes.get('_route') == 'app_register' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_register') }}">Inscription</a></li>
-                                <li class={% if app.request.attributes.get('_route') == 'app_login' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_login') }}">login</a></li>
+                        <nav>
+                            <ul>
+                                <img class="logo" src="{{ asset('img/logo.svg') }}" alt="logo">
+                                {# check if the route is the current page, add a class to highlight it #}
+                                {% if (app.user) %}  
+                                    <li class={% if app.request.attributes.get('_route') == 'app_logout' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_logout') }}">logout</a></li>
+                                    {% else %}
+                                    <li class={% if app.request.attributes.get('_route') == 'app_register' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_register') }}">Inscription</a></li>
+                                    <li class={% if app.request.attributes.get('_route') == 'app_login' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_login') }}">login</a></li>
 
-                            {% endif %}
-                            <li class="navItem"><a href="">Chat</a></li>
-                            <li class="navItem"><a href="">Mon Compte</a></li>
-                            <li class={% if app.request.attributes.get('_route') == 'app_project' %} "activated" {% else %}""{% endif %}><a href="{{path('app_project')}}">Projets</a></li>
-                            <li class={% if app.request.attributes.get('_route') == 'create_project' %} "activated" {% else %}""{% endif %}><a href="{{path('create_project')}}">Créer Projet</a></li>
-                            <li class={% if app.request.attributes.get('_route') == 'app_home' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_home') }}">Home</a></li>
-                            <li class="navItem"><a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                                <i class="fa fa-bars"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                                {% endif %}
+                                <li class="navItem"><a href="">Chat</a></li>
+                                <li class="navItem"><a href="">Mon Compte</a></li>
+                                <li class={% if app.request.attributes.get('_route') == 'app_project' %} "activated" {% else %}""{% endif %}><a href="{{path('app_project')}}">Projets</a></li>
+                                <li class={% if app.request.attributes.get('_route') == 'create_project' %} "activated" {% else %}""{% endif %}><a href="{{path('create_project')}}">Créer Projet</a></li>
+                                <li class={% if app.request.attributes.get('_route') == 'app_home' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_home') }}">Home</a></li>
+                                <li class="navItem"><a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                                    <i class="fa fa-bars"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                 </div>
+                {# <div class="dropdown">
+                    <button class="dropbtn">Dropdown</button>
+                    <div class="dropdown-content">
+                        <a href="{{ path('app_home') }}">Home</a>
+                        <a href="{{path('create_project')}}">Créer Projet</a>
+                        <a href="{{path('app_project')}}">Projets</a>
+                        <a href="">Mon Compte</a>
+                        <a href="">Chat</a>
+                        {% if (app.user) %}
+                            <a href="{{ path('app_logout') }}">logout</a>
+                        {% else %}
+                            <a href="{{ path('app_register') }}">Inscription</a>
+                            <a href="{{ path('app_login') }}">login</a>
+                        {% endif %}
+                    </div>
+                  </div> #}
             </header>
 
             
@@ -48,17 +64,17 @@
         
         <footer>
             <div class="row">
-                <ul class="left-list">
+                <ul class="list">
                     <li><a href="{{ path('app_home') }}">Home</a></li>
                     <li><a href="{{ path('app_home') }}">Créer Projet</a></li>
                     <li><a href="{{ path('app_home') }}">Projets</a></li>
                 </ul>
-                <ul class="middle-list">
+                <ul class="list">
                     <li><a href="{{ path('app_home') }}">Mon Compte</a></li>
                     <li><a href="{{ path('app_home') }}">Chat</a></li>
                     <li><a href="{{ path('app_home') }}">Connexion</a></li>
                 </ul>
-                <ul class="right-list">
+                <ul class="list">
                     <li><a href="{{ path('app_home') }}">Mentions légales</a></li>
                     <li><a href="{{ path('app_home') }}">CGU</a></li>
                     <li><a href="{{ path('app_home') }}">Contact</a></li>

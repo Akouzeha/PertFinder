@@ -3,6 +3,7 @@
 {% block title %}Hello ProjectController!{% endblock %}
 
 {% block body %}
+    {% if app.user %}
         <div class="project-form">
         {{form_errors(formProject)}}
         {{form_start(formProject)}}
@@ -24,10 +25,21 @@
             <div class="col-6">
                 {{form_widget(formProject.description)}}
             </div>
+            
             <div class="col-12">
-                <button type="submit" class="btn">Créer</button>
+                <button type="submit" class="btn">
+                {% if app.request.attributes.get('_route') == 'edit_project' %}Mettre à jour{% else %}Créer{% endif %}
+                </button>
             </div>
 
         </div>
         {{form_end(formProject)}}
+    {% else %}
+        <div class="demande-connexion">
+            <h2>Vous devez être connecté pour créer un projet</h2>
+                <a href="{{path('app_login')}}">Se connecter</a>
+            <h2>Vous n'avez pas de compte ?</h2>
+                <a href="{{path('app_register')}}">S'inscrire</a>
+        </div>
+    {% endif %}
 {% endblock %}

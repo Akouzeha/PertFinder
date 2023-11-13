@@ -38,6 +38,15 @@
     display: table;
 }
 
+/* footer for mobile phones  */
+@media screen and (max-width: 800px) {
+    footer .list {
+        width: 27%;
+        float: left;
+        margin-left: 5px;
+    }
+}
+
 /* Registeration et login forms For mobile phones: */
 @media only screen and (max-width: 800px) {
     .form-group, .form-input{
@@ -116,6 +125,47 @@
         width: 100%;
     }
     .project-form, .form-row, .project-form-input, .required{
+        margin-left: 0px;
+    }
+    
+}
+
+/* ============================================== */
+/* list projects */
+@media screen and (max-width: 800px) {
+    .box-row{
+        width: 100%;
+        margin-left: 0px;
+    }
+    .box-row h5{
+        width: 100%;
+        margin-left: 0px;
+    }
+    .box-row p{
+        font-size:16px;
+        padding-top:0px;
+        padding-bottom:0px;
+    }
+    .creat-projet, .projet-form{
+        width: 100%;
+        margin:auto;
+        
+    }
+}
+
+/* ============================================== */
+/* chart form */
+
+@media screen and (max-width: 800px) {
+    .chart-form-textArea{
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    .chart-form-input{
+        width: 100%;
+    }
+    .chart-form, .form-row, .chart-form-input, .required{
         margin-left: 0px;
     }
     

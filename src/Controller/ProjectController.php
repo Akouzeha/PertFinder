@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Diagram;
 use App\Entity\Project;
 use App\Form\ProjetType;
 use App\Repository\ProjectRepository;
@@ -35,12 +36,15 @@ class ProjectController extends AbstractController
             $project = new Project();
         }
         $project->setUser($user);
+        $project->setCreatedAt(new \DateTime());
         $form = $this->createForm(ProjetType::class, $project);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $project = $form->getData();
             $entityManager->persist($project);
             $entityManager->flush();
+
+            
             //return $this->redirectToRoute('project_show', ['id' => $project->getId()]);
             return $this->redirectToRoute('app_project');
         }
@@ -62,4 +66,13 @@ class ProjectController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('app_project');
     }
+
+    #[Route('/project/project/{id}', name: 'show_project')]
+    public function showProject(Project $project, EntityManagerInterface $entityManager): Response
+    {
+        return $this->render('project/show.html.twig',[
+            'project' => $project,
+        ]);
+    }
+
 }

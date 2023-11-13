@@ -3,8 +3,11 @@
 {% block title %}Hello ProjectController!{% endblock %}
 
 {% block body %}
-    {% if app.user %}
+                
             <div class ="list-projects">
+                    <form class="projet-form" action="{{ path('create_project') }}" method="post">
+                        <button type="submit" class="btn creat-projet">Créer un Projet</button>
+                    </form>
                 {% for project in projects %}
                 <div class="box-row">
                     <div class="list-project-row-1">
@@ -13,25 +16,12 @@
                             <a href="{{path('delete_project', {'id': project.id})}}">delete</a>
                             <a>test</a>
                             <img class="image" src="{{ asset('img/pertFinderLogo.png') }}" alt="image"><br>
-                            <h5 style="width:70%;">{{project.title}}</h5>
-                            <p style="color:black;">{{project.description}}</p>   
-                        </div>
-                    </div>
-                    <div class="list-project-row-1">
-                        <div class="col-5">
-                           <p> a été créé par {{project.user}}</p>
-                        </div>
-                        <div class="col-6">
+                            <h5><a style="float:left;margin-top:0px;" href="{{path('show_project', {'id': project.id}) }}" >{{project.title}}</a></h5> 
+                           <p>Ce Project a été créé par  <a href=""> {{project.user}}</a></p>
                            <p> dernier message par {{project.user}}</p>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
-        {% else %}
-            <div class="demande-connexion">
-                <p>Vous devez être connecté pour voir les projets</p>
-                <a href="{{path('app_login')}}">Se connecter</a>
-            </div>
-    {% endif %}
 {% endblock %}
