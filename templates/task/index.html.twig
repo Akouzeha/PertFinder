@@ -3,5 +3,46 @@
 {% block title %}Hello TaskController!{% endblock %}
 
 {% block body %}
-<p> vous pouvez commencer ajouter les tâches ici </p>
+<div class="task-form-container">
+    <div class="task-form">
+        {{form_errors(formTask)}}
+        {{form_start(formTask)}}
+            <h2> Ajoutez des tâches </h2>
+            <div class="col-5">
+                <div class="form-row">
+                    {{form_label(formTask.name)}}
+                    {{form_widget(formTask.name)}}
+                </div>
+                <div class="form-row">
+                    {{form_label(formTask.optTime)}}
+                    {{form_widget(formTask.optTime)}}
+                    
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="form-row">
+                    {{form_label(formTask.pesTime)}}
+                    {{form_widget(formTask.pesTime)}}
+                </div>
+                <div class="form-row">
+                    {{form_label(formTask.mosTime)}}
+                    {{form_widget(formTask.mosTime)}}
+                </div>
+            </div>
+            <div class="col-6">
+                {{form_widget(formTask.description)}}
+            </div>
+
+            
+            <div class="col-12">
+                <button type="submit" class="btn">
+                {% if app.request.attributes.get('_route') == 'edit_project' %}Mettre à jour{% else %}Créer{% endif %}
+                </button>
+           
+            </div>
+
+        
+        {{form_end(formTask)}}
+    </div>
+</div>
 {% endblock %}

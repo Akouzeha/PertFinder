@@ -20,10 +20,13 @@ class Task
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $startDate = null;
+    private ?\DateTimeInterface $optTime = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $endDate = null;
+    private ?\DateTimeInterface $pesTime = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $mosTime = null;
 
     #[ORM\Column]
     private ?int $duree = null;
@@ -64,26 +67,38 @@ class Task
         return $this;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getOptTime(): ?\DateTimeInterface
     {
-        return $this->startDate;
+        return $this->optTime;
     }
 
-    public function setStartDate(\DateTimeInterface $startDate): static
+    public function setOptTime(\DateTimeInterface $optTime): static
     {
-        $this->startDate = $startDate;
+        $this->optTime = $optTime;
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getPesTime(): ?\DateTimeInterface
     {
-        return $this->endDate;
+        return $this->pesTime;
     }
 
-    public function setEndDate(\DateTimeInterface $endDate): static
+    public function setPesTime(\DateTimeInterface $pesTime): static
     {
-        $this->endDate = $endDate;
+        $this->pesTime = $pesTime;
+
+        return $this;
+    }
+
+    public function getMosTime(): ?\DateTimeInterface
+    {
+        return $this->mosTime;
+    }
+
+    public function setMosTime(\DateTimeInterface $mosTime): static
+    {
+        $this->mosTime = $mosTime;
 
         return $this;
     }

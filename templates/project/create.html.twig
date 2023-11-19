@@ -25,11 +25,13 @@
             <div class="col-6">
                 {{form_widget(formProject.description)}}
             </div>
+
             
             <div class="col-12">
                 <button type="submit" class="btn">
                 {% if app.request.attributes.get('_route') == 'edit_project' %}Mettre à jour{% else %}Créer{% endif %}
                 </button>
+           
             </div>
 
         </div>

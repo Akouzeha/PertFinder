@@ -292,7 +292,7 @@ footer a:hover{
 }
 
 
-.project-form .btn{
+.project-form .btn, .task-form-container .btn{
     margin-left: 160px;
     width: 60%;
 }
@@ -430,4 +430,64 @@ footer a:hover{
     margin-bottom: 0px;
     float: right;
     margin-right: 140px ;
+}
+
+/* ================================================== */
+
+/* task form */
+
+.task-form-container{
+    width: 65%;
+    height: auto;
+    margin-left:220px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: #ECE9E9;
+    border: 2px solid #1ABC9C;
+
+}
+.task-form-container h2{
+    text-align: center;
+    color: #E67E22;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 auto;
+}
+.task-form-input{
+    width: 300px;
+    height: 30px;
+    border-radius:10px;
+    border: 2px solid #1ABC9C;
+    box-shadow: 0 5px #1ABC9C ;
+    margin-left: 40px;
+    margin-top: 10px;
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: semi-bold;
+    color: black;
+}
+
+.task-form .required{
+    color: black;
+    font-size: 20px;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+.task-form .required::after{
+    content: " *";
+    color: red;
+}
+.task-form .form-row{
+    height: 80px;;
+    margin-left: 40px;
+}
+.task-form-textArea{
+    margin-top:5px;
+    width:630px;
+    height: 70px;
+    font-size: 20px;
+    margin-left: 80px;
+}
+.task-form .btn{
+    margin-top: 0px;
 }
