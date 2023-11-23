@@ -43,7 +43,7 @@
             
             <div class="col-12">
                 <button type="submit" class="btn">
-                Créer
+                Modifier
                 </button>
             </div>
         {{form_end(formTask)}}
@@ -60,35 +60,6 @@
                 </div>
             {% endfor %}
 
-            <div class="task-list">
-                <h2> Liste des tâches </h2>
-                <table class="task-table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Temps optimiste</th>
-                            <th scope="col">Temps probable</th>
-                            <th scope="col">Temps pessimiste</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for task in tasks %}
-                            <tr>
-                                <td>{{task.name}}</td>
-                                <td>{{task.optTime}}</td>
-                                <td>{{task.pesTime}}</td>
-                                <td>{{task.mosTime}}</td>
-                                <td>{{task.description}}</td>
-                                <td>
-                                    <a href="{{path('edit_task',{'id': task.id, 'chartId': task.pertChart.id })}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
-                                    <a href="{{path('delete_task', {'id': task.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-
+            
 
 {% endblock %}

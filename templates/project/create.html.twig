@@ -7,7 +7,9 @@
         <div class="project-form">
         {{form_errors(formProject)}}
         {{form_start(formProject)}}
-            <h2> Créez un nouveau projet ou listez tous les projets <a href="{{path('app_project')}}">ICI</a> </h2>
+            {% if app.request.attributes.get('_route') != 'edit_project' %} 
+                <h2> Créez un nouveau projet ou listez tous les projets <a href="{{path('app_project')}}">ICI</a> </h2>
+            {% endif %}
             <div class="col-6">
                 <div class="form-row">
                     {{form_label(formProject.title)}}

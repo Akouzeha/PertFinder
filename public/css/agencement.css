@@ -110,21 +110,25 @@
 /* project form */
 
 @media screen and (max-width: 800px) {
-    .project-form{
+    .project-form, .task-form, .task-form-container{
         width: 100%;
         margin-left: 0px;
     }
-    .project-form .btn{
+    .project-form .btn, .task-form .btn{
         margin-left:0;
         width: 100%;
     }
-    .form-textArea{
+    .form-textArea, .task-form-textArea{
         width: 100%;
+
     }
-    .project-form-input{
+    .project-form-input, .task-form-input{
         width: 100%;
     }
     .project-form, .form-row, .project-form-input, .required{
+        margin-left: 0px;
+    }
+    .task-form-textArea{
         margin-left: 0px;
     }
     

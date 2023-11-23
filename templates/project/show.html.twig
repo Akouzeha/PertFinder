@@ -9,13 +9,13 @@
     <a href="{{path('create_diagram', {'projectId': project.id})}}">ajouter un diagram</a>
     {% for chart in project.diagrams %}
         <h3>liste des diagram dans ce projet</h3>
-    {% if app.user == project.user or app.user.roles == 'MANAGER_ROLE' %}   
+    {% if app.user == project.user or app.user.roles == 'MANAGER_ROLE' or app.user.role == 'ADMIN_ROLE' %}   
         <h5>cliquez pour commencer ajouter les tâches</h5>
-            <p> - <a href="{{path('app_task', {'diagramId': chart.id})}}">{{chart.title}}</a> créé par {{chart.user.username}}</p><br>
+            <p> - <a href="{{path('new_task', {'diagramId': chart.id})}}">{{chart.title}}</a> créé par {{chart.user.username}}</p><br>
     {% else %}
         <p> - {{chart.title}} créé par {{chart.user.username}}</p><br> 
     {% endif %}
     {% endfor %}
- 
+    
     
 {% endblock %}
