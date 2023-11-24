@@ -74,12 +74,7 @@ class TaskType extends AbstractType
                         'minMessage' => 'Le temps le plus probable doit être supérieur à 0',
                     ]),
                 ],
-            ])
-            ->add('description', TextType::class, [
-                'attr' => [
-                    'class' => 'task-form-textArea'
-                ]
-            ])
+            ])   
         ;
     }
 

@@ -481,12 +481,12 @@ footer a:hover{
     width: auto;
     height: auto;
     margin-top: 100px;
-    margin-bottom: 100px;
+    margin-bottom: 10px;
     background-color: #ECE9E9;
     border: 2px solid #1ABC9C;
 
 }
-.task-form-container h2{
+.task-form-container h2, .task-list h2{
     text-align: center;
     color: #E67E22;
     font-size: 20px;
@@ -569,4 +569,32 @@ footer a:hover{
     font-size: large;
     color:red;
     text-align: center;
+}
+
+/* ============================================== */
+
+/* Tasks table */
+
+.task-list{
+    height: auto;
+}
+
+.task-table{
+    width: 100%;
+    height: auto;
+    margin-bottom: 100px;
+    background-color: #D9D9D9;
+    border: 1px solid #1ABC9C;
+}
+.task-table th, td{
+    border: 2px solid white;
+    text-align: center;
+}
+.task-table th{
+    background-color: #BEF5EB;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: semi-bold;
+}
+.task-table tr:nth-child(even) {
+    background-color: white;
 }

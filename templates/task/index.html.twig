@@ -5,7 +5,7 @@
 {% block body %}
 <div class="task-form-container">
     <div class="task-form">
-        <div style="color:red;">{{form_errors(formTask)}}<div>
+        <div style="color:red;">{{form_errors(formTask)}}</div>
         {{form_start(formTask)}}
             <h2> Ajoutez des tâches </h2>
             <div class="col-6">
@@ -34,12 +34,8 @@
                     {{form_errors(formTask.optTime)}}
                     {{form_errors(formTask.pesTime)}}
                     {{form_errors(formTask.mosTime)}}
-                    {{form_errors(formTask.description)}}
                 </p>
             
-            <div class="col-12">
-                {{form_widget(formTask.description)}}
-            </div>
             
             <div class="col-12">
                 <button type="submit" class="btn">
@@ -48,7 +44,6 @@
             </div>
         {{form_end(formTask)}}
     </div>
-</div>
             {% for message in app.flashes('success') %}
                 <div class="alert alert-success">
                     {{ message }}
@@ -59,17 +54,24 @@
                     {{ message }}
                 </div>
             {% endfor %}
-
-            <div class="task-list">
-                <h2> Liste des tâches </h2>
+</div>
+            
+            <div class="task-list col-12">
+                {% if tasks | length == 0 %}
+                    <h2> Aucune tâche n'a été ajoutée </h2>
+                {% else %}
+                    <h2> Liste des tâches </h2>
                 <table class="task-table">
                     <thead>
+                        <tr>
+                            <th colspan="6">Les Données</th>
+                        </tr>
                         <tr>
                             <th scope="col">Nom</th>
                             <th scope="col">Temps optimiste</th>
                             <th scope="col">Temps probable</th>
                             <th scope="col">Temps pessimiste</th>
-                            <th scope="col">Description</th>
+                            <th scope="col"></th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -80,15 +82,28 @@
                                 <td>{{task.optTime}}</td>
                                 <td>{{task.pesTime}}</td>
                                 <td>{{task.mosTime}}</td>
-                                <td>{{task.description}}</td>
+                                <td></td>
                                 <td>
                                     <a href="{{path('edit_task',{'id': task.id, 'chartId': task.pertChart.id })}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
                                     <a href="{{path('delete_task', {'id': task.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
                                 </td>
                             </tr>
                         {% endfor %}
+                        <tr>
+                            <th  colspan="6">{{tasks|length}}
+                                {% if tasks|length > 1 %}
+                                    tâches ont été ajoutées
+                                {% else %}
+                                    tâche a été ajoutée
+                                {% endif %}
+                             </th>
+                        </tr>
                     </tbody>
                 </table>
+            </div>
 
+            
+
+            {% endif %}
 
 {% endblock %}

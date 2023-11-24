@@ -31,9 +31,6 @@ class Task
     #[ORM\Column]
     private ?int $duree = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
-
     #[ORM\OneToMany(mappedBy: 'sourceTask', targetEntity: Edge::class)]
     private Collection $outgoingEdges;
 
@@ -114,18 +111,6 @@ class Task
     public function setDuree(int $duree): static
     {
         $this->duree = $duree;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): static
-    {
-        $this->description = $description;
 
         return $this;
     }
