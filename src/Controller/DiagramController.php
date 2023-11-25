@@ -22,6 +22,13 @@ class DiagramController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/diagram/{projectId}/show", name="show_diagram")
+     * @param $projectId
+     * @param EntityManagerInterface $em
+     * @return Response
+     * Create a new diagram
+     */ 
     #[Route('/diagram/{projectId}/new', name: 'create_diagram')]
     public function createDiagram($projectId, Request $request, Diagram $diagram = NULL, EntityManagerInterface $em): Response
     {

@@ -44,10 +44,18 @@ class Task
     #[ORM\Column]
     private ?float $variance = null;
 
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'tasks')]
+    private Collection $dependancies;
+
+    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'dependancies')]
+    private Collection $tasks;
+
     public function __construct()
     {
         $this->outgoingEdges = new ArrayCollection();
         $this->incomingEdges = new ArrayCollection();
+        $this->dependancies = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -204,5 +212,56 @@ class Task
         $dureeInSecond = ($optTime->getTimestamp() + 4 * $mosTime->getTimestamp() + $pesTime->getTimestamp()) / 6;
         $duree = round($dureeInSecond / 86400);
         return $duree;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getDependancies(): Collection
+    {
+        return $this->dependancies;
+    }
+
+    public function addDependancy(self $dependancy): static
+    {
+        if (!$this->dependancies->contains($dependancy)) {
+            $this->dependancies->add($dependancy);
+        }
+
+        return $this;
+    }
+
+    public function removeDependancy(self $dependancy): static
+    {
+        $this->dependancies->removeElement($dependancy);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTask(self $task): static
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks->add($task);
+            $task->addDependancy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(self $task): static
+    {
+        if ($this->tasks->removeElement($task)) {
+            $task->removeDependancy($this);
+        }
+
+        return $this;
     }
 }

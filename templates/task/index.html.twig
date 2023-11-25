@@ -3,6 +3,9 @@
 {% block title %}Hello TaskController!{% endblock %}
 
 {% block body %}
+{% set sommeDuree = 0 %}
+{% set sommeVariance = 0 %}
+
 <div class="task-form-container">
     <div class="task-form">
         <div style="color:red;">{{form_errors(formTask)}}</div>
@@ -101,7 +104,62 @@
                     </tbody>
                 </table>
             </div>
-
+            <div class="task-list col-12">
+                <div class="col-6">
+                    <table class="task-table">
+                        <thead>
+                            <tr>
+                                <th>La Tâche</th>
+                                <th> Les Successeurs </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in tasks %}
+                                <tr>
+                                    <td>{{task.name}}</td>
+                                    <td>
+                                        à venir
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <th colspan="2"> Dépendance</th>
+                            <tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-6">
+                    <table class="task-table">
+                        <thead>
+                            <tr>
+                                <th>La Tâche</th>
+                                <th>La Durée </th>
+                                <th>La Variance </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in tasks %}
+                                {% set sommeDuree = sommeDuree + task.duree %}
+                                {% set sommeVariance = sommeVariance + task.variance %}
+                                <tr>
+                                    <td>{{task.name}}</td>
+                                    <td>
+                                        {{task.duree}}
+                                    </td>
+                                    <td>
+                                        {{task.variance}}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <th> Somme </th>
+                                <th> {{sommeDuree}} </th>
+                                <th> {{sommeVariance}} </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             
 
             {% endif %}
