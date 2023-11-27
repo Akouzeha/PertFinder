@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Entity\Diagram;
+use App\Entity\TaskDependency;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -126,47 +127,52 @@ class TaskController extends AbstractController
 
     #[Route('/task/{taskId}/dep', name: 'add_dep')]
     public function addDep(Request $request, EntityManagerInterface $em, $taskId): Response
-    {
-        $task = $em->getRepository(Task::class)->findOneBy(['id' => $taskId]);
-        if(!$task){
-            $this->addFlash('error', 'Cette tâche n\'existe pas');
-            return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
-        }
-        if($request->isMethod('POST')){
-            // Get the dependent task name from the form
-            $depTaskId = $request->request->get('dependent_task');
-            //find the task by name
-            $depTask = $em->getRepository(Task::class)->findOneBy(['id' => $depTaskId]);
+        {
+            $task = $em->getRepository(Task::class)->findOneBy(['id' => $taskId]);
 
-            if(!$depTask){
+            if (!$task) {
                 $this->addFlash('error', 'Cette tâche n\'existe pas');
                 return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
             }
-            else if ($task->getDependentTasks()->contains($depTask)) {
-                // Handle the case of duplicate dependency
-                $this->addFlash('error', 'Dépendance déjà existante');
-                return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
-            }
-            else if($depTask->getDependentTasks()->contains($task)){
-                // Handle the case of circular dependency
-                $this->addFlash('error', 'Dépendance circulaire');
-                return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
-            }
-            else if($depTask->getId() === $task->getId()){
-                // Handle the case of self dependency
-                $this->addFlash('error', 'Une tâche ne peut pas dépendre d\'elle-même');
-                return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
-            }
-            else{
-                // Add the dependent task to the dependencies array
+
+            if ($request->isMethod('POST')) {
+                $depTaskId = $request->request->get('dependent_task');
+                $depTask = $em->getRepository(Task::class)->findOneBy(['id' => $depTaskId]);
+
+                if (!$depTask) {
+                    $this->addFlash('error', 'Cette tâche n\'existe pas');
+                    return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
+                }
+
+                // Check for existing dependencies
+                $existingDependency = $em->getRepository(TaskDependency::class)->findOneBy([
+                    'task' => $task,
+                    'dependentTask' => $depTask,
+                ]);
+
+                // Check for circular dependency
+                $isCircularDependency = $this->checkCircularDependency($depTask, $task, $em);
+
+                if ($existingDependency || $isCircularDependency) {
+                    // Handle the case of duplicate or circular dependency
+                    $this->addFlash('error', 'Dépendance déjà existante ou circulaire');
+                    return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
+                }
+
+                // Create a new TaskDependency entity
+                $taskDependency = new TaskDependency();
+                $taskDependency->setTask($task);
+                $taskDependency->setDependentTask($depTask);
                 $task->addDependentTask($depTask);
+
+                // Persist the TaskDependency entity
+                $em->persist($taskDependency);
                 $em->persist($task);
                 $em->flush();
             }
-            
+
+            return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
         }
-        return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
-    }
 
     #[Route('/task/{taskId}/dep/{depTaskId}/delete', name: 'delete_dep')]
     public function deleteDep(EntityManagerInterface $em, $taskId, $depTaskId): Response
@@ -177,9 +183,51 @@ class TaskController extends AbstractController
             $this->addFlash('error', 'Cette tâche n\'existe pas');
             return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
         }
-        $task->removeDependentTask($depTask);
-        $em->persist($task);
-        $em->flush();
+        // Find and remove the TaskDependency
+        $taskDependency = $this->$em
+            ->getRepository(TaskDependency::class)
+            ->findOneBy(['task' => $task, 'dependentTask' => $depTask]);
+
+        if ($taskDependency) {
+            $this->$em->remove($taskDependency);
+            $this->$em->flush();
+
+            // Remove the dependent task from the Task entity
+            $task->removeDependentTask($depTask);
+            $this->$em->persist($task);
+            $this->$em->flush();
+        }
+
         return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
+    }
+    
+
+    /**
+     * Check for circular dependency.
+     *
+     * @param Task $startTask
+     * @param Task $newDependentTask
+     * @param EntityManagerInterface $em
+     * @return bool
+     */
+    private function checkCircularDependency(Task $startTask, Task $newDependentTask, EntityManagerInterface $em): bool
+    {
+        $task = $startTask;
+        $taskIds = [];
+        $taskIds[] = $task->getId();
+
+        // Traverse the dependency chain
+        while ($dependentTasks = $em->getRepository(TaskDependency::class)->findBy(['task' => $task])) {
+            $task = $dependentTasks[0]->getDependentTask();
+
+            // Check for circular dependency
+            if ($task->getId() === $newDependentTask->getId()) {
+                return true;
+            }
+
+            $taskIds[] = $task->getId();
+        }
+
+        return false;
     }
 }

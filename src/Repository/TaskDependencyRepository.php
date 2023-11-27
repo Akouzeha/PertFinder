@@ -2,28 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Task;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\TaskDependency;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Task>
+ * @extends ServiceEntityRepository<TaskDependency>
  *
- * @method Task|null find($id, $lockMode = null, $lockVersion = null)
- * @method Task|null findOneBy(array $criteria, array $orderBy = null)
- * @method Task[]    findAll()
- * @method Task[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method TaskDependency|null find($id, $lockMode = null, $lockVersion = null)
+ * @method TaskDependency|null findOneBy(array $criteria, array $orderBy = null)
+ * @method TaskDependency[]    findAll()
+ * @method TaskDependency[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TaskRepository extends ServiceEntityRepository
+class TaskDependencyRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Task::class);
+        parent::__construct($registry, TaskDependency::class);
     }
 
 //    /**
-//     * @return Task[] Returns an array of Task objects
+//     * @return TaskDependency[] Returns an array of TaskDependency objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -37,7 +36,7 @@ class TaskRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Task
+//    public function findOneBySomeField($value): ?TaskDependency
 //    {
 //        return $this->createQueryBuilder('t')
 //            ->andWhere('t.exampleField = :val')
@@ -46,7 +45,4 @@ class TaskRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-
-
-
 }

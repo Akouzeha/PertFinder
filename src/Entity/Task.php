@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\TaskRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TaskRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 class Task
@@ -31,12 +32,6 @@ class Task
     #[ORM\Column]
     private ?int $duree = null;
 
-    #[ORM\OneToMany(mappedBy: 'sourceTask', targetEntity: Edge::class)]
-    private Collection $outgoingEdges;
-
-    #[ORM\OneToMany(mappedBy: 'targetTask', targetEntity: Edge::class)]
-    private Collection $incomingEdges;
-
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Diagram $pertChart = null;
@@ -47,13 +42,11 @@ class Task
     #[ORM\ManyToMany(targetEntity: self::class)]
     private Collection $dependentTasks;
 
-
     public function __construct()
     {
-        $this->outgoingEdges = new ArrayCollection();
-        $this->incomingEdges = new ArrayCollection();
         $this->dependentTasks = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -120,66 +113,6 @@ class Task
         return $this;
     }
 
-    /**
-     * @return Collection<int, Edge>
-     */
-    public function getOutgoingEdges(): Collection
-    {
-        return $this->outgoingEdges;
-    }
-
-    public function addOutgoingEdge(Edge $outgoingEdge): static
-    {
-        if (!$this->outgoingEdges->contains($outgoingEdge)) {
-            $this->outgoingEdges->add($outgoingEdge);
-            $outgoingEdge->setSourceTask($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOutgoingEdge(Edge $outgoingEdge): static
-    {
-        if ($this->outgoingEdges->removeElement($outgoingEdge)) {
-            // set the owning side to null (unless already changed)
-            if ($outgoingEdge->getSourceTask() === $this) {
-                $outgoingEdge->setSourceTask(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Edge>
-     */
-    public function getIncomingEdges(): Collection
-    {
-        return $this->incomingEdges;
-    }
-
-    public function addIncomingEdge(Edge $incomingEdge): static
-    {
-        if (!$this->incomingEdges->contains($incomingEdge)) {
-            $this->incomingEdges->add($incomingEdge);
-            $incomingEdge->setTargetTask($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIncomingEdge(Edge $incomingEdge): static
-    {
-        if ($this->incomingEdges->removeElement($incomingEdge)) {
-            // set the owning side to null (unless already changed)
-            if ($incomingEdge->getTargetTask() === $this) {
-                $incomingEdge->setTargetTask(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getPertChart(): ?Diagram
     {
         return $this->pertChart;
@@ -228,36 +161,11 @@ class Task
         return $this;
     }
 
-    public function removeDependentTask(Task $dependentTask): static
+    public function removeDependentTask(task $dependentTask): static
     {
         $this->dependentTasks->removeElement($dependentTask);
 
         return $this;
-    }
-    /**
-     * check for circular dependencies and return true if there is one
-     * @param Task $startTask
-     * @param Task $newDependentTask
-    */   
-    public function checkCircularDependency(Task $startTask, Task $newDependentTask)
-    {
-        $task = $startTask;
-        $taskIds = [];
-        $taskIds[] = $task->getId();
-
-        while ($task->getDependentTasks()->count() > 0) {
-            $dependentTasks = $task->getDependentTasks();
-            $task = $dependentTasks->first();
-
-            if ($task->getId() === $newDependentTask->getId() || in_array($task->getId(), $taskIds)) {
-                // If the new dependency is the current task or it's already in the path, it's a circular dependency
-                return true;
-            }
-
-            $taskIds[] = $newDependentTask->getId();
-        }
-
-        return false;
     }
 
 
