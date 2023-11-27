@@ -44,18 +44,15 @@ class Task
     #[ORM\Column]
     private ?float $variance = null;
 
-    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'tasks')]
-    private Collection $dependancies;
+    #[ORM\ManyToMany(targetEntity: self::class)]
+    private Collection $dependentTasks;
 
-    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'dependancies')]
-    private Collection $tasks;
 
     public function __construct()
     {
         $this->outgoingEdges = new ArrayCollection();
         $this->incomingEdges = new ArrayCollection();
-        $this->dependancies = new ArrayCollection();
-        $this->tasks = new ArrayCollection();
+        $this->dependentTasks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -217,51 +214,52 @@ class Task
     /**
      * @return Collection<int, self>
      */
-    public function getDependancies(): Collection
+    public function getDependentTasks(): Collection
     {
-        return $this->dependancies;
+        return $this->dependentTasks;
     }
 
-    public function addDependancy(self $dependancy): static
+    public function addDependentTask(Task $dependentTask): static
     {
-        if (!$this->dependancies->contains($dependancy)) {
-            $this->dependancies->add($dependancy);
+        if (!$this->dependentTasks->contains($dependentTask)) {
+            $this->dependentTasks->add($dependentTask);
         }
 
         return $this;
     }
 
-    public function removeDependancy(self $dependancy): static
+    public function removeDependentTask(Task $dependentTask): static
     {
-        $this->dependancies->removeElement($dependancy);
+        $this->dependentTasks->removeElement($dependentTask);
 
         return $this;
     }
-
     /**
-     * @return Collection<int, self>
-     */
-    public function getTasks(): Collection
+     * check for circular dependencies and return true if there is one
+     * @param Task $startTask
+     * @param Task $newDependentTask
+    */   
+    public function checkCircularDependency(Task $startTask, Task $newDependentTask)
     {
-        return $this->tasks;
-    }
+        $task = $startTask;
+        $taskIds = [];
+        $taskIds[] = $task->getId();
 
-    public function addTask(self $task): static
-    {
-        if (!$this->tasks->contains($task)) {
-            $this->tasks->add($task);
-            $task->addDependancy($this);
+        while ($task->getDependentTasks()->count() > 0) {
+            $dependentTasks = $task->getDependentTasks();
+            $task = $dependentTasks->first();
+
+            if ($task->getId() === $newDependentTask->getId() || in_array($task->getId(), $taskIds)) {
+                // If the new dependency is the current task or it's already in the path, it's a circular dependency
+                return true;
+            }
+
+            $taskIds[] = $newDependentTask->getId();
         }
 
-        return $this;
+        return false;
     }
 
-    public function removeTask(self $task): static
-    {
-        if ($this->tasks->removeElement($task)) {
-            $task->removeDependancy($this);
-        }
 
-        return $this;
-    }
+
 }

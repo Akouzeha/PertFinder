@@ -577,6 +577,12 @@ footer a:hover{
 
 .task-list{
     height: auto;
+    position:relative;
+}
+.table-scroll{
+    height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .task-table{

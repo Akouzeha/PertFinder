@@ -64,103 +64,126 @@
                     <h2> Aucune tâche n'a été ajoutée </h2>
                 {% else %}
                     <h2> Liste des tâches </h2>
-                <table class="task-table">
-                    <thead>
-                        <tr>
-                            <th colspan="6">Les Données</th>
-                        </tr>
-                        <tr>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Temps optimiste</th>
-                            <th scope="col">Temps probable</th>
-                            <th scope="col">Temps pessimiste</th>
-                            <th scope="col"></th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for task in tasks %}
+                <div class="table-scroll">
+                    <table class="task-table">
+                        <thead>
                             <tr>
-                                <td>{{task.name}}</td>
-                                <td>{{task.optTime}}</td>
-                                <td>{{task.pesTime}}</td>
-                                <td>{{task.mosTime}}</td>
-                                <td></td>
-                                <td>
-                                    <a href="{{path('edit_task',{'id': task.id, 'chartId': task.pertChart.id })}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
-                                    <a href="{{path('delete_task', {'id': task.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
-                                </td>
+                                <th colspan="6">Les Données</th>
                             </tr>
-                        {% endfor %}
-                        <tr>
-                            <th  colspan="6">{{tasks|length}}
-                                {% if tasks|length > 1 %}
-                                    tâches ont été ajoutées
-                                {% else %}
-                                    tâche a été ajoutée
-                                {% endif %}
-                             </th>
-                        </tr>
-                    </tbody>
-                </table>
+                            <tr>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Temps optimiste</th>
+                                <th scope="col">Temps probable</th>
+                                <th scope="col">Temps pessimiste</th>
+                                <th scope="col">Ajoute Dépendance</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in tasks %}
+                                <tr>
+                                    <td>{{task.name}}</td>
+                                    <td>{{task.optTime}}</td>
+                                    <td>{{task.pesTime}}</td>
+                                    <td>{{task.mosTime}}</td>
+                                    <td>
+                                        <form action="{{path('add_dep', {'taskId': task.id})}}" method="post">
+                                            <select id="dependent_task" name="dependent_task">
+                                            {% set filteredTasks = tasks|filter(dependentTask => dependentTask.id != task.id) %}
+                                            {% for dependentTask in filteredTasks %}
+                                                <option value="{{ dependentTask.id }}">{{ dependentTask.name }}</option>
+                                            {% endfor %}
+                                            </select>
+
+                                            <button type="submit">Add Dependency</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a href="{{path('edit_task',{'id': task.id, 'chartId': task.pertChart.id })}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
+                                        <a href="{{path('delete_task', {'id': task.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <th  colspan="6">{{tasks|length}}
+                                    {% if tasks|length > 1 %}
+                                        tâches ont été ajoutées
+                                    {% else %}
+                                        tâche a été ajoutée
+                                    {% endif %}
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="task-list col-12">
-                <div class="col-6">
-                    <table class="task-table">
-                        <thead>
-                            <tr>
-                                <th>La Tâche</th>
-                                <th> Les Successeurs </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for task in tasks %}
+                <div class="table-scroll">
+                    <div class="col-6">
+                        <table class="task-table">
+                            <thead>
                                 <tr>
-                                    <td>{{task.name}}</td>
-                                    <td>
-                                        à venir
-                                    </td>
+                                    <th>La Tâche</th>
+                                    <th> Les Successeurs </th>
                                 </tr>
-                            {% endfor %}
-                            <tr>
-                                <th colspan="2"> Dépendance</th>
-                            <tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-6">
-                    <table class="task-table">
-                        <thead>
-                            <tr>
-                                <th>La Tâche</th>
-                                <th>La Durée </th>
-                                <th>La Variance </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for task in tasks %}
-                                {% set sommeDuree = sommeDuree + task.duree %}
-                                {% set sommeVariance = sommeVariance + task.variance %}
+                            </thead>
+                            <tbody>
+                                {% for task in tasks %}
+                                    <tr>
+                                        <td>{{task.name}}</td>
+                                        <td>
+                                            {% if task.dependentTasks | length == 0 %}
+                                                Aucun Successeur
+                                            {% else %}
+                                            {% for successor in task.dependentTasks %}
+                                                {{successor.name}}
+                                                <a href="{{path('delete_dep', {'taskId': task.id, 'depTaskId': successor.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
                                 <tr>
-                                    <td>{{task.name}}</td>
-                                    <td>
-                                        {{task.duree}}
-                                    </td>
-                                    <td>
-                                        {{task.variance}}
-                                    </td>
+                                    <th colspan="2"> Dépendance</th>
+                                <tr>
+                            </tbody>
+                        </table>
+                    
+                    </div>
+                    <div class="col-6">
+                    
+                        <table class="task-table">
+                            <thead>
+                                <tr>
+                                    <th>La Tâche</th>
+                                    <th>La Durée </th>
+                                    <th>La Variance </th>
                                 </tr>
-                            {% endfor %}
-                            <tr>
-                                <th> Somme </th>
-                                <th> {{sommeDuree}} </th>
-                                <th> {{sommeVariance}} </th>
-                            </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {% for task in tasks %}
+                                    {% set sommeDuree = sommeDuree + task.duree %}
+                                    {% set sommeVariance = sommeVariance + task.variance %}
+                                    <tr>
+                                        <td>{{task.name}}</td>
+                                        <td>
+                                            {{task.duree}}
+                                        </td>
+                                        <td>
+                                            {{task.variance}}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <th> Somme </th>
+                                    <th> {{sommeDuree}} </th>
+                                    <th> {{sommeVariance}} </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            
 
             {% endif %}
 
