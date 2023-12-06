@@ -3,18 +3,34 @@
 {% block title %}Hello DiagramController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    
+    <h1>Tasks by Level</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% for level, tasks in tasksByLevel %}
+        <h2>Level {{ level }}</h2>
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    Task Name: {{ task.name | default('No Name') }}<br>
+                    Task Duration: {{ task.duree }}<br>
+                    {% if task.dependentTasks | length > 0 %}
+                        
+                    les predecesseurs :
+                    {% for pre in task.dependentTasks %}
+                         {{pre.name}}
+                        
+                    {% endfor %}
+                    {% else %}
+                        pas de predecesseurs
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Applications/MAMP/htdocs/KOUZEHA_Ammar/PertFinder/src/Controller/DiagramController.php'|file_link(0) }}">src/Controller/DiagramController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Applications/MAMP/htdocs/KOUZEHA_Ammar/PertFinder/templates/diagram/index.html.twig'|file_link(0) }}">templates/diagram/index.html.twig</a></code></li>
-    </ul>
-</div>
+                    {% endif %}
+                    <!-- Add other task properties as needed -->
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+
+    <p>Diagram ID: {{ diagramId }}</p>
+
+    <a href="{{ path('draw_graph', {'diagramId': diagramId}) }}">Créer le Diagram</a>
 {% endblock %}

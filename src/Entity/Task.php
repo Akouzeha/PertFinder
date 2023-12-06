@@ -42,9 +42,20 @@ class Task
     #[ORM\ManyToMany(targetEntity: self::class)]
     private Collection $dependentTasks;
 
+    #[ORM\OneToMany(mappedBy: 'task', targetEntity: Edge::class)]
+    private Collection $edges;
+
+    #[ORM\OneToMany(mappedBy: 'Predecessor', targetEntity: Edge::class)]
+    private Collection $taskPredecessors;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $level = null;
+
     public function __construct()
     {
         $this->dependentTasks = new ArrayCollection();
+        $this->edges = new ArrayCollection();
+        $this->taskPredecessors = new ArrayCollection();
     }
 
 
@@ -168,6 +179,81 @@ class Task
         return $this;
     }
 
+    /**
+     * @return Collection<int, Edge>
+     */
+    public function getEdges(): Collection
+    {
+        return $this->edges;
+    }
 
+    public function addEdge(Edge $edge): static
+    {
+        if (!$this->edges->contains($edge)) {
+            $this->edges->add($edge);
+            $edge->setTask($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEdge(Edge $edge): static
+    {
+        if ($this->edges->removeElement($edge)) {
+            // set the owning side to null (unless already changed)
+            if ($edge->getTask() === $this) {
+                $edge->setTask(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Edge>
+     */
+    public function getTaskPredecessors(): Collection
+    {
+        return $this->taskPredecessors;
+    }
+
+    public function addTaskPredecessor(Edge $taskPredecessor): static
+    {
+        if (!$this->taskPredecessors->contains($taskPredecessor)) {
+            $this->taskPredecessors->add($taskPredecessor);
+            $taskPredecessor->setPredecessor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTaskPredecessor(Edge $taskPredecessor): static
+    {
+        if ($this->taskPredecessors->removeElement($taskPredecessor)) {
+            // set the owning side to null (unless already changed)
+            if ($taskPredecessor->getPredecessor() === $this) {
+                $taskPredecessor->setPredecessor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
+    public function getLevel(): ?int
+    {
+        return $this->level;
+    }
+
+    public function setLevel(?int $level): static
+    {
+        $this->level = $level;
+
+        return $this;
+    }
 
 }

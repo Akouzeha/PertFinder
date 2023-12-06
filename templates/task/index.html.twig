@@ -95,12 +95,12 @@
                                             {% endfor %}
                                             </select>
 
-                                            <button type="submit">Add Dependency</button>
+                                            <button class="petit-btn" type="submit">Add Dependency</button>
                                         </form>
                                     </td>
                                     <td>
                                         <a href="{{path('edit_task',{'id': task.id, 'chartId': task.pertChart.id })}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
-                                        <a href="{{path('delete_task', {'id': task.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
+                                        <a href="{{path('delete_task', {'taskId': task.id, 'taskId': task.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -185,6 +185,13 @@
                 </div>
             </div>
 
+            {% endif %}
+            {% if tasks | length > 0 %}
+                
+            <div class="col-12" style="margin-top:10px;">
+                <a href="{{path('task_edge')}}" class="btn">Les dépendances</a>
+                <a href="" class="btn">Générer le chart</a>
+            </div>
             {% endif %}
 
 {% endblock %}

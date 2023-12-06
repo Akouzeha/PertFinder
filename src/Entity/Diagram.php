@@ -37,6 +37,9 @@ class Diagram
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?array $adjacencyMatrix = null;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
@@ -152,5 +155,17 @@ class Diagram
     public function __toString(): string
     {
         return $this->title;
+    }
+
+    public function getAdjacencyMatrix(): ?array
+    {
+        return $this->adjacencyMatrix;
+    }
+
+    public function setAdjacencyMatrix(?array $adjacencyMatrix): static
+    {
+        $this->adjacencyMatrix = $adjacencyMatrix;
+
+        return $this;
     }
 }

@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EdgeController!{% endblock %}
+
+{% block body %}
+<div class="info-para">
+    <ul>
+        <li> Le graphe ci-dessous représente les tâches du projet. </li>
+        <li> <span>Les tâches entrants</span> sont les tâches qui dépendent d'autres tâches pour être réalisées. </li>
+        <li> <span>Les tâches sortants</span> sont les tâches qui doivent être réalisées avant de pouvoir réaliser d'autres tâches. </li>
+        <li> Dans la <span>Matrice d'adjacence</span>, les relations entre les tâches sont présntées par <span>1</span> </li>
+        <li>La tâche <span>B</span> est un successeur de la tâche <span>A</span> si la tâche <span>B</span> dépend de la tâche <span>A</span> pour être réalisée.</li>
+        <li>ce n'est pas ce que vous cherchez ? <a href="{{path('new_task', {'diagramId': taskData[0]['diagramId']})}}"> modifiez vous tâches ici</a></li>
+    </ul>
+</div>
+<div class="col-12">
+    <div class = "task-list col-6">
+        <table class = "task-table">
+            <thead>
+            <tr>
+                <th>Task</th>
+                <th>Successeur(tâches entrants)</th>
+                <th>Prédécesseur(tâches sortants)</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in taskData %}
+                <tr>
+                    <td>{{ data.task.getName() }}</td>
+                    <td>
+                        
+                            {% for edge in data.edges %}
+                                {{ edge.getPredecessor().getName() }}
+                                {% if not loop.last %}
+                                    -
+                                {% endif %}
+                            {% endfor %}
+                        
+                    </td>
+                    <td>
+                        
+                            {% for predecessor in data.predecessors %}
+                                {{ predecessor.getTask().getName() }}
+                                {% if not loop.last %}
+                                    -
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="task-list col-6">
+        <table class="matrix">
+            <tr>
+            <th>Task</th>
+                {% for task in taskData %}
+                    <th>
+                        {{ task.task.name }}
+                    </th>
+                {% endfor %}
+            </tr>
+            {% for task in taskData %}
+                <tr>
+                    <td>
+                        {{ task.task.name }}
+                    </td>
+                    {% for value in task.adjacencyMatrix %}
+                        <td>
+                            {{ value }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+    {% for data in taskData %}
+    <p>
+        Task: {{ data.task.getName() }}
+        Diagram ID: {{ data.diagramId }}
+        Level: {{ data.level }}
+    </p>
+
+{% endfor %}
+    <a href="{{path('cal_dates', {'diagramId': taskData[0]['diagramId'],'diagramId': taskData[0]['diagramId']})}}">Calculer les dates</a>
+{% endblock %}

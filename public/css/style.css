@@ -23,6 +23,23 @@ header{
 
     float: left;
 }
+
+.info-para{
+    width:100%;
+    height:auto;
+    margin-top: 60px;
+}
+.info-para li{
+    
+    margin-top: 10px;
+    font-size: 20px;
+    color: #E67E22;
+    font-weight: semi-bold;
+}
+.info-para span{
+    color: rgb(60, 0, 255);
+    font-weight: bold;
+}
 /* ============================================== */
 /* Navigation Bar */
 .topnav li {
@@ -579,11 +596,11 @@ footer a:hover{
     height: auto;
     position:relative;
 }
-.table-scroll{
+/* .table-scroll{
     height: 250px;
     overflow-y: auto;
     overflow-x: hidden;
-}
+} */
 
 .task-table{
     width: 100%;
@@ -603,3 +620,29 @@ footer a:hover{
 .task-table tr:nth-child(even) {
     background-color: white;
 }
+.matrix{
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    background-color: #ECE9E9;
+    border: 2px solid #1ABC9C;
+}
+
+.petit-btn{
+    background-color: #6fe2cb;
+    border-radius: 20px;
+    border: 2px solid #1ABC9C;
+    box-shadow: 0 2px #1ABC9C ;
+}
+.petit-btn:hover{
+    background-color: #1ABC9C;
+    border-radius: 20px;
+    border: 2px solid #1ABC9C;
+    box-shadow: 0 2px #1ABC9C ;
+    cursor: pointer;
+}
+.petit-btn:active {
+    box-shadow: 0 0;
+    transform: translateY(4px);
+  }
+

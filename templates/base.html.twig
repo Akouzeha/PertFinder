@@ -21,6 +21,7 @@
                         <nav>
                             <ul>
                                 <img class="logo" src="{{ asset('img/logo.svg') }}" alt="logo">
+                                {# <li class="navItem"><a href="{{ path('app_home') }}">Home</a></li>
                                 {# check if the route is the current page, add a class to highlight it #}
                                 {% if (app.user) %}  
                                     <li class={% if app.request.attributes.get('_route') == 'app_logout' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_logout') }}">logout</a></li>

@@ -1,0 +1,25 @@
+digraph PERT {
+  64 [label="A (12 days)"]
+  65 [label="B (13 days)"]
+  66 [label="C (16 days)"]
+  67 [label="D (11 days)"]
+  68 [label="E (17 days)"]
+  69 [label="F (16 days)"]
+  70 [label="G (14 days)"]
+  71 [label="H (7 days)"]
+  72 [label="I (5 days)"]
+  73 [label="J (14 days)"]
+  68 -> 65
+  68 -> 66
+  64 -> 67
+  64 -> 68
+  67 -> 69
+  68 -> 69
+  65 -> 70
+  70 -> 71
+  64 -> 73
+  73 -> 72
+  66 -> 72
+  71 -> 72
+  69 -> 72
+}

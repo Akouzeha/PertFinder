@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DiagramController!{% endblock %}
+
+{% block body %}
+    <h1>Pert Chart</h1>
+
+    {# Display the PERT chart image #}
+    <img style="height:300px;wodth:300px" src="{{asset('public/chart/' ~ imageFilePath)}}" alt="PERT Chart">
+
+    {# Provide a link to download the PERT chart #}
+    <a href="">Download PERT Chart</a>
+       
+{% endblock %}

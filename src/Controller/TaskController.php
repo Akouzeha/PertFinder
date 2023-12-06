@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Edge;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Entity\Diagram;
@@ -48,11 +49,11 @@ class TaskController extends AbstractController
                 return $this->redirectToRoute('new_task', ['diagramId' => $diagramId]);
             }
             //verify if the data is valid
-            if($task->getPesTime() <= $task->getMosTime()){
+            if($task->getPesTime() < $task->getMosTime()){
                 $this->addFlash('error', 'Le temps pessimiste doit être supérieur ou égal au temps le plus probable');
                 return $this->redirectToRoute('new_task', ['diagramId' => $diagramId]);
             }
-            if($task->getMosTime() <= $task->getOptTime()){
+            if($task->getMosTime() < $task->getOptTime()){
                 $this->addFlash('error', 'Le temps optimiste doit être inférieur ou égal au temps le plus probable');
                 return $this->redirectToRoute('new_task', ['diagramId' => $diagramId]);
             }
@@ -79,9 +80,12 @@ class TaskController extends AbstractController
     }
 
     //delete a task
-    #[Route('/task/{id}', name: 'delete_task')]
-    public function deleteTask(Task $task, EntityManagerInterface $em): Response
+    #[Route('/task/{taskId}', name: 'delete_task')]
+    public function deleteTask($taskId, EntityManagerInterface $em): Response
     {
+        
+        $task = $em->getRepository(Task::class)->findOneBy(['id' => $taskId]);
+
         $em->remove($task);
         $em->flush();
         $this->addFlash('success', 'Tâche supprimée avec succès');
@@ -144,10 +148,10 @@ class TaskController extends AbstractController
                     return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
                 }
 
-                // Check for existing dependencies
-                $existingDependency = $em->getRepository(TaskDependency::class)->findOneBy([
+                 // Check for existing dependencies
+                $existingDependency = $em->getRepository(Edge::class)->findOneBy([
                     'task' => $task,
-                    'dependentTask' => $depTask,
+                    'predecessor' => $depTask,
                 ]);
 
                 // Check for circular dependency
@@ -159,14 +163,14 @@ class TaskController extends AbstractController
                     return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
                 }
 
-                // Create a new TaskDependency entity
-                $taskDependency = new TaskDependency();
-                $taskDependency->setTask($task);
-                $taskDependency->setDependentTask($depTask);
+                // Create a new Edge entity for the dependency
+                $dependencyEdge = new Edge();
+                $dependencyEdge->setTask($task);
+                $dependencyEdge->setPredecessor($depTask);
                 $task->addDependentTask($depTask);
 
-                // Persist the TaskDependency entity
-                $em->persist($taskDependency);
+                // Persist the edge and task entities
+                $em->persist($dependencyEdge);
                 $em->persist($task);
                 $em->flush();
             }
@@ -179,24 +183,31 @@ class TaskController extends AbstractController
     {
         $task = $em->getRepository(Task::class)->findOneBy(['id' => $taskId]);
         $depTask = $em->getRepository(Task::class)->findOneBy(['id' => $depTaskId]);
-        if(!$task || !$depTask){
+
+        if (!$task || !$depTask) {
             $this->addFlash('error', 'Cette tâche n\'existe pas');
             return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
         }
-        // Find and remove the TaskDependency
-        $taskDependency = $this->$em
-            ->getRepository(TaskDependency::class)
-            ->findOneBy(['task' => $task, 'dependentTask' => $depTask]);
 
-        if ($taskDependency) {
-            $this->$em->remove($taskDependency);
-            $this->$em->flush();
+        $task->removeDependentTask($depTask);
+        $em->persist($task);
+        $em->flush();
 
-            // Remove the dependent task from the Task entity
-            $task->removeDependentTask($depTask);
-            $this->$em->persist($task);
-            $this->$em->flush();
+        // Check for existing dependencies
+        $existingDependency = $em->getRepository(Edge::class)->findOneBy([
+            'task' => $task,
+            'predecessor' => $depTask,
+        ]);
+
+        if (!$existingDependency) {
+            // Handle the case of duplicate or circular dependency
+            $this->addFlash('error', 'Dépendance inexistante');
+            return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
         }
+
+        // Remove the dependency
+        $em->remove($existingDependency);
+        $em->flush();
 
         return $this->redirectToRoute('new_task', ['diagramId' => $task->getPertChart()->getId()]);
     }
@@ -217,8 +228,8 @@ class TaskController extends AbstractController
         $taskIds[] = $task->getId();
 
         // Traverse the dependency chain
-        while ($dependentTasks = $em->getRepository(TaskDependency::class)->findBy(['task' => $task])) {
-            $task = $dependentTasks[0]->getDependentTask();
+        while ($edges = $em->getRepository(Edge::class)->findBy(['task' => $task])) {
+            $task = $edges[0]->getPredecessor();
 
             // Check for circular dependency
             if ($task->getId() === $newDependentTask->getId()) {
@@ -230,4 +241,5 @@ class TaskController extends AbstractController
 
         return false;
     }
+    
 }
