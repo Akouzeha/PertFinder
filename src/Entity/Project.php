@@ -32,7 +32,7 @@ class Project
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: Comment::class, orphanRemoval: true)]
-    private Collection $comment;
+    private Collection $comments;
 
     #[ORM\Column(length: 100)]
     private ?string $title = null;
@@ -43,7 +43,7 @@ class Project
     public function __construct()
     {
         $this->diagrams = new ArrayCollection();
-        $this->comment = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -132,15 +132,15 @@ class Project
     /**
      * @return Collection<int, Comment>
      */
-    public function getComment(): Collection
+    public function getComments(): Collection
     {
-        return $this->comment;
+        return $this->comments;
     }
 
     public function addComment(Comment $comment): static
     {
-        if (!$this->comment->contains($comment)) {
-            $this->comment->add($comment);
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
             $comment->setProject($this);
         }
 
@@ -149,7 +149,7 @@ class Project
 
     public function removeComment(Comment $comment): static
     {
-        if ($this->comment->removeElement($comment)) {
+        if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
             if ($comment->getProject() === $this) {
                 $comment->setProject(null);

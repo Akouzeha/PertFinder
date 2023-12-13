@@ -189,7 +189,7 @@
             {% if tasks | length > 0 %}
                 
             <div class="col-12" style="margin-top:10px;">
-                <a href="{{path('task_edge')}}" class="btn">Les dépendances</a>
+                <a href="{{path('task_edge', {'diagramId': tasks[0].pertChart.id})}}" class="btn">Les dépendances</a>
                 <a href="" class="btn">Générer le chart</a>
             </div>
             {% endif %}

@@ -1,0 +1,65 @@
+digraph PERT {
+  rankdir=LR;
+  ranksep=1;
+  node [shape=record];
+  edge [arrowhead=vee];
+  bgcolor="#ECE9E9";
+  92 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: 0</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 10</TD><TD BGCOLOR= 'aquamarine3'>EF: 10</TD></TR>
+        <TR><TD BGCOLOR= 'white' COLSPAN='3'>A</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 0</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 10</TD></TR>
+        
+        </TABLE>>]
+  93 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: 10</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 20</TD><TD BGCOLOR= 'aquamarine3'>EF: 30</TD></TR>
+        <TR><TD BGCOLOR= 'white' COLSPAN='3'>B</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 10</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 30</TD></TR>
+        
+        </TABLE>>]
+  94 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: 30</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 5</TD><TD BGCOLOR= 'aquamarine3'>EF: 35</TD></TR>
+        <TR><TD BGCOLOR= 'white' COLSPAN='3'>C</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 30</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 35</TD></TR>
+        
+        </TABLE>>]
+  95 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: 35</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 10</TD><TD BGCOLOR= 'aquamarine3'>EF: 45</TD></TR>
+        <TR><TD BGCOLOR= 'white' COLSPAN='3'>D</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 35</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 45</TD></TR>
+        
+        </TABLE>>]
+  96 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: 45</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 20</TD><TD BGCOLOR= 'aquamarine3'>EF: 65</TD></TR>
+        <TR><TD BGCOLOR= 'white' COLSPAN='3'>E</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 45</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 65</TD></TR>
+        
+        </TABLE>>]
+  97 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: 10</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 15</TD><TD BGCOLOR= 'aquamarine3'>EF: 25</TD></TR>
+        <TR><TD BGCOLOR= 'white' COLSPAN='3'>F</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 15</TD><TD BGCOLOR= 'chocolate2'>MT: 5</TD><TD BGCOLOR= 'cornflowerblue'>LF: 30</TD></TR>
+        
+        </TABLE>>]
+  98 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: 35</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 5</TD><TD BGCOLOR= 'aquamarine3'>EF: 40</TD></TR>
+        <TR><TD BGCOLOR= 'white' COLSPAN='3'>G</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 40</TD><TD BGCOLOR= 'chocolate2'>MT: 5</TD><TD BGCOLOR= 'cornflowerblue'>LF: 45</TD></TR>
+        
+        </TABLE>>]
+  99 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: 10</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 15</TD><TD BGCOLOR= 'aquamarine3'>EF: 25</TD></TR>
+        <TR><TD BGCOLOR= 'white' COLSPAN='3'>H</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 15</TD><TD BGCOLOR= 'chocolate2'>MT: 5</TD><TD BGCOLOR= 'cornflowerblue'>LF: 30</TD></TR>
+        
+        </TABLE>>]
+  92 -> 93 [color=red]
+  93 -> 94 [color=red]
+  94 -> 95 [color=red]
+  98 -> 96
+  95 -> 96 [color=red]
+  99 -> 96
+  92 -> 97
+  94 -> 98
+  97 -> 98
+  92 -> 99
+}

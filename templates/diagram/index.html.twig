@@ -6,31 +6,51 @@
     
     <h1>Tasks by Level</h1>
 
-    {% for level, tasks in tasksByLevel %}
+    {# {% for level, tasks in tasksByLevel %}
         <h2>Level {{ level }}</h2>
         <ul>
             {% for task in tasks %}
                 <li>
                     Task Name: {{ task.name | default('No Name') }}<br>
                     Task Duration: {{ task.duree }}<br>
-                    {% if task.dependentTasks | length > 0 %}
-                        
-                    les predecesseurs :
-                    {% for pre in task.dependentTasks %}
-                         {{pre.name}}
-                        
-                    {% endfor %}
-                    {% else %}
-                        pas de predecesseurs
+                    ES : {{ES[task.id]}}<br>
+                    EF : {{EF[task.id]}}<br>
+                    
+            {% endfor %} 
+        </ul> 
 
-                    {% endif %}
-                    <!-- Add other task properties as needed -->
-                </li>
-            {% endfor %}
-        </ul>
+
     {% endfor %}
+    #}
+    {# Display ES, EF, LS, LF for each task #}
+    <table border="1">
+        <tr>
+            <th>Task</th>
+            <th>ES</th>
+            <th>EF</th>
+            <th>LS</th>
+            <th>LF</th>
+            <th>ML</th>
+            <th>MT</th>
+        </tr>
+        {% for task in tasksByLevel|default([]) %}
+            {% for t in task %}
+                <tr>
+                    <td>{{ t.name }}</td>
+                    <td>{{ ES[t.id]|default('N/A') }}</td>
+                    <td>{{ EF[t.id]|default('N/A') }}</td>
+                    <td>{{ LS[t.id]|default('N/A') }}</td>
+                    <td>{{ LF[t.id]|default('N/A') }}</td>
+                    <td>{{ ML[t.id]|default('N/A') }}</td>
+                    <td>{{ MT[t.id]|default('N/A') }}</td>
 
-    <p>Diagram ID: {{ diagramId }}</p>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+
+
+
 
     <a href="{{ path('draw_graph', {'diagramId': diagramId}) }}">Créer le Diagram</a>
 {% endblock %}

@@ -44,7 +44,7 @@ class TaskController extends AbstractController
             //verify is the name is unique
             $taskName = $task->getName();
             $taskExist = $em->getRepository(Task::class)->findOneBy(['name' => $taskName]);
-            if($taskExist){
+            if($taskExist and $taskExist->getPertChart()->getId() == $diagramId){
                 $this->addFlash('error', 'Ce nom de tâche existe déjà');
                 return $this->redirectToRoute('new_task', ['diagramId' => $diagramId]);
             }

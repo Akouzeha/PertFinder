@@ -10,6 +10,8 @@ use App\Form\ChartType;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Process\Process;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,7 +55,9 @@ class DiagramController extends AbstractController
             $em->persist($diagram);
             $em->flush();
             $showForm = false;
-            return $this->redirectToRoute('task/index.html.twig');
+            $this->addFlash('success', 'Le diagramme a été créé avec succès');
+            $diagramId = $diagram->getId();
+            return $this->redirectToRoute('new_task', ['diagramId' => $diagramId]);
         }
         return $this->render('diagram/create.html.twig', [
             'formDiagram' => $form,
@@ -77,8 +81,14 @@ class DiagramController extends AbstractController
     $tasks = $em->getRepository(Task::class)->findBy(['pertChart' => $diagramId]);
 
     // Initialize arrays to store Early Start (ES) and Early Finish (EF) of each task
+    // Late Start (LS) and Late Finish (LF) of each task
+    // Margin Total (MT) and Margin Libre (ML) of each task
     $ES = [];
     $EF = [];
+    $LS = [];
+    $LF = [];
+    $MT = [];
+    $ML = [];
 
     // Stock the tasks in an array ordered by level
     $tasksByLevel = [];
@@ -117,37 +127,158 @@ class DiagramController extends AbstractController
             $EF[$taskId] = $maxEF + $task->getDuree();
         }
     }
+    // Calculate LS and LF of each task
+    // Set LF of the tasks of the last level to the EF of the last task
+    $lastLevel = max(array_keys($tasksByLevel));
+    $lastTask = end($tasksByLevel[$lastLevel]);
+    $LF[$lastTask->getId()] = $EF[$lastTask->getId()];
+    $LS[$lastTask->getId()] = $LF[$lastTask->getId()] - $lastTask->getDuree();
+
+    // Calculate LS and LF of the other tasks
+    for ($level = $lastLevel - 1; $level >= 1; $level--) {
+        foreach ($tasksByLevel[$level] as $task) {
+            $taskId = $task->getId();
+
+            // Calculate LF as the minimum LS of all tasks at the next level
+            $minLS = PHP_INT_MAX;
+            foreach ($tasksByLevel[$level + 1] as $successor) {
+                $successorId = $successor->getId();
+                $minLS = min($minLS, $LS[$successorId]);
+            }
+
+            $LF[$taskId] = $minLS;
+            $LS[$taskId] = $LF[$taskId] - $task->getDuree();
+        }
+    }
+    //calculate MT and ML of each task
+    foreach ($tasks as $task) {
+        $taskId = $task->getId();
+        $MT[$taskId] = $LF[$taskId] - $EF[$taskId];
+        $ML[$taskId] = $LS[$taskId] - $ES[$taskId];
+    }
 
     return $this->render('diagram/index.html.twig', [
         'tasksByLevel' => $tasksByLevel,
         'diagramId' => $diagramId,
         'ES' => $ES,
         'EF' => $EF,
+        'LS' => $LS,
+        'LF' => $LF,
+        'MT' => $MT,
+        'ML' => $ML,
     ]);
 }
 
+    private function calculDatesInternal($diagramId, EntityManagerInterface $em)
+    {
+        // Fetch all tasks of the diagram
+    $tasks = $em->getRepository(Task::class)->findBy(['pertChart' => $diagramId]);
+
+    // Initialize arrays to store Early Start (ES) and Early Finish (EF) of each task
+    // Late Start (LS) and Late Finish (LF) of each task
+    // Margin Total (MT) and Margin Libre (ML) of each task
+    $ES = [];
+    $EF = [];
+    $LS = [];
+    $LF = [];
+    $MT = [];
+    $ML = [];
+
+    // Stock the tasks in an array ordered by level
+    $tasksByLevel = [];
+    foreach ($tasks as $task) {
+        $tasksByLevel[$task->getLevel()][] = $task;
+    }
+
+    // Sort the tasks by their level
+    ksort($tasksByLevel);
+
+    // Calculate the ES and EF of each task
+    // Set the ES of the tasks of level 1 to 0
+    foreach ($tasksByLevel[1] as $task) {
+        $ES[$task->getId()] = 0;
+        $EF[$task->getId()] = $task->getDuree();
+    }
+
+    // Calculate the ES and EF of the other tasks
+    foreach ($tasksByLevel as $level => $tasksAtLevel) {
+        if ($level == 1) {
+            // Skip tasks of level 1 (already initialized)
+            continue;
+        }
+
+        foreach ($tasksAtLevel as $task) {
+            $taskId = $task->getId();
+
+            // Calculate ES as the maximum EF of all tasks at the previous level
+            $maxEF = 0;
+            foreach ($tasksByLevel[$level - 1] as $predecessor) {
+                $predecessorId = $predecessor->getId();
+                $maxEF = max($maxEF, $EF[$predecessorId]);
+            }
+
+            $ES[$taskId] = $maxEF;
+            $EF[$taskId] = $maxEF + $task->getDuree();
+        }
+    }
+    // Calculate LS and LF of each task
+    // Set LF of the tasks of the last level to the EF of the last task
+    $lastLevel = max(array_keys($tasksByLevel));
+    $lastTask = end($tasksByLevel[$lastLevel]);
+    $LF[$lastTask->getId()] = $EF[$lastTask->getId()];
+    $LS[$lastTask->getId()] = $LF[$lastTask->getId()] - $lastTask->getDuree();
+
+    // Calculate LS and LF of the other tasks
+    for ($level = $lastLevel - 1; $level >= 1; $level--) {
+        foreach ($tasksByLevel[$level] as $task) {
+            $taskId = $task->getId();
+
+            // Calculate LF as the minimum LS of all tasks at the next level
+            $minLS = PHP_INT_MAX;
+            foreach ($tasksByLevel[$level + 1] as $successor) {
+                $successorId = $successor->getId();
+                $minLS = min($minLS, $LS[$successorId]);
+            }
+
+            $LF[$taskId] = $minLS;
+            $LS[$taskId] = $LF[$taskId] - $task->getDuree();
+        }
+    }
+    //calculate MT and ML of each task
+    foreach ($tasks as $task) {
+        $taskId = $task->getId();
+        $MT[$taskId] = $LF[$taskId] - $EF[$taskId];
+        $ML[$taskId] = $LS[$taskId] - $ES[$taskId];
+    }
+        $results = [
+            'ES' => $ES,
+            'EF' => $EF,
+            'LS' => $LS,
+            'LF' => $LF,
+            'MT' => $MT,
+            'ML' => $ML,
+        ];
+        return $results;
+    }
+
     #[Route('/diagram/{diagramId}/draw', name: 'draw_graph')]
-    // Your Symfony controller method
-    public function generatePertChart($diagramId, EntityManagerInterface $em)
+    public function generatePertChart($diagramId, EntityManagerInterface $em): Response
     {
     // Fetch tasks and edges based on $diagramId
     $tasks = $em->getRepository(Task::class)->findBy(['pertChart' => $diagramId]);
-    $edges = $em->getRepository(Edge::class)->findAll();
+    $edges = $em->getRepository(Edge::class)->findAllEdgesForChart($diagramId);
     $diagram = $em->getRepository(Diagram::class)->find($diagramId);
     $imgName = str_replace(' ', '_', $diagram->getTitle());
-
-    // Create DOT file content
-    $dotContent = "digraph PERT {\n";
-
-    foreach ($tasks as $task) {
-        $dotContent .= "  {$task->getId()} [label=\"{$task->getName()} ({$task->getDuree()} days)\"]\n";
-    }
-
-    foreach ($edges as $edge) {
-        $dotContent .= "  {$edge->getPredecessor()->getId()} -> {$edge->getTask()->getId()}\n";
-    }
-
-    $dotContent .= "}\n";
+    $dates = $this->calculDatesInternal($diagramId, $em);
+    $ES = $dates['ES'];
+    $EF = $dates['EF'];
+    $LS = $dates['LS'];
+    $LF = $dates['LF'];
+    $MT = $dates['MT'];
+    $ML = $dates['ML'];
+    
+ 
+    $dotContent = $this->generateDotFileContent($tasks, $edges, $ES, $EF, $LS, $LF, $MT, $ML);
 
     // Save DOT file
     $dotFilePath = '/Applications/MAMP/htdocs/KOUZEHA_Ammar/PertFinder/public/charts/' . $imgName . '.dot';
@@ -170,7 +301,47 @@ class DiagramController extends AbstractController
     ]);
 }
 
+public function generateDotFileContent($tasks, $edges, $ES, $EF, $LS, $LF, $MT, $ML)
+{
+    
+    // Create DOT file content
+    $dotContent = "digraph PERT {\n";
+    // Set left-to-right orientation
+    $dotContent .= "  rankdir=LR;\n";
+    $dotContent .= "  ranksep=1;\n";
+    
+    // Set node shape to record
+    $dotContent .= "  node [shape=record];\n";
+    // Set edge style to vee
+    $dotContent .= "  edge [arrowhead=vee];\n";
+    //background color
+    $dotContent .= "  bgcolor=\"#ECE9E9\";\n";
 
+    foreach ($tasks as $task) {
+        //the shape of the node
+        $dotContent .= "  {$task->getId()} [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: {$ES[$task->getId()]}</TD><TD BGCOLOR= 'antiquewhite3'>Duree: {$task->getDuree()}</TD><TD BGCOLOR= 'aquamarine3'>EF: {$EF[$task->getId()]}</TD></TR>
+        <TR><TD BGCOLOR= 'white' COLSPAN='3'>{$task->getName()}</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: {$LS[$task->getId()]}</TD><TD BGCOLOR= 'chocolate2'>MT: {$MT[$task->getId()]}</TD><TD BGCOLOR= 'cornflowerblue'>LF: {$LF[$task->getId()]}</TD></TR>
+        
+        </TABLE>>]\n";
+        /* $dotContent .= "  {$task->getId()} [label=\"{MT: {$MT[$task->getId()]} |LS: {$LS[$task->getId()]}| ML: {$ML[$task->getId()]}} | {ES: {$ES[$task->getId()]} | ED: {$task->getDuree()} | EF: {$EF[$task->getId()]} }|{{$task->getName()} | LF: {$LF[$task->getId()]} | }\"]\n"; */
 
+    }
+
+    //set the critical path in red if MT = 0
+
+    foreach ($edges as $edge) {
+        if($MT[$edge->getTask()->getId()] == 0 and $MT[$edge->getPredecessor()->getId()] == 0){
+            $dotContent .= "  {$edge->getPredecessor()->getId()} -> {$edge->getTask()->getId()} [color=red]\n";
+        }
+        else
+        $dotContent .= "  {$edge->getPredecessor()->getId()} -> {$edge->getTask()->getId()}\n";
+    }
+
+    $dotContent .= "}\n";
+
+    return $dotContent;
+}
 
 }

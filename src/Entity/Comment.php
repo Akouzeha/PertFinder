@@ -23,6 +23,9 @@ class Comment
     #[ORM\ManyToOne(inversedBy: 'comment')]
     private ?User $user = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $commentTime = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -63,4 +66,38 @@ class Comment
 
         return $this;
     }
+
+
+    public function getCommentTime(): ?\DateTimeInterface
+    {
+        return $this->commentTime;
+    }
+    
+    public function setCommentTime(\DateTimeInterface $commentTime): static
+    {
+        $this->commentTime = $commentTime;
+    
+        return $this;
+    }
+
+    //time difference
+    public function getTimeDifference(): string
+    {
+        $now = new \DateTime();
+        $interval = $now->diff($this->getCommentTime());
+        if ($interval->y > 0) {
+            return $interval->y . ' years ago';
+        } elseif ($interval->m > 0) {
+            return $interval->m . ' months ago';
+        } elseif ($interval->d > 0) {
+            return $interval->d . ' days ago';
+        } elseif ($interval->h > 0) {
+            return $interval->h . ' hours ago';
+        } elseif ($interval->i > 0) {
+            return $interval->i . ' minutes ago';
+        } else {
+            return $interval->s . ' seconds ago';
+        }
+    }
+
 }

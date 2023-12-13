@@ -174,3 +174,14 @@
     }
     
 }
+/* ============================================== */
+/* show project */
+@media screen and (max-width: 800px) {
+    .project-container{
+        width: 100%;
+        margin-left: 0px;
+    }
+    .project-container img{
+        width:100%;
+    }
+}

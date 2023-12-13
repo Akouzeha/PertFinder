@@ -78,13 +78,18 @@
     </div>
 </div>
 
+    <table>
+        <tr>
+            <th>Task</th>
+            <th>level</th>
+        </tr>
     {% for data in taskData %}
-    <p>
-        Task: {{ data.task.getName() }}
-        Diagram ID: {{ data.diagramId }}
-        Level: {{ data.level }}
-    </p>
-
+        <tr>
+            <td>{{ data.task.getName() }}</td>
+            <td>{{ data.task.getLevel() }}</td>
+        </tr>
 {% endfor %}
+    </table>
+
     <a href="{{path('cal_dates', {'diagramId': taskData[0]['diagramId'],'diagramId': taskData[0]['diagramId']})}}">Calculer les dates</a>
 {% endblock %}

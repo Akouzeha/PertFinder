@@ -70,8 +70,21 @@ class ProjectController extends AbstractController
     #[Route('/project/project/{id}', name: 'show_project')]
     public function showProject(Project $project, EntityManagerInterface $entityManager): Response
     {
+        if ($project->getDiagrams() == null) {
+            $imgName = 'default.png';
+        } else {
+            $diagrams = $project->getDiagrams();
+            if ($diagrams[0] != null) {
+                $diagramName = $diagrams[0]->getTitle();
+                $imgName = str_replace(' ', '_', $diagramName);
+            } else {
+                $imgName = 'default.png';
+            }
+        }
+        
         return $this->render('project/show.html.twig',[
             'project' => $project,
+            'imgName' => $imgName . '.png',
         ]);
     }
 

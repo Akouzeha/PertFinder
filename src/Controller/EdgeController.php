@@ -6,6 +6,7 @@ use App\Entity\Edge;
 use App\Entity\Task;
 use App\Entity\Diagram;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -71,13 +72,14 @@ class EdgeController extends AbstractController
         ]);
     } */
 
-    #[Route('/edge/show', name: 'task_edge')]
-    public function tasksWithDependencies(EntityManagerInterface $em): Response
+    #[Route('/edge/{diagramId}/show', name: 'task_edge')]
+    public function tasksWithDependencies(EntityManagerInterface $em, Request $request): Response
     {
-        // Fetch all tasks
-        $tasks = $em->getRepository(Task::class)->findAll();
-        // Fetch all edges
-        $edges = $em->getRepository(Edge::class)->findAll();
+        $diagramId = $request->get('diagramId');
+        // Fetch all tasks of this diagram
+        $tasks = $em->getRepository(Task::class)->findBy(['pertChart' => $diagramId]);
+        //fetch all edges of this diagram
+        $edges = $em->getRepository(Edge::class)->findAllEdgesForChart($diagramId);
 
         // Create a mapping between task IDs and array indices
         $taskIndices = [];
@@ -107,14 +109,13 @@ class EdgeController extends AbstractController
         $this->calculateAndSaveLevels($tasks, $adjacencyMatrix, $em);
 
         // Fetch the updated tasks from the database
-        $tasks = $em->getRepository(Task::class)->findAll();
+        $tasks = $em->getRepository(Task::class)->findby(['pertChart' => $diagramId]);
 
         // Combine task data with pertChart IDs, the adjacency matrix, and levels
         $taskData = [];
         foreach ($tasks as $task) {
             $edges = $em->getRepository(Edge::class)->findBy(['task' => $task]);
             $predecessor = $em->getRepository(Edge::class)->findBy(['predecessor' => $task]);
-            $diagramId = $task->getPertChart()->getId();
             $diagram = $em->getRepository(Diagram::class)->find($diagramId);
             //set the adjacencymatrix for the diagram
             $diagram->setAdjacencyMatrix($adjacencyMatrix);
