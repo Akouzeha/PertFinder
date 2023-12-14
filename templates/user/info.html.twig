@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+    <div class"user-row user-settings-row row">
+        <div class ="user-info user-settings">
+            <img src="{{ asset('charts/default.png') }}" alt="user" class="user-img">
+            <button class="img-btn">Change Avatar</button>
+            <h1 style="margin-left:180px;" >Salut
+            <a href="{{ path('info_user',{'id': viewedId}) }}">
+               {{userInfo.username}} !
+            </a>
+            </h1>
+        </div>
+         {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        <div class="user-info-container">
+            <div class="user-coordonne">
+                <table class="user-table">
+                    <tr>
+                        <th>Pseudo</th>
+                        {% if app.request.attributes.get('_route') == 'edit_user_name' %}
+                            <td>{{ form_start(userNameForm) }}
+                            {{ form_widget(userNameForm) }}
+                            {{ form_end(userNameForm) }}
+                            </td>
+                        {% else %}
+                        <td>{{userInfo.username}}
+                            {% if app.user.id == viewedId %}
+                                
+                            <a href="{{ path('edit_user_name',{'id': viewedId}) }}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
+                            {% endif %}
+                        </td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th>Prénom</th>
+                        {% if app.request.attributes.get('_route') == 'edit_prenom' %}
+                            <td>{{ form_start(prenomForm) }}
+                                {{ form_widget(prenomForm) }}
+                                 {{ form_end(prenomForm) }}
+                            </td>
+                        {% else %}
+                        <td>{{userInfo.prenom}}
+                        {% if app.user.id == viewedId %}
+                            <a href="{{ path('edit_prenom',{'id': viewedId}) }}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
+                        {% endif %}
+                        </td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th>Prénom</th>
+                        {% if app.request.attributes.get('_route') == 'edit_nom' %}
+                            <td>{{ form_start(nomForm) }}
+                                {{ form_widget(nomForm) }}
+                                 {{ form_end(nomForm) }}
+                            </td>
+                        {% else %}
+                        <td>{{userInfo.nom}}
+                        {% if app.user.id == viewedId %}
+                            <a href="{{ path('edit_nom',{'id': viewedId}) }}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
+                        {% endif %}
+                        </td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        {% if app.request.attributes.get('_route') == 'edit_email' %}
+                        <td>
+                            {{ form_start(emailForm) }}
+                            {{ form_widget(emailForm) }}
+                            {{ form_end(emailForm) }}
+                        </td>
+                        {% else %}
+                        <td>{{userInfo.email}}
+                        {% if app.user.id == viewedId %}
+                            <a href="{{ path('edit_email',{'id': viewedId}) }}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
+                        {% endif %}
+                        </td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th>PassWord</th>
+                        <td>Changez votre mot de passe</td>
+                    </tr>
+                </table>
+                    
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock %}

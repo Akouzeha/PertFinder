@@ -8,13 +8,30 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="user-row">
+        <div class="user-info col-2">
+            <img src="{{asset('charts/default.png')}}">
+        </div>
+        <div class="user-info col-8">
+            <h1>Hello {{ app.user }}! ⚙️ 🟢 🔴 💬</h1>
+        </div>
+    </div>
+    <div class="user-row">
+        <div class="user-pro col-6">
+            <ul>
+                {% for project in app.user.projects %}
+                    <li>{{ project.title }} </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="user-pro col-6">
+            <ul>
+                {% for comment in app.user.comments %}
+                    <li>{{ comment.contenu }} posté {{comment.getTimeDifference}} </li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Applications/MAMP/htdocs/KOUZEHA_Ammar/PertFinder/src/Controller/UserController.php'|file_link(0) }}">src/Controller/UserController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Applications/MAMP/htdocs/KOUZEHA_Ammar/PertFinder/templates/user/index.html.twig'|file_link(0) }}">templates/user/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}

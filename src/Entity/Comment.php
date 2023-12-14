@@ -86,17 +86,17 @@ class Comment
         $now = new \DateTime();
         $interval = $now->diff($this->getCommentTime());
         if ($interval->y > 0) {
-            return $interval->y . ' years ago';
+            return 'il y a ' . $interval->y . 'ans'  ;
         } elseif ($interval->m > 0) {
-            return $interval->m . ' months ago';
+            return 'il y a ' .$interval->m . 'mois' ;
         } elseif ($interval->d > 0) {
-            return $interval->d . ' days ago';
+            return 'il y a ' . $interval->d . ' jours' ;
         } elseif ($interval->h > 0) {
-            return $interval->h . ' hours ago';
+            return 'il y a ' . $interval->h . ' heurs';
         } elseif ($interval->i > 0) {
-            return $interval->i . ' minutes ago';
+            return 'il y a ' . $interval->i . ' minutes';
         } else {
-            return $interval->s . ' seconds ago';
+            return 'il y a ' . $interval->s . ' seconds';
         }
     }
 

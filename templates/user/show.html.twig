@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+
+    <div class="user-row">
+        <div class="user-info col-2">
+            <img class="user-img" src="{{asset('charts/default.png')}}"></img>
+        </div>
+        <div class="user-info col-8">
+            <h1> 
+            {% if app.user.id == viewedId %}
+             <a href="{{path('show_user', {'id': viewedId})}}"> {{ userInfo.username }} </a>
+            {% else %}
+             {{ userInfo.username }}
+            {% endif %}
+             🟢 🔴 💬</h1>
+        </div>
+    </div>
+    <div class="user-row">
+        <div class="user-pro col-6">
+            <h2>Projets</h2>
+            {% if userInfo.projects | length == 0 %}
+                <p> Aucun projet pour le moment </p>
+            {% else %}
+            <ul>
+                {% for project in userInfo.projects %}
+                    <li>{{ project.title }} </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="user-pro col-6">
+            <h2>Commentaires</h2>
+            {% if userInfo.comments | length == 0 %}
+                <p> Aucun commentaire pour le moment </p>
+            {% else %}
+            <ul>
+                {% for comment in userInfo.comments %}
+                    <li>{{ comment.contenu }} posté {{comment.getTimeDifference}} </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        
+    </div>
+
+{% endblock %}

@@ -265,7 +265,6 @@ footer a:hover{
     height:20px;
 }
 
-
 /* ============================================== */
 /* home page */
 .homeContainer h2{
@@ -755,4 +754,158 @@ footer a:hover{
     margin-right: 10px;
     float: left;
 }
+
+/* ============================================== */
+/* user-info */
+.user-row{
+    width:100%;
+    height:auto;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+.user-info{
+    display: flex;
+    align-items: center;
+    
+}
+
+.user-info h1{
+    
+    color: #E67E22;
+    font-size: 30px;
+    font-weight: bold;
+    
+}
+.user-img{
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    margin-top: 80px;
+    margin-left: 30px;
+    margin-bottom: 3px;
+}
+
+.user-row a{
+    text-decoration: none;
+    
+}
+.user-row a:hover{
+    cursor: pointer;
+    color: #E67E22;
+}
+.img-btn{
+    width: 80px;
+    height: 30px;
+    margin-left: 10px;
+    margin-top: 150px;
+}
+.user-info h2{
+    color: #E67E22;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 160px;
+}
+
+.user-info a:visited{
+    color: #1ABC9C;
+}
+.user-info a:hover{
+    color: #E67E22;
+    cursor: pointer;
+}
+.user-info a:active {
+    box-shadow: 0 0;
+    transform: translateY(4px);
+  }
+
+.user-info a{
+    text-decoration: none;
+}
+
+.user-settings{
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid #1ABC9C;
+    box-shadow: 0 4px #1abc9c82 ;
+    
+}
+.user-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    margin: 0;
+}
+
+.user-coordonne {
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.user-table th, .user-table td {
+    padding: 10px;
+    width: 300px;
+    border: 2px solid #312f2f83; /* Add border to both th and td */
+}
+
+.user-table th {
+    
+    padding-right: 20px;
+    border: none; /* Remove border from th */
+}
+
+.user-table td {
+    border-left: none; /* Remove left border from td */
+    border-right:none;
+    border-top: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-table td:first-child {
+    border-left: 1px solid #ccc; /* Add left border to the first td */
+}
+
+
+/* ============================================== */
+/* form change */
+
+.edit-btn{
+    background-color: #6fe2cb;
+    border-radius: 20px;
+    border: 2px solid #1ABC9C;
+    box-shadow: 0 2px #1ABC9C ;
+}
+.edit-btn:hover{
+    background-color: #1ABC9C;
+    border-radius: 20px;
+    border: 2px solid #1ABC9C;
+    box-shadow: 0 2px #1ABC9C ;
+    cursor: pointer;
+}
+.edit-btn:active {
+    box-shadow: 0 0;
+    transform: translateY(4px);
+  }
+
+  .form-change{
+    width: 300px;
+    height: 30px;
+    border-radius:10px;
+    border: 2px solid #1ABC9C;
+    box-shadow: 0 5px #1ABC9C ;
+    margin-top: 10px;
+    padding-left: 20px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: semi-bold;
+    color: black;
+  }
 
