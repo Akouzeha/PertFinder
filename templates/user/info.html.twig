@@ -8,7 +8,7 @@
         <div class ="user-info user-settings">
             <img src="{{ asset('charts/default.png') }}" alt="user" class="user-img">
             <button class="img-btn">Change Avatar</button>
-            <h1 style="margin-left:180px;" >Salut
+            <h1>Salut
             <a href="{{ path('info_user',{'id': viewedId}) }}">
                {{userInfo.username}} !
             </a>
@@ -59,7 +59,7 @@
                         {% endif %}
                     </tr>
                     <tr>
-                        <th>Prénom</th>
+                        <th>Nom</th>
                         {% if app.request.attributes.get('_route') == 'edit_nom' %}
                             <td>{{ form_start(nomForm) }}
                                 {{ form_widget(nomForm) }}
@@ -91,7 +91,13 @@
                     </tr>
                     <tr>
                         <th>PassWord</th>
-                        <td>Changez votre mot de passe</td>
+                        
+                        <td>********
+                        {% if app.user.id == viewedId %}
+                            <a href="{{path('app_forgot_password_request')}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
+                        {% endif %}
+                        </td>
+                        
                     </tr>
                 </table>
                     

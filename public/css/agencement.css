@@ -185,3 +185,13 @@
         width:100%;
     }
 }
+
+/* ============================================== */
+
+@media screen and (max-width: 800px) {
+    .user-info{
+        width: 100%;
+        margin-left: 0px;
+    }
+    
+}

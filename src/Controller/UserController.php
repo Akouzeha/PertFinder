@@ -7,8 +7,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
@@ -54,6 +59,13 @@ class UserController extends AbstractController
             'attr' => [
             'class' => 'form-change'
             ],
+            'constraints' => [
+                new NotBlank(),
+                new Regex([
+                    'pattern' => "/^[a-zA-Z0-9]*$/",
+                    'message' => 'Les caractères spéciaux ne sont pas autorisés! ',
+                ]),
+            ],
         ])
         ->add('save', SubmitType::class, ['label' => 'Changer Username',
         'attr' => ['class' => 'edit-btn']])
@@ -90,6 +102,10 @@ class UserController extends AbstractController
         ->add('email', TextType::class, [
             'attr' => [
             'class' => 'form-change'
+            ],
+            'constraints' => [
+                new NotBlank(),
+                
             ],
         ])
         ->add('save', SubmitType::class, ['label' => 'Changer Email',
@@ -134,6 +150,13 @@ class UserController extends AbstractController
             'attr' => [
             'class' => 'form-change'
             ],
+            'constraints' => [
+                new NotBlank(),
+                new Regex([
+                    'pattern' => '/^[a-zA-Z]+$/',
+                    'message' => 'Prénom est invalide!',
+                ]),
+            ],
         ])
         ->add('save', SubmitType::class, ['label' => 'Changer Prénom',
         'attr' => ['class' => 'edit-btn']])
@@ -142,11 +165,6 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // Update the prenom
             $newPrenom = $form->get('prenom')->getData();
-            //check if prenom is valid
-            if (!preg_match("/^[a-zA-Z-' ]*$/",$newPrenom)) {
-                $this->addFlash('error', 'Prénom est invalide!');
-                return $this->redirectToRoute('show_user', ['id' => $id]);
-            }
             
             $user->setPrenom($newPrenom);
             $em->flush();
@@ -164,12 +182,20 @@ class UserController extends AbstractController
     public function editNom($id, EntityManagerInterface $em, Request $request): Response
     {
         //all user info
+        
         $user = $em->getRepository(User::class)->find($id);
         $form = $this->createFormBuilder($user)
 
         ->add('nom', TextType::class, [
             'attr' => [
             'class' => 'form-change'
+            ],
+            'constraints' => [
+                new NotBlank(),
+                new Regex([
+                    'pattern' => '/^[a-zA-Z]+$/',
+                    'message' => 'Nom est invalide!',
+                ]),
             ],
         ])
         ->add('save', SubmitType::class, ['label' => 'Changer Nom',
@@ -179,11 +205,6 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // Update the nom
             $newNom = $form->get('nom')->getData();
-            //check if nom is valid
-            if (!preg_match("/^[a-zA-Z-' ]*$/",$newNom)) {
-                $this->addFlash('error', 'Nom est invalide!');
-                return $this->redirectToRoute('show_user', ['id' => $id]);
-            }
             
             $user->setNom($newNom);
             $em->flush();
@@ -196,6 +217,86 @@ class UserController extends AbstractController
             'viewedId' => $id
         ]);
     }
+
+    /* #[Route('/user/{id}/edit-password', name: 'edit_password')]
+    public function editPassWord($id, EntityManagerInterface $em, Request $request): Response
+    {
+        
+        //all user info
+        $user = $em->getRepository(User::class)->find($id);
+        $form = $this->createFormBuilder($user)
+
+        //verify if the old password is correct 
+        ->add('oldPassword', TextType::class, [
+            'attr' => [
+            'class' => 'form-change'
+            ],
+            'constraints' => [
+                new NotBlank(),
+            ],
+        ])
+        ->add('plainPassword', RepeatedType::class, [
+            // instead of being set onto the object directly,
+            // this is read and encoded in the controller
+            'mapped' => false,
+            'type' => PasswordType::class,
+            'invalid_message' => 'The password fields must match.',
+            //password must be at least 8 caracter and have at least one majuscule, one minuscule, one number and one special caracter
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Please enter a password',
+                ]),
+                new Length([
+                    'min' => 8,
+                    'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
+                    // max length allowed by Symfony for security reasons
+                    'max' => 4096,
+                ]),
+                new Regex([
+                    'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/',
+                    'message' => 'Votre mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial'
+                ])
+            ],
+            'options' => ['attr' => ['class' => 'password-field']],
+            'required' => true,
+            'first_options'  => ['label' => 'Password','attr' => [
+                'placeholder' => 'Mot de passe'
+            ]],
+            'second_options' => ['label' => 'Repeat Password','attr' => [
+                'placeholder' => 'Répéter le mot de passe'
+            ]],
+            
+        ])
+        ->add('save', SubmitType::class, ['label' => 'Changer Mot de passe',
+        'attr' => ['class' => 'edit-btn']])
+        ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Update the password
+            $oldPassword = $form->get('oldPassword')->getData();
+            $newPassword = $form->get('plainPassword')->getData();
+            // check if old password is correct
+                if (!$this->passwordEncoder->isPasswordValid($user, $oldPassword)) {
+                    $this->addFlash('error', 'Mot de passe incorrect!');
+                    return $this->redirectToRoute('show_user', ['id' => $id]);
+                }
+            $user->setPassword(
+                password_hash(
+                    $newPassword,
+                    PASSWORD_DEFAULT
+                )
+            );
+            $em->flush();
+            $this->addFlash('success', 'Mot de passe est modifié avec sucées!');
+            return $this->redirectToRoute('show_user', ['id' => $id]);
+        }
+        return $this->render('user/info.html.twig', [
+            'passwordForm' => $form->createView(),
+            'userInfo' => $user,
+            'viewedId' => $id
+        ]);
+
+    } */
 
     
 }
