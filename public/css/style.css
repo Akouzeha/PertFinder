@@ -265,6 +265,30 @@ footer a:hover{
     width:25px;
     height:20px;
 }
+.projet-option-btn{
+    text-decoration: none;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: lighter;
+    border: #f5bd8d;
+    background-color: #ada9a5;
+    color: black;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    transition-duration: 0.4s;
+    margin-top: 20px;
+    box-shadow: 0 5px rgba(230, 125, 34, 0.447);
+}
+.projet-option-btn:hover{
+    background-color: white;
+    color:#E67E22;
+    border: 2px solid #E67E22;
+    cursor: pointer;
+}
+.projet-option-btn:active{
+    box-shadow: 0 0;
+    transform: translateY(4px);
+}
 
 /* ============================================== */
 /* home page */
@@ -486,6 +510,7 @@ footer a:hover{
     width: 900px;
     height: 400px;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .show-project{
@@ -513,6 +538,7 @@ footer a:hover{
     font-size: 18px;
     font-weight: semi-bold;
 }
+
 
 /* ============================================== */
 
@@ -777,6 +803,21 @@ footer a:hover{
 .comment .edit-pen{
     width:30px;
     height:30px;
+}
+.comment a{
+    text-decoration: none;
+    color: #1ABC9C;
+}
+.comment a:hover{
+    color: #E67E22;
+    cursor: pointer;
+}
+.comment a:active {
+    box-shadow: 0 0;
+    transform: translateY(4px);
+  }
+  .comment a:visited{
+    color: #1ABC9C;
 }
 /* ============================================== */
 /* user-info */

@@ -17,8 +17,8 @@
             {% for chart in project.diagrams %}
                 <img src="{{asset('charts/' ~ imgName )}}" alt="diagram">
             {% if app.user == project.user or app.user.roles == 'MANAGER_ROLE' or app.user.role == 'ADMIN_ROLE' %}   
-                <h5>Vous pouvez <a href="{{path('new_task', {'diagramId': chart.id})}}" >modifier</a> ce projet</h5>
-                <a href="{{path('task_edge', {'diagramId': chart.id})}}" class="btn">Les dépendances</a>
+                <a href="{{path('new_task', {'diagramId': chart.id})}}" class="projet-option-btn" >modifier</a>
+                <a href="{{path('task_edge', {'diagramId': chart.id})}}" class="projet-option-btn">Les dépendances</a>
             {% endif %}
             {% endfor %}
         </div>
