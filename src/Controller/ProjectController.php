@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Diagram;
 use App\Entity\Project;
 use App\Form\ProjetType;
+use App\Form\CommentType;
+use App\Repository\CommentRepository;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,13 +18,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProjectController extends AbstractController
 {
     #[Route('/project', name: 'app_project')]
-    public function index(ProjectRepository $projectRepository): Response
+    public function index(ProjectRepository $projectRepository, CommentRepository $commentRepository): Response
     {
+        
         $projects = $projectRepository->findAll();
+
+        $commentCounts = [];
+        foreach ($projects as $project) {
+            $commentCounts[$project->getId()] = $commentRepository->countCommentsInProject($project->getId());
+        }
+
         return $this->render('project/index.html.twig', [
             'projects' => $projects,
+            'commentCounts' => $commentCounts,
         ]);
     }
+    
     /**
      * @Route("/project/create", name="project_show")
      * @return Response
@@ -67,8 +79,8 @@ class ProjectController extends AbstractController
         return $this->redirectToRoute('app_project');
     }
 
-    #[Route('/project/project/{id}', name: 'show_project')]
-    public function showProject(Project $project, EntityManagerInterface $entityManager): Response
+    #[Route('/project/show/{id}', name: 'show_project')]
+    public function showProject(Project $project, EntityManagerInterface $em,Request $request): Response
     {
         if ($project->getDiagrams() == null) {
             $imgName = 'default.png';
@@ -81,10 +93,27 @@ class ProjectController extends AbstractController
                 $imgName = 'default.png';
             }
         }
+        $projectId = $project->getId();
+        //add a comment to the project
+        $user = $this->getUser();
+        $comment = new Comment();
+        $comment->setProject($project);
+        $comment->setUser($user);
+        $comment->setCommentTime(new \DateTime());
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        // Check if the form is submitted and valid
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment = $form->getData();
+            $em->persist($comment);
+            $em->flush();
+            return $this->redirectToRoute('show_project', ['id' => $projectId]);
+        }
         
         return $this->render('project/show.html.twig',[
             'project' => $project,
             'imgName' => $imgName . '.png',
+            'formComment' => $form,
         ]);
     }
 

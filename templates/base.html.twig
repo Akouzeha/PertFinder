@@ -4,9 +4,14 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-{#         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- #}        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+       <FilesMatch "\.(jpg|jpeg|png|gif|css|js)$">
+         Header set Cache-Control "public, max-age=31536000"
+        </FilesMatch>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {# <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>#}
         <link rel="stylesheet" href="{{ asset('css/agencement.css') }}">
         {% block stylesheets %}
         {% endblock %}
@@ -21,6 +26,10 @@
                 <div class="topnav" id="myNavBar">
                         <nav>
                             <ul>
+                                <li class="navItem"><a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                                    <i class="fa fa-bars"></i>
+                                    </a>
+                                </li>
                                 <img class="logo" src="{{ asset('img/logo.svg') }}" alt="logo">
                                 {# <li class="navItem"><a href="{{ path('app_home') }}">Home</a></li>
                                 {# check if the route is the current page, add a class to highlight it #}
@@ -39,10 +48,7 @@
 
                                 {% endif %}
                                 <li class={% if app.request.attributes.get('_route') == 'app_home' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_home') }}">Home</a></li>
-                                <li class="navItem"><a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                                    <i class="fa fa-bars"></i>
-                                    </a>
-                                </li>
+                                
                             </ul>
                         </nav>
                 </div>

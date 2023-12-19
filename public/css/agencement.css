@@ -195,3 +195,20 @@
     }
     
 }
+/* ============================================== */
+/* comment */
+@media screen and (max-width: 800px) {
+    .comment{
+        width: 100%;
+        margin-left: 0px;
+    }
+    .post-comment textarea{
+        width: 100%;
+        margin-left: 0px;
+    }
+    .post-comment .btn{
+        width: 100%;
+        margin-left: 0px;
+    }
+    
+}

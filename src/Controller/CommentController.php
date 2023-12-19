@@ -21,43 +21,6 @@ class CommentController extends AbstractController
             'controller_name' => 'CommentController',
         ]);
     }
-    #[Route('/project/{projectId}/{userId}/newcomment', name: 'new_comment')]
-    public function newComment(EntityManagerInterface $em, $projectId, $userId, Request $request, Comment $comment = null): Response
-    {
-        $project = $em->getRepository(Project::class)->find($projectId);
-        $user = $em->getRepository(User::class)->find($userId);
-        $time = new \DateTime();
-
-        // Check if $comment is null to determine if it's a new comment or an edit
-        if (!$comment) {
-            $comment = new Comment();
-        }
-        $comment->setProject($project);
-        //get image name
-        $diagrams = $project->getDiagrams();
-        $diagram = $diagrams[0];
-        $imgName = $diagram->getImgName();
-        $comment->setUser($user);
-        $comment->setCommentTime($time);
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
-        // Check if the form is submitted and valid
-        if ($form->isSubmitted() && $form->isValid()) {
-            $comment = $form->getData();
-            $em->persist($comment);
-            $em->flush();
-            return $this->redirectToRoute('show_project', ['id' => $projectId]);
-        }
-        $formComment = $form->createView();
-
-        return $this->render('project/show.html.twig', [
-            'formComment' => $formComment, // Pass the form to the template,
-            'project' => $project,
-            'user' => $user,
-            'imgName' => $imgName . '.png',
-            'comment' => $comment, // Pass the comment to the template for rendering/editing
-        ]);
-    }
 
     #[Route('/project/{commentId}/delcomment', name: 'del_comment')]
     public function delComment(EntityManagerInterface $em, $commentId): Response

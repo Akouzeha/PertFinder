@@ -45,4 +45,13 @@ class CommentRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+    public function countCommentsInProject($projectId)
+        {
+            return $this->createQueryBuilder('c')
+                ->select('COUNT(c.id)')
+                ->where('c.project = :projectId')
+                ->setParameter('projectId', $projectId)
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
+    }
