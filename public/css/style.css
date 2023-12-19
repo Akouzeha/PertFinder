@@ -769,10 +769,12 @@ footer a:hover{
 .comment p{
     width: 50%;
 }
-.comment a{
-    float:right;
-}
+
 .comment .delete-bin{
+    width:30px;
+    height:30px;
+}
+.comment .edit-pen{
     width:30px;
     height:30px;
 }

@@ -44,6 +44,7 @@ security:
     role_hierarchy:
         
         ROLE_USER:         []
+        ROLE_PROJECT_MANAGER: [ROLE_USER]
         ROLE_MODERATOR: [ROLE_USER]
         ROLE_ADMIN:       [ROLE_USER, ROLE_MODERATOR]
         ROLE_SUPER_ADMIN: [ROLE_ADMIN,ROLE_MODERATOR, ROLE_ALLOWED_TO_SWITCH]

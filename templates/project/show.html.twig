@@ -18,6 +18,7 @@
                 <img src="{{asset('charts/' ~ imgName )}}" alt="diagram">
             {% if app.user == project.user or app.user.roles == 'MANAGER_ROLE' or app.user.role == 'ADMIN_ROLE' %}   
                 <h5>Vous pouvez <a href="{{path('new_task', {'diagramId': chart.id})}}" >modifier</a> ce projet</h5>
+                <a href="{{path('task_edge', {'diagramId': chart.id})}}" class="btn">Les dépendances</a>
             {% endif %}
             {% endfor %}
         </div>
@@ -27,17 +28,27 @@
             {% for comment in project.comments %}
                 <div class="comment">
                     <img src="{{asset('charts/default.png')}}" alt="avatar">
-                    <a  href="{{path('del_comment', {'commentId': comment.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
-                    <p>Posté par {{comment.user.username}} - {{comment.getTimeDifference}} </p>
+                    <a style="float:right;"  href="{{path('del_comment', {'commentId': comment.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
+                    <a style="float:right;"  href="{{path('edit_comment', {'id': project.id, 'commentId': comment.id})}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
+                    <p>Posté par <a href="{{path('info_user',{'id': comment.user.id})}}"> {{comment.user.username}}</a> - {{comment.getTimeDifference}} </p>
                     <p style=margin-left:15px;>{{comment.contenu}}</p>
                 </div>
             {% endfor %}
             {% if app.user %}
-                <div class="post-comment">
-                   {{form_start(formComment)}}
-                    {{form_widget(formComment.contenu)}}
-                    {{form_end(formComment)}}
-                </div>
+                {% if app.request.attributes.get('_route') == 'edit_comment' %}
+                    <div class="post-comment">
+                        {{form_start(formEditComment)}}
+                            {{form_widget(formEditComment.contenu)}}
+                            {{form_end(formEditComment)}}
+                    </div>
+                {% else %}
+                    <div class="post-comment">
+                        {{form_start(formComment)}}
+                        {{form_widget(formComment.contenu)}}
+                        {{form_end(formComment)}}
+                    </div>
+                        
+                {% endif %}
             {% else %}
             <div class="comment-connecxion">
                 <p>Vous devez être connecté pour poster un commentaire</p>
