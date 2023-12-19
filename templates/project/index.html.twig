@@ -3,7 +3,7 @@
 {% block title %}Hello ProjectController!{% endblock %}
 
 {% block body %}
-                
+            {% if app.user %}    
             <div class ="list-projects">
                     <form class="projet-form" action="{{ path('create_project') }}" method="post">
                         <button type="submit" class="btn creat-projet">Créer un Projet</button>
@@ -24,4 +24,12 @@
                 </div>
                 {% endfor %}
             </div>
+            {% else %}
+            <div class="demande-connexion">
+            <h2>Vous devez être connecté pour créer un projet</h2>
+                <a href="{{path('app_login')}}">Se connecter</a>
+            <h2>Vous n'avez pas de compte ?</h2>
+                <a href="{{path('app_register')}}">S'inscrire</a>
+        </div>
+            {% endif %}
 {% endblock %}

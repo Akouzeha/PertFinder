@@ -6,7 +6,7 @@ body{
     padding: 0;
     height: 100%;
     box-sizing: border-box;
-    background-color: #ECE9E9;
+    background-color: #fcf9f9;
     display: flex;
     flex-direction: column;
 }
@@ -48,7 +48,7 @@ header{
   }
   .topnav {
     overflow: hidden;
-    background-color: #ECE9E9;
+    background-color: #fcf9f9;
   }
   .topnav ul {
     list-style-type: none;
@@ -56,7 +56,7 @@ header{
     padding: 0;
     margin-top: 3px;
     overflow: hidden;
-    background-color: #ECE9E9;
+    background-color: #fcf9f9;
     position: fixed;
     top: 0;
     right: 0;
@@ -68,7 +68,8 @@ header{
   .topnav a {
     float: right;
     display: inline-block;
-    color: #1ABC9C;
+    /* color: #1ABC9C; */
+    color: #159279;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -331,7 +332,7 @@ footer a:hover{
     margin-left:150px;
     margin-top: 100px;
     margin-bottom: 100px;
-    background-color: #ECE9E9;
+    background-color: #fcf9f9;
 }
 .project-form h2{
     text-align: center;
@@ -418,7 +419,7 @@ footer a:hover{
     float: left;
     margin-top: 100px;
     margin-bottom: 100px;
-    background-color: #ECE9E9;
+    background-color: #fcf9f9;
 }
 .box-row{
     width: 75%;
@@ -523,7 +524,7 @@ footer a:hover{
     float: left;
     margin-top: 100px;
     margin-bottom: 100px;
-    background-color: #ECE9E9;
+    background-color: #fcf9f9;
 }
 
 .creat-projet{
@@ -541,7 +542,7 @@ footer a:hover{
     height: auto;
     margin-top: 100px;
     margin-bottom: 10px;
-    background-color: #ECE9E9;
+    background-color: #fcf9f9;
     border: 2px solid #1ABC9C;
 
 }
@@ -666,7 +667,7 @@ footer a:hover{
     width: 100%;
     height: auto;
     margin-bottom: 20px;
-    background-color: #ECE9E9;
+    background-color: #fcf9f9;
     border: 2px solid #1ABC9C;
 }
 
@@ -695,7 +696,7 @@ footer a:hover{
     width: 100%;
     height: auto;
     border-radius: 4px;
-    background-color: #ECE9E9;
+    background-color: #fcf9f9;
     border: 2px solid #1ABC9C;
 }
 .show-comment h2{
@@ -909,3 +910,29 @@ footer a:hover{
     color: black;
   }
 
+
+/* ============================================== */
+ /* control panel */
+
+ .user-info-panel h1{
+    
+    color: #E67E22;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 50px;
+ }
+
+ .user-info-panel h3{
+        color: #1ABC9C ;
+        font-size: 20px;
+        font-weight: bold;
+ }
+
+ .user-info-panel a:visited{
+    color: #E67E22;
+ }
+    .user-info-panel a:hover{
+        color: #1ABC9C;
+        cursor: pointer;
+    }

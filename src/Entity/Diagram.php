@@ -40,6 +40,9 @@ class Diagram
     #[ORM\Column(nullable: true)]
     private ?array $adjacencyMatrix = null;
 
+    #[ORM\Column(length: 100)]
+    private ?string $imgName = null;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
@@ -165,6 +168,18 @@ class Diagram
     public function setAdjacencyMatrix(?array $adjacencyMatrix): static
     {
         $this->adjacencyMatrix = $adjacencyMatrix;
+
+        return $this;
+    }
+
+    public function getImgName(): ?string
+    {
+        return $this->imgName;
+    }
+
+    public function setImgName(string $imgName): static
+    {
+        $this->imgName = $imgName;
 
         return $this;
     }

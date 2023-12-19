@@ -33,6 +33,10 @@ class CommentController extends AbstractController
             $comment = new Comment();
         }
         $comment->setProject($project);
+        //get image name
+        $diagrams = $project->getDiagrams();
+        $diagram = $diagrams[0];
+        $imgName = $diagram->getImgName();
         $comment->setUser($user);
         $comment->setCommentTime($time);
         $form = $this->createForm(CommentType::class, $comment);
@@ -50,6 +54,7 @@ class CommentController extends AbstractController
             'formComment' => $formComment, // Pass the form to the template,
             'project' => $project,
             'user' => $user,
+            'imgName' => $imgName . '.png',
             'comment' => $comment, // Pass the comment to the template for rendering/editing
         ]);
     }

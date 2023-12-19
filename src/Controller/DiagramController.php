@@ -52,6 +52,8 @@ class DiagramController extends AbstractController
             $diagram = $form->getData();
             $diagram->setProject($project);
             $diagram->setUser($user);
+            $imgName = str_replace(' ', '_', $diagram->getTitle());
+            $diagram->setImgName($imgName);
             $em->persist($diagram);
             $em->flush();
             $showForm = false;
@@ -268,7 +270,8 @@ class DiagramController extends AbstractController
     $tasks = $em->getRepository(Task::class)->findBy(['pertChart' => $diagramId]);
     $edges = $em->getRepository(Edge::class)->findAllEdgesForChart($diagramId);
     $diagram = $em->getRepository(Diagram::class)->find($diagramId);
-    $imgName = str_replace(' ', '_', $diagram->getTitle());
+    //$imgName = str_replace(' ', '_', $diagram->getTitle());
+    $imgName = $diagram->getImgName();
     $dates = $this->calculDatesInternal($diagramId, $em);
     $ES = $dates['ES'];
     $EF = $dates['EF'];
@@ -343,5 +346,23 @@ public function generateDotFileContent($tasks, $edges, $ES, $EF, $LS, $LF, $MT, 
 
     return $dotContent;
 }
+    #[Route('/diagram/{diagramId}/download/{fileName}', name: 'download_diagram')]
+    public function downloadFile($fileName)
+    {
+        $fPath = $this->getParameter('kernel.project_dir') . '/public/charts/' . $fileName;
+        
+        // Check if the file exists
+        if (!file_exists($fPath)) {
+            throw $this->createNotFoundException('The file does not exist');
+        }
+        $response = new BinaryFileResponse($fPath);
+
+        // Set the response headers
+        $response->headers->set('Content-Type', 'image/png');
+        $response->headers->set('Content-Disposition', 'inline; filename="' . $fileName . '"');
+
+        return $response;
+    }
+
 
 }

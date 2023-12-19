@@ -9,6 +9,7 @@
     <img style="height:300px;" src="{{asset('charts/' ~ imageFilePath)}}" alt="PERT Chart">
     
     {# Provide a link to download the PERT chart #}
-    <a href="">Download PERT Chart</a>
+    <a href="{{ path('download_diagram', {'diagramId': diagramId,'fileName': imageFilePath}) }}">Télécharger l'image</a>
+
        
 {% endblock %}

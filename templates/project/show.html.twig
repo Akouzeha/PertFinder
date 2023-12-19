@@ -33,10 +33,14 @@
                 </div>
             {% endfor %}
             {% if app.user %}
+                    <a href="{{path('new_comment', {'projectId': project.id, 'userId': app.user.id})}}">new comment</a>
+            {% if app.request.attributes.get('_route') == 'new_comment' %}
+                
                 {{ form_start(formComment) }}
                     {{ form_row(formComment.contenu) }}
                     <button type="submit" class="btn btn-success">Commenter</button>
                 {{ form_end(formComment) }}
+            {% endif %}
             
             {% else %}
             <div class="comment-connecxion">

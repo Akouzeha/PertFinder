@@ -31,5 +31,11 @@
             </div>
         </div>
     </div>
+    {% for projet in projets %}
+    <div>
+        {{projet.title}}
+    </div>
+        
+    {% endfor %}
 {% endblock %}
     
