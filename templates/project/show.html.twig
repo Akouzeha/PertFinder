@@ -19,6 +19,7 @@
             {% if app.user == project.user or app.user.roles == 'MANAGER_ROLE' or app.user.role == 'ADMIN_ROLE' %}   
                 <a href="{{path('new_task', {'diagramId': chart.id})}}" class="projet-option-btn" >modifier</a>
                 <a href="{{path('task_edge', {'diagramId': chart.id})}}" class="projet-option-btn">Les dépendances</a>
+                <a href="{{path('cal_dates', {'diagramId': chart.id})}}" class="projet-option-btn">Les dates</a>
             {% endif %}
             {% endfor %}
         </div>
