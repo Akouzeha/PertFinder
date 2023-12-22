@@ -65,14 +65,24 @@ class AdminController extends AbstractController
     {
         // Check if the user has the "super admin" role
         if (in_array('ROLE_SUPER_ADMIN', $user->getRoles(), true)) {
-            $this->addFlash('warning', 'You cannot delete a super admin.');
+            $this->addFlash('warning', 'You cannot pseudonymize a super admin.');
             return $this->redirectToRoute('app_admin');
         }
-
-        $em->remove($user);
+    
+        // Pseudonymize or anonymize personal data
+        $hashedUsername = hash('sha256', $user->getUsername());
+        $hashedEmail = hash('sha256', $user->getEmail());
+        // Disable the user's account
+        //$user->setEnabled(false);
+    
+        // Set the pseudonymized data
+        $user->setUsername($hashedUsername);
+        $user->setEmail($hashedEmail);
+    
+        $em->persist($user);
         $em->flush();
-        $this->addFlash('success', 'L\'utilisateur a été supprimé avec succès.');
+    
+        $this->addFlash('success', 'L\'utilisateur a été pseudonymisé avec succès.');
         return $this->redirectToRoute('app_admin');
     }
-
 }
