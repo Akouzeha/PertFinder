@@ -43,7 +43,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($user);
             $em->flush();
-            $this->addFlash('success', 'Les rôles de l\'utilisateur ont été modifiés');
+            $this->addFlash('success', 'Les rôles de l\'utilisateur ont été modifiés avec succès.');
             return $this->redirectToRoute('admin_edit_user', ['id' => $userId]);
         }
 
@@ -54,6 +54,25 @@ class AdminController extends AbstractController
             'form' => $form,
         ]);
     }
+    /**
+     * @Route("/admin/{id}/delete", name="admin_delete_user")
+     * @param User $user
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    #[Route('/admin/{id}/delete', name: 'admin_delete_user')]
+    public function deleteUser(User $user, EntityManagerInterface $em): Response
+    {
+        // Check if the user has the "super admin" role
+        if (in_array('ROLE_SUPER_ADMIN', $user->getRoles(), true)) {
+            $this->addFlash('warning', 'You cannot delete a super admin.');
+            return $this->redirectToRoute('app_admin');
+        }
 
+        $em->remove($user);
+        $em->flush();
+        $this->addFlash('success', 'L\'utilisateur a été supprimé avec succès.');
+        return $this->redirectToRoute('app_admin');
+    }
 
 }

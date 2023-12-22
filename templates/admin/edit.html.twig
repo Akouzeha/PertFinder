@@ -4,32 +4,42 @@
 
 {% block body %}
     
-    <div class="user-row">
-        <div class="user-info-panel col-12">
+    <div class="admin-edit-row">
+        <div class="admin-edit-panel col-12">
             <h1>Bienvenu dans le Panneau de contrôle</h1>
             <div class="col-6">
-                ici tu peux modifier {{ user.username }}!
-                ses rôles sont : 
-                {% for role in user.roles %}
-                    {{ role }}
-                    {% if not loop.last %}
-                        ,
-                    {% endif %}
-                {% endfor %}
+                <p> Ici tu peux modifier {{ user.username }}! </p>
+                <p> Ses rôles sont : 
+                    {% for role in user.roles %}
+                        {{ role }}
+                        {% if not loop.last %}
+                            ,
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                <a href="{{ path('admin_delete_user', {'id': user.id}) }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Delete User</a>
             </div>
-            {{ form_start(form) }}
-                {{ form_widget(form) }}
-            {{ form_end(form) }}
+            <div class="col-6">
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
         </div>
-        {% for message in app.flashes('success') %}
+        
+        <div class="alert">
+            {% for message in app.flashes('success') %}
                 <div class="alert alert-success">
                     {{ message }}
                 </div>
-                {% endfor %}
-                {% for message in app.flashes('error') %}
+            {% endfor %}
+            {% for message in app.flashes('error') %}
                 <div class="alert alert-danger">
                     {{ message }}
                 </div>
-                {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+</div>
+
+
+
 {% endblock %}
