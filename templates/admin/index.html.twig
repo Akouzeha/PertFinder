@@ -21,9 +21,15 @@
                     {% for user in users %}
                         <tr>
                             <td><a href="{{path('info_user', {'id':user.id})}}">{{ user.username }}</a></td>
-                            <td>{{ user.roles[0] }}</td>
-                            <td><a href="{{path('promote_user', {'userId': user.id})}}">(+)</i></a>
-                                <a href="{{path('demote_user', {'userId': user.id})}}"> (-)</a>
+                            <td>{% for role in user.roles %}
+                                    {{ role }}
+                                    {% if not loop.last %},{% endif %}
+                            {% endfor %}</td>
+                            <td>
+                            {% if "ROLE_SUPER_ADMIN" not in user.roles  %}
+                                
+                            <a href="{{path('admin_edit_user', {'id':user.id})}}"><button class="btn btn-primary">Modifier</button></a>
+                            {% endif %}
                             </td>
                         </tr>
                     {% endfor %}
