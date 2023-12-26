@@ -22,12 +22,15 @@ security:
                 # home page is the route where users are redirected after logout
                 target: app_home
                 # target: app_any_route
+                invalidate_session: true
+
 
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800
                 path: /
                 always_remember_me: true
+            idle_timeout: 1800 # 30 minutes
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

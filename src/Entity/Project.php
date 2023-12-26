@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ProjectRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Comment;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProjectRepository;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Project
@@ -186,5 +188,18 @@ class Project
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    
+    public function getLastComment(): ?Comment
+    {
+        // Create a sorting criteria to get the comments in descending order by commentTime
+        $criteria = Criteria::create()
+            ->orderBy(['commentTime' => Criteria::DESC])
+            ->setMaxResults(1);
+        // Get the last comment using the sorting criteria
+        $lastComment = $this->comments->matching($criteria)->first();
+        return $lastComment ? $lastComment : null;;
+
     }
 }
