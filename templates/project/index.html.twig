@@ -12,8 +12,10 @@
                 <div class="box-row">
                     <div class="list-project-row-1">
                         <div class="col-12">
-                            <a href="{{path('edit_project', {'id': project.id})}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
-                            <a href="{{path('delete_project', {'id': project.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
+                            {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_PROJECT_MANAGER") %}  
+                                <a href="{{path('edit_project', {'id': project.id})}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
+                                <a href="{{path('delete_project', {'id': project.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
+                            {% endif %}
                             <a href="{{path('show_project', {'id': project.id})}}" >{{ commentCounts[project.id] }} <img class="delete-bin" src="{{ asset('img/icons8-comment.svg') }}"></a>
                             <img class="image" src="{{ asset('img/pertFinderLogo.png') }}" alt="image"><br>
                             <h5><a style="float:left;margin-top:0px;" href="{{path('show_project', {'id': project.id}) }}" >{{project.title}}</a></h5> 

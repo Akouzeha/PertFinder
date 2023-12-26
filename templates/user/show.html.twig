@@ -7,12 +7,18 @@
 
     <div class="user-row">
         <div class="user-info col-2">
-            <img class="user-img" src="{{asset('charts/default.png')}}"></img>
+            {% if userInfo.isDeleted %}
+                <img src="{{ asset('img/deleted.jpg') }}" alt="user" class="user-img">
+            {% else %}
+                <img src="{{ asset('charts/default.png') }}" alt="user" class="user-img">
+            {% endif %}
         </div>
         <div class="user-info col-8">
             <h1> 
             {% if app.user.id == viewedId %}
              <a href="{{path('show_user', {'id': viewedId})}}"> {{ userInfo.username }} </a>
+            {% elseif userInfo.isDeleted %}
+                Utilisateur supprimé
             {% else %}
              {{ userInfo.username }}
             {% endif %}
@@ -27,7 +33,7 @@
             {% else %}
             <ul>
                 {% for project in userInfo.projects %}
-                    <li>{{ project.title }} </li>
+                    <li> <a href="{{path('show_project', {'id': project.id}) }}" >{{project.title}}</a> </li>
                 {% endfor %}
             </ul>
             {% endif %}
@@ -39,7 +45,7 @@
             {% else %}
             <ul>
                 {% for comment in userInfo.comments %}
-                    <li>{{ comment.contenu }} posté {{comment.getTimeDifference}} </li>
+                    <li>{{ comment.contenu }} <span> posté </span> {{comment.getTimeDifference}} </li>
                 {% endfor %}
             </ul>
             {% endif %}

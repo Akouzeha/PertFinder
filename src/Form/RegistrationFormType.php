@@ -26,6 +26,26 @@ class RegistrationFormType extends AbstractType
             ->add('username', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Nom d\'utilisateur'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez entrer un nom d\'utilisateur',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Votre nom d\'utilisateur doit contenir au moins {{ limit }} caractères',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 20,
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z0-9_]+$/',
+                        'message' => 'Votre nom d\'utilisateur ne doit contenir que des lettres, des chiffres et des underscores'
+                    ]),
+                    //username cannot start with a number
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z_][a-zA-Z0-9_]*$/',
+                        'message' => 'Votre nom d\'utilisateur ne peut pas commencer par un chiffre'
+                    ])
                 ]
             ])
             

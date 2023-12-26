@@ -16,7 +16,7 @@
             {% endif %}
             {% for chart in project.diagrams %}
                 <img src="{{asset('charts/' ~ imgName )}}" alt="diagram">
-            {% if app.user == project.user or app.user.roles == 'MANAGER_ROLE' or app.user.role == 'ADMIN_ROLE' %}   
+            {% if app.user == project.user or is_granted("ROLE_PROJECT_MANAGER") %}   
                 <a href="{{path('new_task', {'diagramId': chart.id})}}" class="projet-option-btn" >modifier</a>
                 <a href="{{path('task_edge', {'diagramId': chart.id})}}" class="projet-option-btn">Les dépendances</a>
                 <a href="{{path('cal_dates', {'diagramId': chart.id})}}" class="projet-option-btn">Les dates</a>
@@ -28,11 +28,22 @@
             <h2>Commentaires</h2>
             {% for comment in project.comments %}
                 <div class="comment">
+                {% if comment.user.isDeleted %}
+                    <img src="{{asset('img/deleted.jpg')}}" alt="deleted user">
+                {% else %}
                     <img src="{{asset('charts/default.png')}}" alt="avatar">
+                {% endif %}
+                    {% if app.user == comment.user or is_granted("ROLE_MODERATOR") %}
                     <a style="float:right;"  href="{{path('del_comment', {'commentId': comment.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
                     <a style="float:right;"  href="{{path('edit_comment', {'id': project.id, 'commentId': comment.id})}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
-                    <p>Posté par <a href="{{path('info_user',{'id': comment.user.id})}}"> {{comment.user.username}}</a> - {{comment.getTimeDifference}} </p>
-                    <p style=margin-left:15px;>{{comment.contenu}}</p>
+                    {% endif %}
+                    {% if comment.user.isDeleted %}
+                        <p>Posté par <a href="{{path('info_user',{'id': comment.user.id})}}"> Anonymous </a> - {{comment.getTimeDifference}} </p>
+                        <p style=margin-left:15px;>{{comment.contenu}}</p>
+                    {% else %}
+                        <p>Posté par <a href="{{path('info_user',{'id': comment.user.id})}}"> {{comment.user.username}}</a> - {{comment.getTimeDifference}} </p>
+                        <p style=margin-left:15px;>{{comment.contenu}}</p>
+                    {% endif %}
                 </div>
             {% endfor %}
             {% if app.user %}

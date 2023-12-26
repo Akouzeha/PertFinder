@@ -50,6 +50,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Message::class)]
     private Collection $sentMessages;
 
+    #[ORM\Column]
+    private ?bool $isDeleted = null;
+
 
     public function __construct()
     {
@@ -277,6 +280,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): string
     {
         return $this->username;
+    }
+
+    public function isIsDeleted(): ?bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function setIsDeleted(bool $isDeleted): static
+    {
+        $this->isDeleted = $isDeleted;
+
+        return $this;
     }
 
 }

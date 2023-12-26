@@ -24,6 +24,7 @@ class UserPromoteType extends AbstractType
                 ],
                 'expanded' => true,
                 'multiple' => true,
+                
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Changez les rôles',

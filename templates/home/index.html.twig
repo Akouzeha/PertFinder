@@ -31,11 +31,24 @@
             </div>
         </div>
     </div>
-    {% for projet in projets %}
-    <div>
-        {{projet.title}}
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="image-grid">
+                {% for imgInfo in imgData %}
+                    <div class="responsive-img-grid">
+                        <div class="gallery">
+                            <h3 class="desc">{{ imgInfo.diagramTitle }}</h3>
+                            <a href="{{ path('show_project', {'id': imgInfo.projectId}) }}">
+                            <img src="{{ asset('charts/' ~ imgInfo.imgName ~ '.png') }}" alt="{{ imgInfo.diagramTitle }}">
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="clearfix"></div>
+            </div>
+        </div>
     </div>
-        
-    {% endfor %}
+
 {% endblock %}
     

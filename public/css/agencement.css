@@ -54,8 +54,8 @@
         margin-left:10px;
     }
     .form-group .btn{
-        
         width: 100%;
+        margin-left:0px;
     }
 
 }
@@ -211,4 +211,43 @@
         margin-left: 0px;
     }
     
+}
+/* ============================================== */
+/* image grid in the home page */
+
+@media only screen and (max-width: 800px) {
+    .responsive-img-grid {
+        width: 100%;
+        margin: 6px 0;
+        float: left;
+    }
+    .gallery{
+        width: 550px;
+        margin-left: 0px;
+        margin-right:5px;
+    }
+    .gallery img{
+        width: 548px !important;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .responsive-img-grid {
+        width: 100%;
+    }
+    .gallery img{
+        width: 100% !important;
+    }
+}
+
+/* ============================================== */
+/* dates table */
+@media only screen and (max-width: 800px) {
+    .dates {
+        font-size: 14px;
+    }
+
+    .dates th, .dates td {
+        padding: 6px;
+    }
 }

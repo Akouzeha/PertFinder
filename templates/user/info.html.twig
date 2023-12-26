@@ -5,8 +5,12 @@
 {% block body %}
 
     <div class"user-row user-settings-row row">
-        <div class ="user-info user-settings">
-            <img src="{{ asset('charts/default.png') }}" alt="user" class="user-img">
+        <div class ="user-info user-settings col-12">
+            {% if userInfo.isDeleted %}
+                <img src="{{ asset('img/deleted.jpg') }}" alt="user" class="user-img">
+            {% else %}
+                <img src="{{ asset('charts/default.png') }}" alt="user" class="user-img">
+            {% endif %}
             <button class="img-btn">Change Avatar</button>
             <h1>Salut
             <a href="{{ path('info_user',{'id': viewedId}) }}">
@@ -24,7 +28,7 @@
                     {{ message }}
                 </div>
             {% endfor %}
-        <div class="user-info-container">
+        <div class="user-info-container col-12">
             <div class="user-coordonne">
                 <table class="user-table">
                     <tr>
@@ -40,36 +44,6 @@
                                 
                             <a href="{{ path('edit_user_name',{'id': viewedId}) }}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
                             {% endif %}
-                        </td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <th>Prénom</th>
-                        {% if app.request.attributes.get('_route') == 'edit_prenom' %}
-                            <td>{{ form_start(prenomForm) }}
-                                {{ form_widget(prenomForm) }}
-                                 {{ form_end(prenomForm) }}
-                            </td>
-                        {% else %}
-                        <td>{{userInfo.prenom}}
-                        {% if app.user.id == viewedId %}
-                            <a href="{{ path('edit_prenom',{'id': viewedId}) }}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
-                        {% endif %}
-                        </td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <th>Nom</th>
-                        {% if app.request.attributes.get('_route') == 'edit_nom' %}
-                            <td>{{ form_start(nomForm) }}
-                                {{ form_widget(nomForm) }}
-                                 {{ form_end(nomForm) }}
-                            </td>
-                        {% else %}
-                        <td>{{userInfo.nom}}
-                        {% if app.user.id == viewedId %}
-                            <a href="{{ path('edit_nom',{'id': viewedId}) }}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
-                        {% endif %}
                         </td>
                         {% endif %}
                     </tr>

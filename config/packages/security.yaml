@@ -38,8 +38,20 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/app_home, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/project, roles: ROLE_USER }
+        - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/task, roles: ROLE_USER }
+        - { path: ^/edge, roles: ROLE_USER }
+        - { path: ^/diagram, roles: ROLE_USER }
+        - { path: ^/home, roles: ROLE_USER }
+        - { path: ^/chat, roles: ROLE_USER }
+
+        # grant access to the home page to all users
+        - { path: ^/app_home, roles: PUBLIC_ACCESS }
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/register, roles: PUBLIC_ACCESS }
+        
     
     role_hierarchy:
         
@@ -47,7 +59,7 @@ security:
         ROLE_PROJECT_MANAGER: [ROLE_USER]
         ROLE_MODERATOR: [ROLE_USER]
         ROLE_ADMIN:       [ROLE_USER, ROLE_MODERATOR]
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN,ROLE_MODERATOR, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_SUPER_ADMIN: [ROLE_USER,ROLE_PROJECT_MANAGER,ROLE_ADMIN,ROLE_MODERATOR, ROLE_ALLOWED_TO_SWITCH]
 
 when@test:
     security:

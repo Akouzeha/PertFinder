@@ -20,15 +20,28 @@
                     <tbody>
                     {% for user in users %}
                         <tr>
-                            <td><a href="{{path('info_user', {'id':user.id})}}">{{ user.username }}</a></td>
-                            <td>{% for role in user.roles %}
-                                    {{ role }}
-                                    {% if not loop.last %},{% endif %}
-                            {% endfor %}</td>
+                            <td>
+                                {% if user.isDeleted %}
+                                    <a style="color:red;" href="{{path('info_user', {'id':user.id})}}">utilisateur supprimé</a>
+                                {% else %}
+                                    <a href="{{path('info_user', {'id':user.id})}}">{{ user.username }}</a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if user.isDeleted %}
+                                    Supprimé
+                                {% else %}
+                                    {% for role in user.roles %}
+                                            {{ role }}
+                                            {% if not loop.last %},{% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
                             <td>
                             {% if "ROLE_SUPER_ADMIN" not in user.roles  %}
-                                
-                            <a href="{{path('admin_edit_user', {'id':user.id})}}"><button class="btn btn-primary">Modifier</button></a>
+                            {% if not user.isDeleted %}
+                                <a href="{{path('admin_edit_user', {'id':user.id})}}"><button class="btn btn-primary">Modifier</button></a>
+                            {% endif %}
                             {% endif %}
                             </td>
                         </tr>

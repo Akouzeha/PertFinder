@@ -27,7 +27,7 @@
         <div class="user-pro col-6">
             <ul>
                 {% for comment in app.user.comments %}
-                    <li>{{ comment.contenu }} posté {{comment.getTimeDifference}} </li>
+                    <li>{{ comment.contenu }} <span> posté </span> {{comment.getTimeDifference}} </li>
                 {% endfor %}
             </ul>
         </div>

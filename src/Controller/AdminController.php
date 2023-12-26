@@ -73,8 +73,8 @@ class AdminController extends AbstractController
         $hashedUsername = hash('sha256', $user->getUsername());
         $hashedEmail = hash('sha256', $user->getEmail());
         // Disable the user's account
-        //$user->setEnabled(false);
-    
+        $user->setIsDeleted(true);
+        
         // Set the pseudonymized data
         $user->setUsername($hashedUsername);
         $user->setEmail($hashedEmail);

@@ -4,53 +4,72 @@
 
 {% block body %}
     
-    <h1>Tasks by Level</h1>
-
-    {# {% for level, tasks in tasksByLevel %}
-        <h2>Level {{ level }}</h2>
-        <ul>
-            {% for task in tasks %}
-                <li>
-                    Task Name: {{ task.name | default('No Name') }}<br>
-                    Task Duration: {{ task.duree }}<br>
-                    ES : {{ES[task.id]}}<br>
-                    EF : {{EF[task.id]}}<br>
-                    
-            {% endfor %} 
-        </ul> 
-
-
-    {% endfor %}
-    #}
-    {# Display ES, EF, LS, LF for each task #}
-    <table border="1">
-        <tr>
-            <th>Task</th>
-            <th>ES</th>
-            <th>EF</th>
-            <th>LS</th>
-            <th>LF</th>
-            <th>ML</th>
-            <th>MT</th>
-        </tr>
-        {% for task in tasksByLevel|default([]) %}
-            {% for t in task %}
+    <div class="row-dates">
+        <div class="col-12">
+            <h1>Tasks by Level</h1>
+            <table class="dates" border="1">
                 <tr>
-                    <td>{{ t.name }}</td>
-                    <td>{{ ES[t.id]|default('N/A') }}</td>
-                    <td>{{ EF[t.id]|default('N/A') }}</td>
-                    <td>{{ LS[t.id]|default('N/A') }}</td>
-                    <td>{{ LF[t.id]|default('N/A') }}</td>
-                    <td>{{ ML[t.id]|default('N/A') }}</td>
-                    <td>{{ MT[t.id]|default('N/A') }}</td>
-
+                    <th>Task</th>
+                    <th>ES</th>
+                    <th>EF</th>
+                    <th>LS</th>
+                    <th>LF</th>
+                    <th>ML</th>
+                    <th>MT</th>
                 </tr>
-            {% endfor %}
-        {% endfor %}
-    </table>
+                {% for task in tasksByLevel|default([]) %}
+                    {% for t in task %}
+                        <tr>
+                            <td class="task-name">{{ t.name }}</td>
+                            <td>{{ ES[t.id]|default('N/A') }}</td>
+                            <td>{{ EF[t.id]|default('N/A') }}</td>
+                            <td>{{ LS[t.id]|default('N/A') }}</td>
+                            <td>{{ LF[t.id]|default('N/A') }}</td>
+                            <td>{{ ML[t.id]|default('N/A') }}</td>
+                            <td>{{ MT[t.id]|default('N/A') }}</td>
+
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </table>
+            <a class="btn btn-primary" href="{{ path('draw_graph', {'diagramId': diagramId}) }}">Créer le Diagram</a>
+        </div>
+        <div class="vocab col-12">
+            <h1>Vocabulaire</h1>
+            <table class="dates wider-table" border="1">
+                <tr>
+                    <th>Terme</th>
+                    <th>Signification</th>
+                </tr>
+                <tr>
+                    <td>ES</td>
+                    <td>Early Start, Début Plustôt</td>
+                </tr>
+                <tr>
+                    <td>EF</td>
+                    <td>Early Finish, Fin Plustôt</td>
+                </tr>
+                <tr>
+                    <td>LS</td>
+                    <td>Late Start, Début Plustrad</td>
+                </tr>
+                <tr>
+                    <td>LF</td>
+                    <td>Late Finish, Fin Plustard</td>
+                </tr>
+                <tr>
+                    <td>ML</td>
+                    <td>Marge Libre, Margin Libre</td>
+                </tr>
+                <tr>
+                    <td>MT</td>
+                    <td>Marge Totale, Margin Totale</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
 
 
 
-    <a href="{{ path('draw_graph', {'diagramId': diagramId}) }}">Créer le Diagram</a>
 {% endblock %}
