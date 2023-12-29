@@ -29,7 +29,8 @@
             </a>
             </h1>
         </div>
-            {% for message in app.flashes('success') %}
+        <div class="alert-messages col-12">
+                {% for message in app.flashes('success') %}
                     <div class="alert alert-success">
                         {{ message }}
                     </div>
@@ -39,6 +40,7 @@
                         {{ message }}
                     </div>
                 {% endfor %}
+        </div>
         <div class="user-info-container col-12">
             <div class="user-coordonne">
                 <table class="user-table">

@@ -644,7 +644,8 @@ footer a:hover{
 
 .alert {
     margin-top: 20px;
-    font-size: 16px;
+    font-size: 24px;
+    font-weight: semi-bold;
 }
 .alert-success {
     background-color: #d4edda;
@@ -658,6 +659,12 @@ footer a:hover{
     color: #721c24;
     border: 1px solid #f5c6cb;
     border-radius: 4px;
+}
+.alert-messages{
+    margin-top: 8px; /* Adjust as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* ============================================== */
