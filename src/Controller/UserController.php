@@ -167,7 +167,7 @@ class UserController extends AbstractController
             $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
             $safeFilename = $slugger->slug($originalFilename);
             $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
-            $imgFilePath = 'public/img/profile_pics/'.$newFilename;
+            $imgFilePath = 'img/profile_pics/'.$newFilename;
             // Move the file to the directory where brochures are stored
             try {
                 $imageFile->move(

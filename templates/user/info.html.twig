@@ -8,9 +8,11 @@
         <div class ="user-info user-settings col-12">
             <div class="img-div">
                 {% if userInfo.isDeleted %}
-                    <img src="{{ asset('img/deleted.jpg') }}" alt="user" class="user-img">
+                    <img src="{{ asset('img/deleted.jpg') }}" alt="deleted-user" class="user-img">
+                {% elseif not userInfo.imgName %}
+                    <img src="{{ asset('charts/default.png') }}" alt="default-image" class="user-img">
                 {% else %}
-                    <img src="{{ asset('charts/default.png') }}" alt="user" class="user-img">
+                    <img src="{{ asset('' ~ userInfo.imgName) }}" alt="user" class="user-img">
                 {% endif %}
                 {% if app.request.attributes.get('_route') == 'show_user' %}
                 <button class="btn-avatar"> <a href="{{ path('change_photo', {'id': userInfo.id}) }}">Change Avatar</a></button>

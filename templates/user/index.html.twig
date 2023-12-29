@@ -8,30 +8,4 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-    <div class="user-row">
-        <div class="user-info col-2">
-            <img src="{{asset('charts/default.png')}}">
-        </div>
-        <div class="user-info col-8">
-            <h1>Hello {{ app.user }}! ⚙️ 🟢 🔴 💬</h1>
-        </div>
-    </div>
-    <div class="user-row">
-        <div class="user-pro col-6">
-            <ul>
-                {% for project in app.user.projects %}
-                    <li>{{ project.title }} </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="user-pro col-6">
-            <ul>
-                {% for comment in app.user.comments %}
-                    <li>{{ comment.contenu }} <span> posté </span> {{comment.getTimeDifference}} </li>
-                {% endfor %}
-            </ul>
-        </div>
-        
-    </div>
-
 {% endblock %}
