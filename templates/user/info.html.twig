@@ -6,28 +6,39 @@
 
     <div class"user-row user-settings-row row">
         <div class ="user-info user-settings col-12">
-            {% if userInfo.isDeleted %}
-                <img src="{{ asset('img/deleted.jpg') }}" alt="user" class="user-img">
-            {% else %}
-                <img src="{{ asset('charts/default.png') }}" alt="user" class="user-img">
-            {% endif %}
-            <button class="img-btn">Change Avatar</button>
+            <div class="img-div">
+                {% if userInfo.isDeleted %}
+                    <img src="{{ asset('img/deleted.jpg') }}" alt="user" class="user-img">
+                {% else %}
+                    <img src="{{ asset('charts/default.png') }}" alt="user" class="user-img">
+                {% endif %}
+                {% if app.request.attributes.get('_route') == 'show_user' %}
+                <button class="btn-avatar"> <a href="{{ path('change_photo', {'id': userInfo.id}) }}">Change Avatar</a></button>
+                {% endif %}
+                {# <button class="btn-avatar">Change Avatar</button> #}
+                {% if app.request.attributes.get('_route') == 'change_photo' %}
+                    
+                {{form_start(profilePicForm)}}
+                {{form_widget(profilePicForm)}}
+                {{form_end(profilePicForm)}}
+                {% endif %}
+            </div>
             <h1>Salut
             <a href="{{ path('info_user',{'id': viewedId}) }}">
                {{userInfo.username}} !
             </a>
             </h1>
         </div>
-         {% for message in app.flashes('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {% for message in app.flashes('error') %}
-                <div class="alert alert-danger">
-                    {{ message }}
-                </div>
-            {% endfor %}
+            {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
         <div class="user-info-container col-12">
             <div class="user-coordonne">
                 <table class="user-table">

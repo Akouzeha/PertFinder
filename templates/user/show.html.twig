@@ -6,6 +6,7 @@
 
 
     <div class="user-row">
+        
         <div class="user-info col-2">
             {% if userInfo.isDeleted %}
                 <img src="{{ asset('img/deleted.jpg') }}" alt="user" class="user-img">
@@ -15,16 +16,29 @@
         </div>
         <div class="user-info col-8">
             <h1> 
+            {{ userInfo.username }}
             {% if app.user.id == viewedId %}
-             <a href="{{path('show_user', {'id': viewedId})}}"> {{ userInfo.username }} </a>
+            <h3>
+             <a href="{{path('show_user', {'id': viewedId})}}">
+                <button class="btn-modif">Modifier</button>
+              </a>
+            </h3>
             {% elseif userInfo.isDeleted %}
                 Utilisateur supprimé
-            {% else %}
-             {{ userInfo.username }}
             {% endif %}
              🟢 🔴 💬</h1>
         </div>
     </div>
+        {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
     <div class="user-row">
         <div class="user-pro col-6">
             <h2>Projets</h2>

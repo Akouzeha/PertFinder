@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UploadImageType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,11 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class UserController extends AbstractController
 {
@@ -49,10 +52,15 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/{id}/edit-usernme', name: 'edit_user_name')]
-    public function editUserName($id, EntityManagerInterface $em, Request $request): Response
+    public function editUserName(User $user,$id, EntityManagerInterface $em, Request $request): Response
     {
         //all user info
         $user = $em->getRepository(User::class)->find($id);
+        //check if the user is changing his own username
+        if($this->getUser() != $user) {
+            $this->addFlash('error', 'Vous n\'avez pas le droit de modifier ce profil!');
+            return $this->redirectToRoute('info_user', ['id' => $this->getUser()->getId()]);
+        }
         $form = $this->createFormBuilder($user)
 
         ->add('username', TextType::class, [
@@ -134,6 +142,52 @@ class UserController extends AbstractController
         }
         return $this->render('user/info.html.twig', [
             'emailForm' => $form->createView(),
+            'userInfo' => $user,
+            'viewedId' => $id
+        ]);
+    }
+    #[Route('/user/{id}/changephoto', name: 'change_photo')]
+    public function changeProfilePic(Request $request,SluggerInterface $slugger ,EntityManagerInterface $em, User $user, $id)
+    {
+        //all user info
+        $user = $em->getRepository(User::class)->find($id);
+        //check if the user is changing his own photo
+        if($this->getUser() != $user) {
+            $this->addFlash('error', 'Vous n\'avez pas le droit de modifier ce profil!');
+            return $this->redirectToRoute('info_user', ['id' => $this->getUser()->getId()]);
+        }
+        $form = $this->createForm(UploadImageType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('imageFile')->getData();
+            if ($imageFile === null) {
+                $this->addFlash('error', 'Veuillez choisir une photo!');
+                return $this->redirectToRoute('show_user', ['id' => $id]);
+            }
+            $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+            $imgFilePath = 'public/img/profile_pics/'.$newFilename;
+            // Move the file to the directory where brochures are stored
+            try {
+                $imageFile->move(
+                    //profile_pics_directory is defined in services.yaml
+                    $this->getParameter('profile_pics_directory'),
+                    $newFilename
+                );
+                $user->setImgName($imgFilePath);
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+                $this->addFlash('error', 'Erreur lors de l\'upload de la photo!');
+                return $this->redirectToRoute('show_user', ['id' => $id]);
+            }
+
+            $em->flush();
+            $this->addFlash('success', 'Photo est modifié avec sucées!');
+            return $this->redirectToRoute('show_user', ['id' => $id]);
+        }
+        return $this->render('user/info.html.twig', [
+            'profilePicForm' => $form,
             'userInfo' => $user,
             'viewedId' => $id
         ]);

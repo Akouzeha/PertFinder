@@ -840,7 +840,9 @@ footer a:hover{
 /* Styling for user information section */
 .user-info {
     display: flex;
+    flex-direction: row;
     align-items: center;
+    text-align: center;
 }
 
 .user-info h1 {
@@ -856,13 +858,46 @@ footer a:hover{
     width: 120px;
     height: 120px;
     border-radius: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 40px;
+    display: block;
 }
 .user-settings img {
     margin-left: 10px;
 }
-
+.img-div{
+    height: auto;
+    padding: 0%;
+}
+.btn-avatar{
+    margin-top:3px;
+    margin-bottom: 0px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 2px solid #E67E22;
+    box-shadow: 0 5px #E67E22 ;
+    background-color: #E67E22;
+    cursor: pointer;
+}
+.btn-modif{
+    margin-top:3px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    border-radius: 10px;
+    border: 2px solid #1ABC9C;
+    box-shadow: 0 5px #1ABC9C ;
+    background-color: #1ABC9C;
+    cursor: pointer;
+}
+.btn-avatar:hover{
+    background-color: white;
+    color:#E67E22;
+    border: 2px solid #E67E22;
+    cursor: pointer;
+}
+.btn-avatar:active, .btn-modif:active {
+    box-shadow: 0 0;
+    transform: translateY(4px);
+}
 /* Styling for user profile section */
 .user-pro {
     display: flex;

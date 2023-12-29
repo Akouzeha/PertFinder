@@ -42,6 +42,9 @@ class Project
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
 
+    #[ORM\Column]
+    private ?bool $isLocked = null;
+
     public function __construct()
     {
         $this->diagrams = new ArrayCollection();
@@ -201,5 +204,17 @@ class Project
         $lastComment = $this->comments->matching($criteria)->first();
         return $lastComment ? $lastComment : null;;
 
+    }
+
+    public function isIsLocked(): ?bool
+    {
+        return $this->isLocked;
+    }
+
+    public function setIsLocked(bool $isLocked): static
+    {
+        $this->isLocked = $isLocked;
+
+        return $this;
     }
 }

@@ -53,6 +53,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isDeleted = null;
 
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $imgName = null;
+
 
     public function __construct()
     {
@@ -290,6 +293,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsDeleted(bool $isDeleted): static
     {
         $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+    public function getImgName(): ?string
+    {
+        return $this->imgName;
+    }
+
+    public function setImgName(?string $imgName): static
+    {
+        $this->imgName = $imgName;
 
         return $this;
     }

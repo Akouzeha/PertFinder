@@ -30,7 +30,7 @@ security:
                 lifetime: 604800
                 path: /
                 always_remember_me: true
-            idle_timeout: 1800 # 30 minutes
+            
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
