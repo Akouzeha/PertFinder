@@ -15,16 +15,19 @@
             {% endif %}
         </div>
         <div class="user-info col-8">
-            <h1> 
+            <h1>
+            {% if userInfo.isDeleted %}
+                Utilisateur supprimé
+            {% else %}
             {{ userInfo.username }}
+            {% endif %}
             {% if app.user.id == viewedId %}
             <h3>
              <a href="{{path('show_user', {'id': viewedId})}}">
                 <button class="btn-modif">Modifier</button>
               </a>
             </h3>
-            {% elseif userInfo.isDeleted %}
-                Utilisateur supprimé
+            
             {% endif %}
              🟢 🔴 💬</h1>
         </div>
