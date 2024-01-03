@@ -223,13 +223,13 @@ footer a:hover{
 .btn:active {
     box-shadow: 0 0;
     transform: translateY(4px);
-  }
+}
 
 .btn-danger{
     text-decoration: none;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: lighter;
-    border: #E67E22;
+    border: red;
     background-color: red;
     color: white;
     font-size: 20px;
@@ -239,11 +239,17 @@ footer a:hover{
     margin-top: 20px;
     box-shadow: 0 5px rgba(230, 34, 34, 0.306);
 }
+.btn-danger:hover{
+    background-color: white;
+    color:red;
+    border: 2px solid red;
+    cursor: pointer;
+}
 .btn-primary{
     text-decoration: none;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: lighter;
-    border: #E67E22;
+    border: #1ABC9C;
     background-color: #1ABC9C;
     color: white;
     font-size: 20px;
@@ -252,9 +258,13 @@ footer a:hover{
     transition-duration: 0.4s;
     margin-top: 20px;
     box-shadow: 0 5px rgba(26, 188, 156, 0.306);
-
 }
-
+.btn-primary:hover{
+    background-color: white;
+    color:#1ABC9C;
+    border: 2px solid #1ABC9C;
+    cursor: pointer;
+}
 .delete-bin{
     width:25px;
     height:20px;
@@ -891,8 +901,13 @@ footer a:hover{
     margin-left: 5px;
     border-radius: 10px;
     border: 2px solid #1ABC9C;
-    box-shadow: 0 5px #1ABC9C ;
     background-color: #1ABC9C;
+    cursor: pointer;
+}
+.btn-modif:hover{
+    background-color: white;
+    color:#E67E22;
+    border: 2px solid #E67E22;
     cursor: pointer;
 }
 .btn-avatar:hover{

@@ -56,6 +56,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $imgName = null;
 
+    #[ORM\Column]
+    private ?bool $requestDelete = null;
+
 
     public function __construct()
     {
@@ -305,6 +308,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setImgName(?string $imgName): static
     {
         $this->imgName = $imgName;
+
+        return $this;
+    }
+
+    public function isRequestDelete(): ?bool
+    {
+        return $this->requestDelete;
+    }
+
+    public function setRequestDelete(bool $requestDelete): static
+    {
+        $this->requestDelete = $requestDelete;
 
         return $this;
     }

@@ -14,6 +14,7 @@
                     <tr>
                         <th scope="col">Pseudo</th>
                         <th scope="col">Rôle</th>
+                        <th scope="col">Demande Suppression</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -35,6 +36,15 @@
                                             {{ role }}
                                             {% if not loop.last %},{% endif %}
                                     {% endfor %}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if user.isDeleted %}
+                                     - - -
+                                {% elseif user.requestDelete %}
+                                    <p style="color:red;">Oui<p>
+                                {% else %}
+                                    <p style="color:green;">Non<p>
                                 {% endif %}
                             </td>
                             <td>

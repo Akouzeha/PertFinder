@@ -101,10 +101,15 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/{id}/edit-email', name: 'edit_email')]
-    public function editMail($id, EntityManagerInterface $em, Request $request): Response
+    public function editMail(User $user, $id, EntityManagerInterface $em, Request $request): Response
     {
         //all user info
         $user = $em->getRepository(User::class)->find($id);
+        //check if the user is changing his own email
+        if($this->getUser() != $user) {
+            $this->addFlash('error', 'Vous n\'avez pas le droit de modifier ce profil!');
+            return $this->redirectToRoute('info_user', ['id' => $this->getUser()->getId()]);
+        }
         $form = $this->createFormBuilder($user)
 
         ->add('email', TextType::class, [
@@ -193,5 +198,29 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/user/{id}/request-delete', name: 'delete_request')]
+    public function requestDelete(User $user, $id, EntityManagerInterface $em): Response
+    {
+        //ask an admin to delete the account
+        $user = $em->getRepository(User::class)->find($id);
+        //check if the user is demanding to delete his own account
+        if($this->getUser() != $user) {
+            $this->addFlash('error', 'Vous n\'avez pas le droit de modifier ce profil!');
+            return $this->redirectToRoute('info_user', ['id' => $this->getUser()->getId()]);
+        }
+        //check if the user is already asking to delete his account
+        if($user->isRequestDelete()) {
+            $this->addFlash('error', 'Vous avez déja demandé la suppression de votre compte!');
+            return $this->redirectToRoute('info_user', ['id' => $id]);
+        }
+        $user->setRequestDelete(true);
+        $em->flush();
+        $this->addFlash('success', 'Votre demande est envoyée!');
+        return $this->render('user/info.html.twig', [
+            'userInfo' => $user,
+            'viewedId' => $id
+        ]);
+        
+    }
     
 }
