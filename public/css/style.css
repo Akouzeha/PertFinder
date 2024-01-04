@@ -1267,3 +1267,11 @@ footer a:hover{
 .dates th{
     color: #156756;
 }
+
+/* ============================================== */
+
+/* messages */
+
+.grid-message{
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}

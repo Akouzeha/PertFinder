@@ -15,12 +15,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {# <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>#}
         <link rel="stylesheet" href="{{ asset('css/agencement.css') }}">
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+       
         {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
+        {{ ux_controller_link_tags() }}
+    {% endblock %}
+ 
+    {% block javascripts %}
+            {{ importmap('app') }}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
             <script src="{{ asset('js/script.js') }}"></script>
-        {% endblock %}
+    {% endblock %}
     </head>
     <body>
         
@@ -41,7 +46,7 @@
                                         <li class={% if app.request.attributes.get('_route') == 'app_admin' %} "activated" {% else %}""{% endif %}><a href="{{path('app_admin', {'id': app.user.id})}}">Paramètes</a></li>
                                     {% endif %}
                                     <li class={% if app.request.attributes.get('_route') == 'info_user' %} "activated" {% else %}""{% endif %}><a href="{{path('info_user', {'id': app.user.id})}}">Mon Compte</a></li>
-                                    <li class="navItem"><a href="">Chat</a></li>
+                                    <li class={% if app.request.attributes.get('_route') == 'app_message' %} "activated" {% else %}""{% endif %}><a href="{{path('app_message')}}">Chat</a></li>
                                     <li class={% if app.request.attributes.get('_route') == 'app_project' %} "activated" {% else %}""{% endif %}><a href="{{path('app_project')}}">Projets</a></li>
                                     <li class={% if app.request.attributes.get('_route') == 'create_project' %} "activated" {% else %}""{% endif %}><a href="{{path('create_project')}}">Créer Projet</a></li>
                                     {% else %}
