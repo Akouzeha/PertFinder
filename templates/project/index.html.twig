@@ -17,9 +17,9 @@
                                 <a href="{{path('delete_project', {'id': project.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
                             {% endif %}
                                 <a href="{{path('show_project', {'id': project.id})}}" >{{ commentCounts[project.id] }} <img class="delete-bin" src="{{ asset('img/icons8-comment.svg') }}"></a>
-                                <img class="image" src="{{ asset('img/pertFinderLogo.png') }}" alt="image"><br>
+                                <img class="image" src="{{ asset('img/pertFinderLogo.png') }}" alt="image">
                                 <h5><a style="float:left;margin-top:0px;" href="{{path('show_project', {'id': project.id}) }}" >{{project.title}}</a></h5> 
-                                <p>Ce Project a été créé par <a href="{{path('info_user',{'id': project.user.id})}}"> {{project.user}}</a></p>
+                                <p>Ce Project a été créé par  <a href="{{path('info_user',{'id': project.user.id})}}"> {{project.user}}</a></p>
                            {% if project.comments is empty() %}
                                 <p> Pas encore de commentaire dans ce projet </p>
                             {% elseif project.lastComment.user.isDeleted  %}

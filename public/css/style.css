@@ -274,6 +274,13 @@ footer a:hover{
     width:25px;
     height:20px;
 }
+.lock, .unlock{
+    width:25px;
+    height:20px;
+}
+.lock:hover, .unlock:hover{
+    cursor: pointer;
+}
 .projet-option-btn{
     text-decoration: none;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -507,6 +514,7 @@ footer a:hover{
     font-size: 16px;
     color: #E67E22;
 }
+
 
 /* ============================================== */
 /* Show projet */

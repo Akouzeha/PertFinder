@@ -34,8 +34,10 @@
                     <img src="{{asset('charts/default.png')}}" alt="avatar">
                 {% endif %}
                     {% if app.user == comment.user or is_granted("ROLE_MODERATOR") %}
-                    <a style="float:right;"  href="{{path('del_comment', {'commentId': comment.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
-                    <a style="float:right;"  href="{{path('edit_comment', {'id': project.id, 'commentId': comment.id})}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
+                        {% if not project.isIsLocked %}
+                            <a style="float:right;"  href="{{path('del_comment', {'commentId': comment.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
+                            <a style="float:right;"  href="{{path('edit_comment', {'id': project.id, 'commentId': comment.id})}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
+                        {% endif %}
                     {% endif %}
                     {% if comment.user.isDeleted %}
                         <p>Posté par <a href="{{path('info_user',{'id': comment.user.id})}}"> Anonymous </a> - {{comment.getTimeDifference}} </p>
@@ -47,25 +49,29 @@
                 </div>
             {% endfor %}
             {% if app.user %}
-                {% if app.request.attributes.get('_route') == 'edit_comment' %}
-                    <div class="post-comment">
-                        {{form_start(formEditComment)}}
-                            {{form_widget(formEditComment.contenu)}}
-                            {{form_end(formEditComment)}}
-                    </div>
+                {% if not project.isIsLocked %}
+                    {% if app.request.attributes.get('_route') == 'edit_comment' %}
+                        <div class="post-comment">
+                            {{form_start(formEditComment)}}
+                                {{form_widget(formEditComment.contenu)}}
+                                {{form_end(formEditComment)}}
+                        </div>
+                    {% else %}
+                        <div class="post-comment">
+                            {{form_start(formComment)}}
+                            {{form_widget(formComment.contenu)}}
+                            {{form_end(formComment)}}
+                        </div>
+                            
+                    {% endif %}
                 {% else %}
-                    <div class="post-comment">
-                        {{form_start(formComment)}}
-                        {{form_widget(formComment.contenu)}}
-                        {{form_end(formComment)}}
-                    </div>
-                        
+                    <h2 style="color:red;">Le projet est verrouillé</h2>
                 {% endif %}
             {% else %}
-            <div class="comment-connecxion">
-                <p>Vous devez être connecté pour poster un commentaire</p>
-                <a href="{{path('app_login')}}">Se connecter</a>
-            </div>
+                <div class="comment-connecxion">
+                    <p>Vous devez être connecté pour poster un commentaire</p>
+                    <a href="{{path('app_login')}}">Se connecter</a>
+                </div>
             {% endif %}
         </div>
 

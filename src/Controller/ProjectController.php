@@ -165,6 +165,24 @@ class ProjectController extends AbstractController
          return $this->redirectToRoute('app_project');
      }
 
-     
+     #[Route('/project/{id}/lock', name: 'lock_project')]
+     public function lockProject(EntityManagerInterface $em, $id): Response
+     {
+         
+        $project = $em->getRepository(Project::class)->find($id);
+       //verify if the user has the right to lock the project
+        if ($project->getUser() == $this->getUser() || $this->isGranted('ROLE_MODERATOR')) {
+            //verify if the project is locked or not
+            if ($project->isIsLocked() == true) {
+                $project->setIsLocked(false);
+            } else {
+                $project->setIsLocked(true);
+            }
+            $em->persist($project);
+            $em->flush();
+        }
+        return $this->redirectToRoute('show_project', ['id' => $id]);
+
+     }
 
 }

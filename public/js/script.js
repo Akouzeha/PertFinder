@@ -7,7 +7,7 @@ function myFunction() {
   }
 }
 
-//show and hide chart form
+/* //show and hide chart form
 document.addEventListener('DOMContentLoaded', function() {
   var form = document.getElementById('chartForm');
   var toggleButton = document.getElementById('toggleFormButton');
@@ -17,5 +17,5 @@ document.addEventListener('DOMContentLoaded', function() {
       // Toggle the form visibility
       form.style.display = (form.style.display === 'none') ? 'block' : 'none';
   });
-});
+}); */
 
