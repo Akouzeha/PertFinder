@@ -1,4 +1,11 @@
+{% extends 'base.html.twig' %}
 
+{% block title %}Hello MessageController!{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>MessageController</h1>
+    </header>
         <article>
             {{message.contenu}}<br>
         </article>
@@ -6,3 +13,4 @@
         {{form_widget(form)}}
         {{form_end(form)}}
 
+{% endblock %}

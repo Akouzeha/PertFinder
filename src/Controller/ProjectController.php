@@ -49,6 +49,7 @@ class ProjectController extends AbstractController
         }
         $project->setUser($user);
         $project->setCreatedAt(new \DateTime());
+        $project->setIsLocked(false);
         $form = $this->createForm(ProjetType::class, $project);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -106,7 +107,7 @@ class ProjectController extends AbstractController
         return $this->render('project/show.html.twig',[
             'project' => $project,
             'commentId' => $commentId,
-            'diagramId' => $diagramId,
+            
             'imgName' => $imgName . '.png',
             'formComment' => $form,
         ]);

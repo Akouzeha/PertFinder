@@ -47,7 +47,7 @@ security:
         - { path: ^/task, roles: ROLE_USER }
         - { path: ^/edge, roles: ROLE_USER }
         - { path: ^/diagram, roles: ROLE_USER }
-        - { path: ^/home, roles: ROLE_USER }
+        
         - { path: ^/chat, roles: ROLE_USER }
 
         # grant access to the home page to all users
