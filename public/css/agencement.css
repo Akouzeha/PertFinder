@@ -197,6 +197,13 @@
 }
 /* ============================================== */
 /* comment */
+
+@media screen and (max-width: 1000px) {
+    
+    .show-comment .btn{
+        margin-left: 300px;
+    }
+}
 @media screen and (max-width: 800px) {
     .comment{
         width: 100%;
@@ -249,5 +256,23 @@
 
     .dates th, .dates td {
         padding: 6px;
+    }
+}
+
+/* ============================================== */
+/* imag-grid */
+@media only screen and (max-width: 800px) {
+    .responsive-img-grid {
+        width: 100%;
+        margin: 6px 0;
+        float: left;
+    }
+    .gallery{
+        width: 550px;
+        margin-left: 0px;
+        margin-right:5px;
+    }
+    .gallery img{
+        width: 548px !important;
     }
 }

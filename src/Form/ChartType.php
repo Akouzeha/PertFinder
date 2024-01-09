@@ -26,7 +26,8 @@ class ChartType extends AbstractType
                 'attr' => [
                     'class' => 'chart-form-textArea',
                     'placeholder' => 'Description du diagramme'
-                ]
+                ],
+                'sanitize_html' => true,
             ])
         ;
     }

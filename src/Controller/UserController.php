@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UploadImageType;
+use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
@@ -30,10 +32,26 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/{id}', name: 'info_user')]
-    public function showUser($id, EntityManagerInterface $em): Response
+    public function showUser(User $user, Request $request, $id, EntityManagerInterface $em): Response
     {   
         $user = $em->getRepository(User::class)->find($id);
+        //check if the user is changing his own aboutMe
+        if($this->getUser() != $user) {
+            $this->addFlash('error', 'Vous n\'avez pas le droit de modifier ce profil!');
+            return $this->redirectToRoute('info_user', ['id' => $this->getUser()->getId()]);
+        }
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Update the aboutMe
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash('success', 'Présentation est modifié avec sucées!');
+            return $this->redirectToRoute('info_user', ['id' => $id]);
+        }
+
         return $this->render('user/show.html.twig', [
+            'aboutMeForm' => $form,
             'viewedId' => $id,
             'userInfo' => $user
         ]);

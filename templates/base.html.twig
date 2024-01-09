@@ -22,8 +22,6 @@
     {% endblock %}
  
     {% block javascripts %}
-            {{ importmap('app') }}
-        {% block importmap %}{{ importmap('app') }}{% endblock %}
             <script src="{{ asset('js/script.js') }}"></script>
     {% endblock %}
     </head>

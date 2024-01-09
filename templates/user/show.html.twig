@@ -24,14 +24,21 @@
             {% if app.user.id == viewedId %}
             <h3>
              <a href="{{path('show_user', {'id': viewedId})}}">
-                <button class="btn-modif">Modifier</button>
+                <button class="btn btn-mod-profil" style="margin-left:10px; margin-top:0px;">Modifier</button>
               </a>
             </h3>
             
             {% endif %}
              🟢 🔴 💬</h1>
+             
         </div>
     </div>
+        <div class="button-container">
+            
+            <button class="btn" onclick="toggleProjects()">Liste des Projets</button>
+            <button class="btn" onclick="toggleComments()">Liste des Commentaires</button>
+            <button class="btn" onclick="togglePropos()">À propos de moi</button>
+        </div>
         <div class="alert-messages col-12">
                 {% for message in app.flashes('success') %}
                     <div class="alert alert-success">
@@ -44,32 +51,58 @@
                     </div>
                 {% endfor %}
         </div>
-    <div class="user-row">
-        <div class="user-pro col-6">
-            <h2>Projets</h2>
+    <div class="user-row-hidden">
+    <div class="user-pro-hidden col-12"  id="projectList" style="display:none;">
+        <h2>Projets</h2>
+        <ul class="project-list">
             {% if userInfo.projects | length == 0 %}
-                <p> Aucun projet pour le moment </p>
+                <p class="no-content"> Aucun projet pour le moment </p>
             {% else %}
-            <ul>
                 {% for project in userInfo.projects %}
-                    <li> <a href="{{path('show_project', {'id': project.id}) }}" >{{project.title}}</a> </li>
+                    <li>
+                        <a href="{{ path('show_project', {'id': project.id}) }}">
+                            <cite>{{ project.title }}</cite>
+                        </a>
+                    </li>
                 {% endfor %}
-            </ul>
             {% endif %}
-        </div>
-        <div class="user-pro col-6">
-            <h2>Commentaires</h2>
-            {% if userInfo.comments | length == 0 %}
-                <p> Aucun commentaire pour le moment </p>
-            {% else %}
-            <ul>
-                {% for comment in userInfo.comments %}
-                    <li>{{ comment.contenu }} <span> posté </span> {{comment.getTimeDifference}} </li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-        </div>
-        
+        </ul>
     </div>
+    <div class="user-pro-hidden col-12" id="commentList" style="display:none;">
+        <h2>Commentaires</h2>
+        <ul class="comment-list">
+            {% if userInfo.comments | length == 0 %}
+                <p class="no-content"> Aucun commentaire pour le moment </p>
+            {% else %}
+                {% for comment in userInfo.comments %}
+                    <li>
+                        {{ comment.contenu }} <span> posté </span> {{ comment.getTimeDifference }}
+                    </li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+    <div class="user-pro-hidden col-12" id="aboutMe" style="display:none;">
+        <section class="about-me">
+        <h2>À propos de moi</h2>
+            {% if not  userInfo.propos %}
+                {{form_start(aboutMeForm)}}
+                {{form_widget(aboutMeForm)}}
+                {{form_end(aboutMeForm)}}
+            {% else %}
+                <p>{{ userInfo.propos }}</p>
+                <button class="btn btn-avatar" onclick="toggleModifAboutMe()">Modifier</button>
+            <section class="about-me" id="modifAboutMe" style="display:none;">
+                {{form_start(aboutMeForm)}}
+                {{form_widget(aboutMeForm)}}
+                {{form_end(aboutMeForm)}}
+            </section>
+            {% endif %}
+        </section>
+    </div>
+</div>
+
+
+
 
 {% endblock %}

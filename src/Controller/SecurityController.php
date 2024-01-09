@@ -20,6 +20,13 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        //vérifier si le compte est validé
+        if ($error) {
+            $error = $error->getMessage();
+            if ($error == 'Account is disabled.') {
+                $error = 'Votre compte n\'est pas encore validé. Veuillez consulter votre boîte mail.';
+            }
+        }
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }

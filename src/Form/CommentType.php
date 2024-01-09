@@ -22,7 +22,8 @@ class CommentType extends AbstractType
             'attr' => [
                 'class' => 'form-textArea',
                 'placeholder' => 'Votre commentaire'
-            ]
+            ],
+            'sanitize_html' => true,
         ])
         ->add('poster', SubmitType::class,
         [

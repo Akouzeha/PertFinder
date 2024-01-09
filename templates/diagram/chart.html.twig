@@ -9,7 +9,11 @@
     <img style="height:300px;" src="{{asset('charts/' ~ imageFilePath)}}" alt="PERT Chart">
     
     {# Provide a link to download the PERT chart #}
-    <a href="{{ path('download_diagram', {'diagramId': diagramId,'fileName': imageFilePath}) }}">Télécharger l'image</a>
-
+    <div class="col-12">
+        <a class="btn btn-avatar" href="{{ path('download_diagram', {'diagramId': diagramId,'fileName': imageFilePath}) }}">Télécharger l'image</a>
+        <a class="btn btn-avatar" href="{{ path('download_pdf', {'diagramId': diagramId,'fileName': pdfFilePath}) }}">Télécharger le PDF</a>
+    </div>
+    
+    {# Provide a link to return to the project #}
        
 {% endblock %}

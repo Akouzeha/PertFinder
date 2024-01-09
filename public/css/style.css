@@ -83,10 +83,13 @@ header{
   .topnav a:hover{
     color: #E67E22;
     cursor: pointer;
-    padding: 6px 8px;
+    padding: 14px 14px;
+    text-decoration: none;
+    margin-left:30px;
+    font-size: 17px;
     border-radius: 10px;
     border: 2px solid #E67E22;
-    box-shadow: 0 5px #e67d22c4;
+    
 }
 .activated a{
     color: #E67E22;
@@ -356,10 +359,19 @@ footer a:hover{
     color: #1ABC9C;
 }
 .homeContainer .btn{
-    margin-left: 100px;
+    margin-left: 140px;
     margin-top: 0;
     width:50%;
 }
+
+/* Apply styles to the section with the class "home-description" */
+.home-description {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+}
+
+
 
 
 /* ============================================== */
@@ -539,7 +551,7 @@ footer a:hover{
    align-self: center;
 }
 
-.show-project h1{
+/* .show-project h1{
     text-align: center;
     color: #E67E22;
     font-size: 30px;
@@ -549,6 +561,28 @@ footer a:hover{
     text-align: center;
     font-size: 18px;
     font-weight: bold;
+} */
+.project-description {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 20px 0;
+    height: auto;
+}
+
+/* Style the heading inside the section */
+.project-description h1 {
+    color: #E67E22;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+/* Style the paragraph inside the section */
+.project-description p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
 }
 .show-project p span{
     color: #1ABC9C;
@@ -578,7 +612,7 @@ footer a:hover{
 .creat-projet{
     margin-bottom: 0px;
     float: right;
-    margin-right: 140px ;
+    margin-right: 180px ;
 }
 
 /* ================================================== */
@@ -756,11 +790,13 @@ footer a:hover{
     background-color: #fcf9f9;
     border: 2px solid #1ABC9C;
 }
-.show-comment h2{
+.show-comment h2 {
     text-align: center;
     color: #E67E22;
     font-size: 20px;
     font-weight: bold;
+    margin-top: 10px; 
+    margin-bottom: 10px;
 }
 
 .comment-connecxion p{
@@ -777,18 +813,14 @@ footer a:hover{
     font-weight: bold;
 }
 .comment{
-    width: 80%;
+    width: 900px;
     height: auto;
-    margin-left: 100px;
+    align-self: center;
     border-radius: 4px;
     margin-top: 5px;
     margin-bottom: 5px;
     background-color: white;
     border: 2px solid #E67E22;
-}
-.comment-btn{
-    margin-top: 2px;
-    margin-bottom: 9px;
 }
 .comment img{
     width: 50px;
@@ -799,14 +831,22 @@ footer a:hover{
     margin-right: 10px;
     float: left;
 }
+.post-comment{
+    width: 100%;
+    height: auto;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+}
 .post-comment textarea{
-    width: 80%;
+    width: 900px;
     height: 100px;
-    margin-left: 100px;
+    align-self: center;
     font-size: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
-    align-self: center;
+    
     border-radius: 10px;
     border: 2px solid #1ABC9C;
     box-shadow: 0 5px #1ABC9C ;
@@ -815,11 +855,14 @@ footer a:hover{
     font-weight: semi-bold;
     color: black;
 }
+
 .post-comment .btn{
-    margin-left: 300px;
-    margin-top: 0;
-    margin-bottom: 10px;
-    width:40%;
+    width:30%;
+    
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+    margin-bottom: 9px;
 }
 .comment p{
     width: 50%;
@@ -893,40 +936,8 @@ footer a:hover{
     height: auto;
     padding: 0%;
 }
-.btn-avatar{
-    margin-top:3px;
-    margin-bottom: 0px;
-    padding: 10px 14px;
-    border-radius: 10px;
-    border: 2px solid #E67E22;
-    box-shadow: 0 5px #E67E22 ;
-    background-color: #E67E22;
-    cursor: pointer;
-}
-.btn-modif{
-    margin-top:3px;
-    margin-bottom: 0px;
-    margin-left: 5px;
-    border-radius: 10px;
-    border: 2px solid #1ABC9C;
-    background-color: #1ABC9C;
-    cursor: pointer;
-}
-.btn-modif:hover{
-    background-color: white;
-    color:#E67E22;
-    border: 2px solid #E67E22;
-    cursor: pointer;
-}
-.btn-avatar:hover{
-    background-color: white;
-    color:#E67E22;
-    border: 2px solid #E67E22;
-    cursor: pointer;
-}
-.btn-avatar:active, .btn-modif:active {
-    box-shadow: 0 0;
-    transform: translateY(4px);
+.btn-avatar a{
+    color:black;
 }
 /* Styling for user profile section */
 .user-pro {
@@ -950,9 +961,9 @@ footer a:hover{
     margin-bottom: 8px;
 }
 
-.user-pro span {
+.user-pro-hidden span {
     font-style: italic;
-    color: #888;
+    color: #837aa4;
 }
 
 /* Styling for links */
@@ -1057,6 +1068,136 @@ footer a:hover{
     border-left: 1px solid #ccc;
 }
 
+.user-row-hidden {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+.user-row-hidden h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #E67E22;
+    text-align: center;
+    width: 100%;
+}
+
+.user-pro-hidden {
+    display: flex;
+}
+
+.project-list,
+.comment-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.project-list li,
+.comment-list li {
+    margin-right: 20px;
+    padding: 10px;
+    background-color: #F2F2F2;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.project-list li::after,
+.comment-list li::after {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 8px;
+    background: rgba(26, 188, 156, 0);
+    transition: background 0.3s ease;
+}
+
+.project-list li:hover,
+.comment-list li:hover {
+    background-color: #1ABC9C;
+}
+
+.project-list li:hover::after,
+.comment-list li:hover::after {
+    background: rgba(26, 188, 156, 0.5);
+}
+
+.no-content {
+    font-style: italic;
+    color: #888;
+}
+
+.project-list a,
+.comment-list a {
+    text-decoration: none;
+    color: #333;
+}
+
+.project-list a:hover,
+.comment-list a:hover {
+    color: #fff;
+}
+.button-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.button-container button, .btn-mod-profil, .btn-avatar{
+    margin-right: 20px;
+    padding: 10px;
+    background-color: #F2F2F2;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+.about-me {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.about-me form {
+    margin-top: 10px;
+}
+
+.about-me p {
+    margin-top: 10px;
+    color: #333;
+    font-size: 16px;
+}
+.about-me p::first-letter {
+    font-size: 1.5em;
+    text-transform: capitalize;
+    font-weight: semi-bold;
+    margin-right: 4px;
+}
+#user_propos {
+    width: 100%;
+    max-width: 600px;
+    height: 150px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 10px;
+    resize: vertical;
+}
+
+#user_propos:focus {
+    outline: none;
+    border-color: #1ABC9C;
+    box-shadow: 0 0 5px rgba(26, 188, 156, 0.7);
+}
 
 /* ============================================== */
 /* form change */
@@ -1275,3 +1416,6 @@ footer a:hover{
 .grid-message{
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
+
+
+/* ============================================== */

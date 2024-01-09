@@ -7,8 +7,10 @@
     
     <div class="project-container">
         <div class="show-project">
-            <h1>{{project.title}}</h1>
-            <p>{{project.description}}</p>
+            <section class="project-description">
+                <h1>{{project.title}}</h1>
+                <p>{{project.description}}</p>
+            </section>
             {% if project.diagrams | length == 0 %}
             <p>aucun diagram dans ce projet</p>  
                 <p><a href="{{path('create_diagram', {'projectId': project.id})}}">ajouter un diagram</a></p>
@@ -17,7 +19,12 @@
             {% for chart in project.diagrams %}
                 <img src="{{asset('charts/' ~ imgName )}}" alt="diagram">
             {% if app.user == project.user or is_granted("ROLE_PROJECT_MANAGER") %}   
-                <a href="{{path('new_task', {'diagramId': chart.id})}}" class="projet-option-btn" >modifier</a>
+                <a href="{{path('new_task', {'diagramId': chart.id})}}" class="projet-option-btn" >Modifier</a>
+                {% if not project.isIsLocked %}
+                    <a href="{{path('lock_project', {'id': project.id})}}" class="projet-option-btn" >Verrouiller</a>
+                {% else %}
+                    <a href="{{path('lock_project', {'id': project.id})}}" class="projet-option-btn" >Déverrouiller</a>
+                {% endif %}
                 <a href="{{path('task_edge', {'diagramId': chart.id})}}" class="projet-option-btn">Les dépendances</a>
                 <a href="{{path('cal_dates', {'diagramId': chart.id})}}" class="projet-option-btn">Les dates</a>
             {% endif %}
@@ -65,7 +72,7 @@
                             
                     {% endif %}
                 {% else %}
-                    <h2 style="color:red;">Le projet est verrouillé</h2>
+                    <h2 style="color:red;">Ce projet est verrouillé</h2>
                 {% endif %}
             {% else %}
                 <div class="comment-connecxion">

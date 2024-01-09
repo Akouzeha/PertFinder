@@ -15,7 +15,7 @@
                     <img src="{{ asset('' ~ userInfo.imgName) }}" alt="user" class="user-img">
                 {% endif %}
                 {% if app.request.attributes.get('_route') == 'show_user' %}
-                <button class="btn-avatar"> <a href="{{ path('change_photo', {'id': userInfo.id}) }}">Change Avatar</a></button>
+                <button class="btn btn-avatar"> <a href="{{ path('change_photo', {'id': userInfo.id}) }}">Change Avatar</a></button>
                 {% endif %}
                 {# <button class="btn-avatar">Change Avatar</button> #}
                 {% if app.request.attributes.get('_route') == 'change_photo' %}

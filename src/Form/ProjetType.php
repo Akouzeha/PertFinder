@@ -45,6 +45,7 @@ class ProjetType extends AbstractType
             ->add('description', TextareaType::class,
             [
                 'label' => 'Description',
+                'sanitize_html' => true,
                 'attr' => [
                     'class' => 'form-textArea'
                 ]
