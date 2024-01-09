@@ -288,12 +288,12 @@ class DiagramController extends AbstractController
     file_put_contents($dotFilePath, $dotContent);
 
     // Generate image using Graphviz
-    $imageFilePath = '/Applications/MAMP/htdocs/KOUZEHA_Ammar/PertFinder/public/charts/img' . $imgName . '.png';
+    $imageFilePath = '/Applications/MAMP/htdocs/KOUZEHA_Ammar/PertFinder/public/charts/img/' . $imgName . '.png';
     $process = new Process(['dot', '-Tpng', "-o$imageFilePath", $dotFilePath]);
     $process->run();
 
     //Generate pdf file using Graphviz
-    $pdfFilePath = '/Applications/MAMP/htdocs/KOUZEHA_Ammar/PertFinder/public/charts/pdf' . $imgName . '.pdf';
+    $pdfFilePath = '/Applications/MAMP/htdocs/KOUZEHA_Ammar/PertFinder/public/charts/pdf/' . $imgName . '.pdf';
     $process = new Process(['dot', '-Tpdf', "-o$pdfFilePath", $dotFilePath]);
     $process->run();
 
@@ -355,7 +355,7 @@ public function generateDotFileContent($tasks, $edges, $ES, $EF, $LS, $LF, $MT, 
     #[Route('/diagram/{diagramId}/download/{fileName}', name: 'download_diagram')]
     public function downloadImageFile($fileName)
     {
-        $fPath = $this->getParameter('kernel.project_dir') . '/public/charts/img' . $fileName;
+        $fPath = $this->getParameter('kernel.project_dir') . '/public/charts/img/' . $fileName;
         
         // Check if the file exists
         if (!file_exists($fPath)) {
@@ -373,7 +373,7 @@ public function generateDotFileContent($tasks, $edges, $ES, $EF, $LS, $LF, $MT, 
     #[Route('/diagram/{diagramId}/download/pdf/{fileName}', name: 'download_pdf')]
     public function downloadPdfFile($fileName)
     {
-        $fPath = $this->getParameter('kernel.project_dir') . '/public/charts/pdf' . $fileName;
+        $fPath = $this->getParameter('kernel.project_dir') . '/public/charts/pdf/' . $fileName;
         
         // Check if the file exists
         if (!file_exists($fPath)) {

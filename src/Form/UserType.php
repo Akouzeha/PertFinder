@@ -23,7 +23,6 @@ class UserType extends AbstractType
                 'class' => 'form-control',
                 'placeholder' => 'Présentez-vous en quelques lignes'],
                 'required' => false,
-                'sanitize_html' => true,
                 'constraints' => [
                     new Length([
                         'min' => 10,

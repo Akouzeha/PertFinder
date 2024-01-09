@@ -15,6 +15,13 @@
             <p>aucun diagram dans ce projet</p>  
                 <p><a href="{{path('create_diagram', {'projectId': project.id})}}">ajouter un diagram</a></p>
                 <img src="{{asset('charts/default.png')}}" alt="empty">
+                {% if app.user == project.user or is_granted("ROLE_PROJECT_MANAGER") %} 
+                    {% if not project.isIsLocked %}
+                        <a href="{{path('lock_project', {'id': project.id})}}" class="projet-option-btn" >Verrouiller</a>
+                    {% else %}
+                        <a href="{{path('lock_project', {'id': project.id})}}" class="projet-option-btn" >Déverrouiller</a>
+                    {% endif %}
+                {% endif %}
             {% endif %}
             {% for chart in project.diagrams %}
                 <img src="{{asset('charts/' ~ imgName )}}" alt="diagram">
@@ -27,6 +34,7 @@
                 {% endif %}
                 <a href="{{path('task_edge', {'diagramId': chart.id})}}" class="projet-option-btn">Les dépendances</a>
                 <a href="{{path('cal_dates', {'diagramId': chart.id})}}" class="projet-option-btn">Les dates</a>
+                <a href="{{path('draw_graph', {'diagramId': chart.id})}}" class="projet-option-btn">Téléchargement</a>
             {% endif %}
             {% endfor %}
         </div>
