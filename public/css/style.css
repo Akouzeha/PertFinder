@@ -75,6 +75,8 @@ header{
     text-decoration: none;
     margin-left:30px;
     font-size: 17px;
+    border-radius: 10px;
+    border: 2px solid #e67d2200;
   }
   
   .topnav .icon {
@@ -83,7 +85,7 @@ header{
   .topnav a:hover{
     color: #E67E22;
     cursor: pointer;
-    padding: 14px 14px;
+    padding: 14px 16px;
     text-decoration: none;
     margin-left:30px;
     font-size: 17px;
@@ -97,7 +99,7 @@ header{
 }
 .topnav a:active {
     box-shadow: 0 0;
-    transform: translateY(4px);
+    transform: translateY(1px);
   }
 
 
@@ -1419,3 +1421,52 @@ footer a:hover{
 
 
 /* ============================================== */
+/* download chart page  */
+
+/* Style the section */
+.dowload-chart {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Style the heading */
+.dowload-chart h1 {
+    color: #3498db;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+/* Style the figure */
+.dowload-chart figure {
+    margin: 0;
+    position: relative;
+}
+
+/* Style the image */
+.dowload-chart img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd; /* Add a light border around the image */
+    border-radius: 8px; /* Optional: Add rounded corners to the image */
+}
+
+/* Style the figcaption */
+.dowload-chart figcaption {
+    margin-top: 10px;
+}
+
+/* Style the download buttons */
+.dowload-chart a.btn-chart {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #3498db;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.dowload-chart a.btn-chart:hover {
+    background-color: #2980b9;
+}

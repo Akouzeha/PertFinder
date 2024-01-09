@@ -1,18 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DiagramController!{% endblock %}
+{% block title %}download the pert chart{% endblock %}
 
 {% block body %}
-    <h1>Pert Chart</h1>
-
-    {# Display the PERT chart image #}
-    <img style="height:300px;" src="{{asset('charts/' ~ imageFilePath)}}" alt="PERT Chart">
     
-    {# Provide a link to download the PERT chart #}
-    <div class="col-12">
-        <a class="btn btn-avatar" href="{{ path('download_diagram', {'diagramId': diagramId,'fileName': imageFilePath}) }}">Télécharger l'image</a>
-        <a class="btn btn-avatar" href="{{ path('download_pdf', {'diagramId': diagramId,'fileName': pdfFilePath}) }}">Télécharger le PDF</a>
-    </div>
+    <section class="dowload-chart">
+        
+        <h1>Le Diagramme de PERT</h1>
+
+        <figure>
+            <img style="height:300px;" src="{{asset('charts/' ~ imageFilePath)}}" alt="PERT Chart">
+            <figcaption>
+                <a class="btn-chart" href="{{ path('download_diagram', {'diagramId': diagramId,'fileName': imageFilePath}) }}">Télécharger l'image</a>
+                <a class="btn-chart" href="{{ path('download_pdf', {'diagramId': diagramId,'fileName': pdfFilePath}) }}">Télécharger le PDF</a>
+            </figcaption>
+        </figure>
+    </section>
     
     {# Provide a link to return to the project #}
        
