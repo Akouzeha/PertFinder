@@ -64,4 +64,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function countDeleteRequests(): int
+    {
+        return $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->where('u.requestDelete = true')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

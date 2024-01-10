@@ -18,9 +18,11 @@ class AdminController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
         $users = $em->getRepository(User::class)->findAll();
+        $requestCount = $em->getRepository(User::class)->countDeleteRequests();
 
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
+            'requestCount' => $requestCount,
             'users' => $users,
         ]);
     }
