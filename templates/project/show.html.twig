@@ -55,10 +55,10 @@
                         {% endif %}
                     {% endif %}
                     {% if comment.user.isDeleted %}
-                        <p>Posté par <a href="{{path('info_user',{'id': comment.user.id})}}"> Anonymous </a> - {{comment.getTimeDifference}} </p>
+                        <p>Posté par <a href="{{path('see_user',{'id': comment.user.id})}}"> Anonymous </a> - {{comment.getTimeDifference}} </p>
                         <p style=margin-left:15px;>{{comment.contenu}}</p>
                     {% else %}
-                        <p>Posté par <a href="{{path('info_user',{'id': comment.user.id})}}"> {{comment.user.username}}</a> - {{comment.getTimeDifference}} </p>
+                        <p>Posté par <a href="{{path('see_user',{'id': comment.user.id})}}"> {{comment.user.username}}</a> - {{comment.getTimeDifference}} </p>
                         <p style=margin-left:15px;>{{comment.contenu}}</p>
                     {% endif %}
                 </div>

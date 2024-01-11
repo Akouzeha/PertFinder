@@ -23,9 +23,9 @@
                         <tr>
                             <td>
                                 {% if user.isDeleted %}
-                                    <a style="color:red;" href="{{path('info_user', {'id':user.id})}}">utilisateur supprimé</a>
+                                    <a style="color:red;" href="{{path('see_user', {'id':user.id})}}">utilisateur supprimé</a>
                                 {% else %}
-                                    <a href="{{path('info_user', {'id':user.id})}}">{{ user.username }}</a>
+                                    <a href="{{path('see_user', {'id':user.id})}}">{{ user.username }}</a>
                                 {% endif %}
                             </td>
                             <td>

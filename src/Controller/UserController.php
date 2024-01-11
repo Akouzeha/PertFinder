@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UploadImageType;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,15 +32,16 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/user/{id}', name: 'info_user')]
-    public function showUser(User $user, Request $request, $id, EntityManagerInterface $em): Response
+    #[Route('/user/info', name: 'info_user')]
+    public function showUser( Request $request, EntityManagerInterface $em): Response
     {   
-        $user = $em->getRepository(User::class)->find($id);
+        $user = $this->getUser();
+        
         //check if the user is changing his own aboutMe
-        if($this->getUser() != $user) {
+        /* if($this->getUser() != $user) {
             $this->addFlash('error', 'Vous n\'avez pas le droit de modifier ce profil!');
             return $this->redirectToRoute('info_user', ['id' => $this->getUser()->getId()]);
-        }
+        } */
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -47,33 +49,33 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
             $this->addFlash('success', 'Présentation est modifié avec sucées!');
-            return $this->redirectToRoute('info_user', ['id' => $id]);
+            return $this->redirectToRoute('info_user', ['id' => $user->getId()]);
         }
 
         return $this->render('user/show.html.twig', [
             'aboutMeForm' => $form,
-            'viewedId' => $id,
+            
             'userInfo' => $user
         ]);
     }
 
-    #[Route('/user/{id}/show', name: 'show_user')]
-    public function editUser($id, EntityManagerInterface $em): Response
+    #[Route('/user/show', name: 'show_user')]
+    public function editUser( EntityManagerInterface $em): Response
     {
         //all user info
-        $user = $em->getRepository(User::class)->find($id);
+        $user = $this->getUser();
 
         return $this->render('user/info.html.twig', [
             'userInfo' => $user,
-            'viewedId' => $id
+            
         ]);
     }
 
-    #[Route('/user/{id}/edit-usernme', name: 'edit_user_name')]
-    public function editUserName(User $user,$id, EntityManagerInterface $em, Request $request): Response
+    #[Route('/user/edit-usernme', name: 'edit_user_name')]
+    public function editUserName(EntityManagerInterface $em, Request $request): Response
     {
         //all user info
-        $user = $em->getRepository(User::class)->find($id);
+        $user = $this->getUser();
         //check if the user is changing his own username
         if($this->getUser() != $user) {
             $this->addFlash('error', 'Vous n\'avez pas le droit de modifier ce profil!');
@@ -104,30 +106,25 @@ class UserController extends AbstractController
             $userExist = $em->getRepository(User::class)->findBy(['username' => $newUsername]);
             if ($userExist) {
                 $this->addFlash('error', 'Username existe déja!');
-                return $this->redirectToRoute('show_user', ['id' => $id]);
+                return $this->redirectToRoute('show_user');
             }
             $user->setUsername($newUsername);
             $em->flush();
             $this->addFlash('success', 'Username est modifié avec sucées!');
-            return $this->redirectToRoute('show_user', ['id' => $id]);
+            return $this->redirectToRoute('show_user');
         }
         return $this->render('user/info.html.twig', [
             'userNameForm' => $form->createView(),
-            'userInfo' => $user,
-            'viewedId' => $id
+            'userInfo' => $user
         ]);
     }
 
-    #[Route('/user/{id}/edit-email', name: 'edit_email')]
-    public function editMail(User $user, $id, EntityManagerInterface $em, Request $request): Response
+    #[Route('/user/edit-email', name: 'edit_email')]
+    public function editMail(EntityManagerInterface $em, Request $request): Response
     {
         //all user info
-        $user = $em->getRepository(User::class)->find($id);
-        //check if the user is changing his own email
-        if($this->getUser() != $user) {
-            $this->addFlash('error', 'Vous n\'avez pas le droit de modifier ce profil!');
-            return $this->redirectToRoute('info_user', ['id' => $this->getUser()->getId()]);
-        }
+        $user = $this->getUser();
+        
         $form = $this->createFormBuilder($user)
 
         ->add('email', TextType::class, [
@@ -150,23 +147,23 @@ class UserController extends AbstractController
             $mailExist = $em->getRepository(User::class)->findBy(['email' => $newEmail]);
             if ($mailExist) {
                 $this->addFlash('error', 'Email existe déja!');
-                return $this->redirectToRoute('show_user', ['id' => $id]);
+                return $this->redirectToRoute('show_user');
             }
             elseif (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
                 $this->addFlash('error', 'Email est invalide!');
-                return $this->redirectToRoute('show_user', ['id' => $id]);
+                return $this->redirectToRoute('show_user');
             }
             else {
             $user->setEmail($newEmail);
             $em->flush();
             $this->addFlash('success', 'Email est modifié avec sucées!');
-            return $this->redirectToRoute('show_user', ['id' => $id]);
+            return $this->redirectToRoute('show_user');
             }
         }
         return $this->render('user/info.html.twig', [
             'emailForm' => $form->createView(),
             'userInfo' => $user,
-            'viewedId' => $id
+           
         ]);
     }
     #[Route('/user/{id}/changephoto', name: 'change_photo')]
@@ -239,6 +236,15 @@ class UserController extends AbstractController
             'viewedId' => $id
         ]);
         
+    }
+
+    #[Route('/user/{id}/see-user', name: 'see_user')]
+    public function seeUser(User $user, UserRepository $ur): Response
+    {
+        $user = $ur->find($user->getId());
+        return $this->render('user/see.html.twig', [
+            'userInfo' => $user,
+        ]);
     }
     
 }

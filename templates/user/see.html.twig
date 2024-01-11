@@ -21,15 +21,9 @@
             {% else %}
             {{ userInfo.username }}
             {% endif %}
-            {# {% if app.user.id == viewedId %} #}
-            <h3>
-             <a href="{{path('show_user')}}">
-                <button class="btn btn-mod-profil" style="margin-left:10px; margin-top:0px;">Modifier</button>
-              </a>
-            </h3>
-            
-            
-             🟢 🔴 💬</h1>
+        
+             🟢 🔴 💬
+             </h1>
              
         </div>
     </div>
@@ -85,18 +79,12 @@
     <div class="user-pro-hidden col-12" id="aboutMe" style="display:none;">
         <section class="about-me">
         <h2>À propos de moi</h2>
-            {% if not  userInfo.propos %}
-                {{form_start(aboutMeForm)}}
-                {{form_widget(aboutMeForm)}}
-                {{form_end(aboutMeForm)}}
+            {% if userInfo.isDeleted %}
+                <p>Utilisateur supprimé</p>
+            {% elseif not  userInfo.propos %}
+                <p>Aucune description pour le moment</p>
             {% else %}
                 <p>{{ userInfo.propos }}</p>
-                <button class="btn btn-avatar" onclick="toggleModifAboutMe()">Modifier</button>
-            <section class="about-me" id="modifAboutMe" style="display:none;">
-                {{form_start(aboutMeForm)}}
-                {{form_widget(aboutMeForm)}}
-                {{form_end(aboutMeForm)}}
-            </section>
             {% endif %}
         </section>
     </div>

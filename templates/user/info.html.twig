@@ -26,7 +26,7 @@
                 {% endif %}
             </div>
             <h1>Salut
-            <a href="{{ path('info_user',{'id': viewedId}) }}">
+            <a href="{{ path('info_user') }}">
                {{userInfo.username}} !
             </a>
             </h1>
@@ -54,11 +54,9 @@
                             {{ form_end(userNameForm) }}
                             </td>
                         {% else %}
-                        <td>{{userInfo.username}}
-                            {% if app.user.id == viewedId %}
-                                
-                            <a href="{{ path('edit_user_name',{'id': viewedId}) }}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
-                            {% endif %}
+                        <td>{{userInfo.username}}  
+                            <a href="{{ path('edit_user_name') }}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
+                            
                         </td>
                         {% endif %}
                     </tr>
@@ -72,9 +70,9 @@
                         </td>
                         {% else %}
                         <td>{{userInfo.email}}
-                        {% if app.user.id == viewedId %}
-                            <a href="{{ path('edit_email',{'id': viewedId}) }}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
-                        {% endif %}
+                        
+                            <a href="{{ path('edit_email') }}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
+                        
                         </td>
                         {% endif %}
                     </tr>
@@ -82,18 +80,18 @@
                         <th>PassWord</th>
                         
                         <td>********
-                        {% if app.user.id == viewedId %}
+                        
                             <a href="{{path('app_forgot_password_request')}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
-                        {% endif %}
+                        
                         </td>
                     </tr>
                     <tr>
                         <th>Demande de suppression </th>
                         
                         <td>
-                        {% if app.user.id == viewedId %}
-                            <a class="btn btn-danger" style="padding: 6px 50px;" href="{{path('delete_request', {'id': viewedId})}}">Envoyez</a>
-                        {% endif %}
+                        
+                            <a class="btn btn-danger" style="padding: 6px 50px;" href="{{path('delete_request', {'id': userInfo.id})}}">Envoyez</a>
+                        
                         </td>
                     </tr>
                 </table>
