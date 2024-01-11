@@ -79,23 +79,27 @@
             {% block body %}{% endblock %}
         
         <footer>
-            <div class="row">
-                <ul class="list">
-                    <li><a href="{{ path('app_home') }}">Home</a></li>
-                    <li><a href="{{ path('app_home') }}">Créer Projet</a></li>
-                    <li><a href="{{ path('app_home') }}">Projets</a></li>
+            <div class="footer-container">
+                <ul class="footer-list">
+                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                    <li><a href="{{ path('create_project') }}">Créer Projet</a></li>
+                    <li><a href="{{ path('app_project') }}">Projets</a></li>
                 </ul>
-                <ul class="list">
-                    <li><a href="{{ path('app_home') }}">Mon Compte</a></li>
-                    <li><a href="{{ path('app_home') }}">Chat</a></li>
-                    <li><a href="{{ path('app_home') }}">Connexion</a></li>
+                <ul class="footer-list">
+                    <li><a href="{{ path('info_user', {'id': app.user.id}) }}">Mon Compte</a></li>
+                    <li><a href="{{ path('app_message') }}">Chat</a></li>
+                    {% if app.user %}
+                        <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                    {% else %}
+                        <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                    {% endif %}
                 </ul>
-                <ul class="list">
-                    <li><a href="{{ path('app_home') }}">Mentions légales</a></li>
-                    <li><a href="{{ path('app_home') }}">CGU</a></li>
-                    <li><a href="{{ path('app_home') }}">Contact</a></li>
+                <ul class="footer-list">
+                    <li><a href="#">Mentions légales</a></li>
+                    <li><a href="#">CGU</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul>
             </div>
-        </footer>
+    </footer>
     </body>
 </html>

@@ -23,6 +23,9 @@ class Message
     #[ORM\ManyToOne(inversedBy: 'sentMessages')]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'messages')]
+    private ?Channel $channel = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,5 +70,17 @@ class Message
     public function __toString(): string
     {
         return $this->contenu;
+    }
+
+    public function getChannel(): ?Channel
+    {
+        return $this->channel;
+    }
+
+    public function setChannel(?Channel $channel): static
+    {
+        $this->channel = $channel;
+
+        return $this;
     }
 }
