@@ -4,13 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Message;
 use App\Form\MessageType;
+use App\Repository\ChannelRepository;
 use Symfony\Component\Mercure\Update;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 
 class MessageController extends AbstractController
 {
@@ -30,6 +34,18 @@ class MessageController extends AbstractController
         return $this->render('message/index.html.twig', [
             'form' => $form,
         ]);
-    }
     
+}
+
+    /**
+     * @Route("/message/send", name="send_message")
+     */
+
+    #[Route('/message/send', name: 'send_message')]
+    public function sendMessage(Request $request, ChannelRepository $channelRepository,
+    SerializerInterface $serializer,
+    EntityManagerInterface $em): Response
+    {
+        
+    }
 }

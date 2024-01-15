@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Channel;
 use App\Repository\ChannelRepository;
 use App\Repository\MessageRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +26,7 @@ class ChannelController extends AbstractController
     {
         $messages = $messageRepository->findBy([
             'channel' => $channel
-        ], ['createdAt' => 'ASC']);
+        ], ['sentAt' => 'ASC']);
 
         return $this->render('channel/chat.html.twig', [
             'channel' => $channel,

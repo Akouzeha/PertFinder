@@ -35,7 +35,10 @@
                                     <i class="fa fa-bars"></i>
                                     </a>
                                 </li>
-                                <img class="logo" src="{{ asset('img/logo.svg') }}" alt="logo">
+                                <a href="{{ path('app_home') }}" class="logo-link"
+                                style="float:left;padding:0;border:none;margin-left:0px;">
+                                    <img class="logo" src="{{ asset('img/logo.svg') }}" alt="logo">
+                                </a>
                                 {# <li class="navItem"><a href="{{ path('app_home') }}">Home</a></li>
                                 {# check if the route is the current page, add a class to highlight it #}
                                 {% if (app.user) %}  
@@ -80,6 +83,9 @@
         
         <footer>
             <div class="footer-container">
+                {# <div class="footer-logo">
+                    <img src="{{ asset('img/pertExo.png') }}" alt="logo">
+                </div> #}
                 <ul class="footer-list">
                     <li><a href="{{ path('app_home') }}">Accueil</a></li>
                     <li><a href="{{ path('create_project') }}">Créer Projet</a></li>

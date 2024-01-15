@@ -139,7 +139,8 @@
                                             {% else %}
                                             {% for successor in task.dependentTasks %}
                                                 {{successor.name}}
-                                                <a href="{{path('delete_dep', {'taskId': task.id, 'depTaskId': successor.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
+                                                <a href="{{path('delete_dep', {'taskId': task.id, 'depTaskId': successor.id})}}">
+                                                <img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
                                             {% endfor %}
                                             {% endif %}
                                         </td>

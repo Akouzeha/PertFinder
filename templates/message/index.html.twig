@@ -1,22 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MessageController!{% endblock %}
+{% block title %}Contactez nous{% endblock %}
 
 {% block body %}
-    <header>
-        <h1>messenger</h1>
-    </header>
-    <main class="message-container">
-        <h2>Messages</h2>
-        <div class="grid-message" id="messages">
-            <article>test message</article>
-            <article>test message</article>
-            <article>test message</article>
-            <article>test message</article>
-            <article>test message</article>
-        </div>
+    
 
-        {{ form_start(form) }}
-        {{ form_widget(form.contenu) }}
-        {{ form_end(form) }}
+<section class="contact-us">
+    <div class="contact-container">
+        <div class="contact-form">
+            <h3>Formulaire de contact</h3>
+            {{ form_start(form) }}
+            <div>
+                <label for="{{ form.email.vars.id }}">Email</label>
+                {{ form_widget(form.email) }}
+            </div>
+            <div>
+                <label for="{{ form.sujet.vars.id }}">Sujet</label>
+                {{ form_widget(form.sujet) }}
+            </div>
+            <div>
+                <label for="{{ form.contenu.vars.id }}">Contenu</label>
+                {{ form_widget(form.contenu) }}
+            </div>
+            
+                {{ form_end(form) }}
+        </div>
+        <aside class="contact-info">
+            <h3>Informations de contact</h3>
+            <p>Vous pouvez nous contacter par téléphone ou par mail</p>
+            <ul>
+                <li> 07 00 00 00 00</li>
+                <li><a href="mailto:admin@pertfinder.com">admin@pertfinder.com</a></li>
+        </aside>
+    </div>
+</section>
+
+
+
 {% endblock %}
+

@@ -26,3 +26,5 @@ function toggleModifAboutMe() {
   aboutMe.style.display = (aboutMe.style.display === 'none') ? 'block' : 'none';
 }
 
+
+

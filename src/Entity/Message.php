@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\MessageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 class Message
@@ -12,19 +13,29 @@ class Message
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['message'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['message'])]
     private ?string $contenu = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $sentAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'sentMessages')]
+    #[Groups(['message'])]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'messages')]
+    #[Groups(['message'])]
     private ?Channel $channel = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $sujet = null;
 
     public function getId(): ?int
     {
@@ -80,6 +91,30 @@ class Message
     public function setChannel(?Channel $channel): static
     {
         $this->channel = $channel;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getSujet(): ?string
+    {
+        return $this->sujet;
+    }
+
+    public function setSujet(string $sujet): static
+    {
+        $this->sujet = $sujet;
 
         return $this;
     }
