@@ -35,7 +35,7 @@ class MessageController extends AbstractController
             'form' => $form,
         ]);
     
-}
+    }
 
     /**
      * @Route("/message/send", name="send_message")
@@ -43,7 +43,6 @@ class MessageController extends AbstractController
 
     #[Route('/message/send', name: 'send_message')]
     public function sendMessage(Request $request, ChannelRepository $channelRepository,
-    SerializerInterface $serializer,
     EntityManagerInterface $em): Response
     {
         
