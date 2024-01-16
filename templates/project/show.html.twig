@@ -8,12 +8,16 @@
     <div class="project-container">
         <div class="show-project">
             <section class="project-description">
+                <a href="{{path('edit_project', {'id': project.id})}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
                 <h1>{{project.title}}</h1>
                 <p>{{project.description}}</p>
+
             </section>
             {% if project.diagrams | length == 0 %}
-            <p>aucun diagram dans ce projet</p>  
-                <p><a href="{{path('create_diagram', {'projectId': project.id})}}">ajouter un diagram</a></p>
+            <section class="add-diagram">
+            <h4>aucun diagram dans ce projet</h4>  
+                <p><a class="add-chart" href="{{path('create_diagram', {'projectId': project.id})}}">ajouter un diagram</a></p>
+            </section>
                 <img src="{{asset('charts/default.png')}}" alt="empty">
                 {% if app.user == project.user or is_granted("ROLE_PROJECT_MANAGER") %} 
                     {% if not project.isIsLocked %}
@@ -27,6 +31,7 @@
                 <img src="{{asset('charts/' ~ imgName )}}" alt="diagram">
             {% if app.user == project.user or is_granted("ROLE_PROJECT_MANAGER") %}   
                 <a href="{{path('new_task', {'diagramId': chart.id})}}" class="projet-option-btn" >Modifier</a>
+
                 {% if not project.isIsLocked %}
                     <a href="{{path('lock_project', {'id': project.id})}}" class="projet-option-btn" >Verrouiller</a>
                 {% else %}
@@ -35,6 +40,10 @@
                 <a href="{{path('task_edge', {'diagramId': chart.id})}}" class="projet-option-btn">Les dépendances</a>
                 <a href="{{path('cal_dates', {'diagramId': chart.id})}}" class="projet-option-btn">Les dates</a>
                 <a href="{{path('draw_graph', {'diagramId': chart.id})}}" class="projet-option-btn">Téléchargement</a>
+                <a href="{{path('delete_diagram', {'diagramId': chart.id})}}" class="projet-option-btn"
+                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce diagramme ?');"
+                >Supprimer</a>
+
             {% endif %}
             {% endfor %}
         </div>

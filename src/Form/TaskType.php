@@ -31,7 +31,7 @@ class TaskType extends AbstractType
                 ],
             ])
             ->add('optTime', IntegerType::class, [
-                'label' => 'Optemistic Time',
+                'label' => 'Temps optimiste',
                 'attr' => [
                     'class' => 'task-form-input'
                 ],
@@ -46,7 +46,7 @@ class TaskType extends AbstractType
                 ],
             ])
             ->add('pesTime', IntegerType::class, [
-                'label' => 'Pessimistic Time',
+                'label' => 'Temps pessimiste',
                 'attr' => [
                     'class' => 'task-form-input'
                 ],
@@ -61,7 +61,7 @@ class TaskType extends AbstractType
                 ],
             ])
             ->add('mosTime', IntegerType::class, [
-                'label' => 'Most Likely Time',
+                'label' => 'Temps le plus probable',
                 'attr' => [
                     'class' => 'task-form-input'
                 ],

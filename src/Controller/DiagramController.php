@@ -388,5 +388,23 @@ public function generateDotFileContent($tasks, $edges, $ES, $EF, $LS, $LF, $MT, 
         return $response;
     }
 
+    #[Route('/diagram/{diagramId}/delete', name: 'delete_diagram')]
+    public function deleteDiagramme($diagramId, EntityManagerInterface $em): Response
+    {
+        
+        $diagram = $em->getRepository(Diagram::class)->find($diagramId);
+        $user = $diagram->getUser();
+        if($this->isGranted('ROLE_PROJECT_MANAGER') or $user == $this->getUser()){
+            $em->remove($diagram);
+            $em->flush();
+            $this->addFlash('success', 'Le diagramme a été supprimé avec succès');
+            return $this->redirectToRoute('app_project');
+        }
+        else{
+            $this->addFlash('warning', 'Vous n\'avez pas le droit de supprimer ce diagramme');
+            return $this->redirectToRoute('app_project');
+        }
+    }
+
 
 }

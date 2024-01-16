@@ -502,6 +502,32 @@ footer {
     border: 2px solid #ffffff00;
     color: black; 
 }
+/* add diagramme - chart */
+.add-diagram {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.add-diagram h4 {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+}
+
+.add-diagram p {
+    margin-top: 10px;
+}
+
+.add-diagram a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+
 /* ============================================== */
 
 
@@ -637,7 +663,12 @@ footer {
     font-size: 18px;
     font-weight: semi-bold;
 }
+.show-project .edit-pen{
+    float: right;
+    width: 30px;
+    height: 30px;
 
+}
 
 /* ============================================== */
 
@@ -1499,7 +1530,7 @@ footer {
 }
 
 /* Style the download buttons */
-.dowload-chart a.btn-chart {
+.dowload-chart a.btn-chart, .add-chart {
     display: inline-block;
     margin: 0 10px;
     padding: 10px 20px;
@@ -1510,7 +1541,7 @@ footer {
     transition: background-color 0.3s ease;
 }
 
-.dowload-chart a.btn-chart:hover {
+.dowload-chart a.btn-chart:hover, .add-chart:hover {
     background-color: #2980b9;
 }
 
