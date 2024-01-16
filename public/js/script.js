@@ -26,5 +26,12 @@ function toggleModifAboutMe() {
   aboutMe.style.display = (aboutMe.style.display === 'none') ? 'block' : 'none';
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+  var alertMessages = document.querySelector('.alert-messages');
 
-
+  if (alertMessages) {
+      setTimeout(function () {
+          alertMessages.classList.add('hide-after-3s');
+      }, 3000);
+  }
+});

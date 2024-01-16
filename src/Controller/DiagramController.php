@@ -394,7 +394,10 @@ public function generateDotFileContent($tasks, $edges, $ES, $EF, $LS, $LF, $MT, 
         
         $diagram = $em->getRepository(Diagram::class)->find($diagramId);
         $user = $diagram->getUser();
+        $project = $diagram->getProject();
         if($this->isGranted('ROLE_PROJECT_MANAGER') or $user == $this->getUser()){
+            $project->removeDiagram($diagram);
+            $user->removeDiagram($diagram);
             $em->remove($diagram);
             $em->flush();
             $this->addFlash('success', 'Le diagramme a été supprimé avec succès');

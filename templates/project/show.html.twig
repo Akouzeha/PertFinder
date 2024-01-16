@@ -9,16 +9,30 @@
         <div class="show-project">
             <section class="project-description">
                 <a href="{{path('edit_project', {'id': project.id})}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
-                <h1>{{project.title}}</h1>
+                <h1>{{project.title}}</h1> <span>Ce projet a été créé par</span> <a href="{{path('see_user',{'id': project.user.id})}}">{{project.user.username}}</a>
+                le {{project.getCreatedAt|date('d/m/Y')}} -  <span> Durée estimée : </span> {{project.calculNumberDays()}} <span> jours</span>
                 <p>{{project.description}}</p>
 
             </section>
+             <div class="alert-messages col-12">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
             {% if project.diagrams | length == 0 %}
             <section class="add-diagram">
             <h4>aucun diagram dans ce projet</h4>  
                 <p><a class="add-chart" href="{{path('create_diagram', {'projectId': project.id})}}">ajouter un diagram</a></p>
             </section>
-                <img src="{{asset('charts/default.png')}}" alt="empty">
+                    
+                <img src="{{asset('charts/default.png')}}" alt="no-diagram-yet">
                 {% if app.user == project.user or is_granted("ROLE_PROJECT_MANAGER") %} 
                     {% if not project.isIsLocked %}
                         <a href="{{path('lock_project', {'id': project.id})}}" class="projet-option-btn" >Verrouiller</a>
@@ -28,9 +42,18 @@
                 {% endif %}
             {% endif %}
             {% for chart in project.diagrams %}
-                <img src="{{asset('charts/' ~ imgName )}}" alt="diagram">
-            {% if app.user == project.user or is_granted("ROLE_PROJECT_MANAGER") %}   
-                <a href="{{path('new_task', {'diagramId': chart.id})}}" class="projet-option-btn" >Modifier</a>
+                {% if chart.tasks is empty %}
+                    <p style="text-align:center;"> ce diagramme n'a pas de tâches</p>
+                    <img src="{{asset('charts/default.png')}}" alt="no-diagram-yet">
+                {% else %}
+                    <img src="{{asset('charts/' ~ imgName )}}" alt="diagram">
+                {% endif %}
+            {% if app.user == project.user or is_granted("ROLE_PROJECT_MANAGER") %}
+                {% if chart.tasks is empty %}
+                    <a href="{{path('new_task', {'diagramId': chart.id})}}" class="projet-option-btn" >Ajouter des Tâches</a>
+                {% else %}
+                    <a href="{{path('new_task', {'diagramId': chart.id})}}" class="projet-option-btn" >Visualiser</a>
+                {% endif %}
 
                 {% if not project.isIsLocked %}
                     <a href="{{path('lock_project', {'id': project.id})}}" class="projet-option-btn" >Verrouiller</a>
@@ -47,6 +70,7 @@
             {% endif %}
             {% endfor %}
         </div>
+        
     </div>
         <div class="show-comment">
             <h2>Commentaires</h2>

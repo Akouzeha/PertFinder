@@ -202,7 +202,7 @@ class Project
             ->setMaxResults(1);
         // Get the last comment using the sorting criteria
         $lastComment = $this->comments->matching($criteria)->first();
-        return $lastComment ? $lastComment : null;;
+        return $lastComment ? $lastComment : null;
 
     }
 
@@ -216,5 +216,13 @@ class Project
         $this->isLocked = $isLocked;
 
         return $this;
+    }
+
+    public function calculNumberDays(): int
+    {
+        $dateDebut = $this->getDateDebut();
+        $dateFin = $this->getDateFin();
+        $interval = $dateDebut->diff($dateFin);
+        return $interval->days;
     }
 }

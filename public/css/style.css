@@ -669,6 +669,18 @@ footer {
     height: 30px;
 
 }
+.project-description span{
+    color: var(--primary);
+    font-weight: bold;
+}
+.project-description a{
+    text-decoration: none;
+    color: var(--header);
+}
+.project-description a:hover{
+    color: var(--primary);
+    cursor: pointer;
+}
 
 /* ============================================== */
 
@@ -791,6 +803,15 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.hide-after-3s {
+    opacity: 1;
+    transition: opacity 3s ease-in-out;
+}
+
+.hide {
+    opacity: 0;
 }
 
 /* ============================================== */
