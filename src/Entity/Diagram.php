@@ -43,6 +43,12 @@ class Diagram
     #[ORM\Column(length: 100)]
     private ?string $imgName = null;
 
+    #[ORM\Column]
+    private ?int $duree = null;
+
+    #[ORM\Column]
+    private ?float $variance = null;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
@@ -183,4 +189,30 @@ class Diagram
 
         return $this;
     }
+
+    public function getDuree(): ?int
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(int $duree): static
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    public function getVariance(): ?float
+    {
+        return $this->variance;
+    }
+
+    public function setVariance(float $variance): static
+    {
+        $this->variance = $variance;
+
+        return $this;
+    }
+
+    
 }

@@ -3,17 +3,67 @@
 {% block title %}Hello ProjectController!{% endblock %}
 
 {% block body %}
-
+{% if not project.diagrams is empty %}
+    {% set chart = project.diagrams[0] %}
+    {% set zScore = project.calculZScore(projectDuree, chart.duree, chart.variance) %}
+    {% set probability = project.calculateProbabilityAndNormalDistribution(zScore) %}
+{% endif %}
     
     <div class="project-container">
         <div class="show-project">
             <section class="project-description">
                 <a href="{{path('edit_project', {'id': project.id})}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
                 <h1>{{project.title}}</h1> <span>Ce projet a été créé par</span> <a href="{{path('see_user',{'id': project.user.id})}}">{{project.user.username}}</a>
-                le {{project.getCreatedAt|date('d/m/Y')}} -  <span> Durée estimée : </span> {{project.calculNumberDays()}} <span> jours</span>
+                le {{project.getCreatedAt|date('d/m/Y')}}
                 <p>{{project.description}}</p>
-
             </section>
+            <section class="project-description smaller">
+                <div class="diagram-information">
+                    <div class="left-column col-3">
+                        <span> Durée souhaitée : </span> {{ project.calculNumberDays() }} <span> jours</span><br>
+                        {% if project.diagrams is empty %}
+                            <span> Durée Estimé : </span> 0 <span> jours</span>
+                        {% else %}
+                            <span> Durée Estimé : </span> {{ chart.duree }} <span> jours</span><br>
+                        {% endif %}
+                    </div>
+                    <div class="right-column col-3">
+                        {% if project.diagrams is empty %}
+                            <span> Variance : </span> - <br>
+                            <span> Z-Score : </span> - <br>
+                        {% else %}
+                            
+                            <span> Variance : </span> {{ chart.variance }} <br>
+                        
+                        <span> Z-Score : </span> {{zScore |number_format(3)}}<br>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+                    <div class="centered">
+                        {% if project.diagrams is empty %}
+                        <p> pas encore de diagramme pour ce projet</p>
+                        {% else %}
+                        {% if zScore == 0 %}
+                            <p> Le Z-score est exactement 0, cela signifie que le point de données est à la moyenne de la distribution.</p>
+                        {% elseif zScore > -2 and zScore < 2 %}
+                            <p> Le Z-score est entre -2 et 2, cela signifie que le point de données est dans la distribution <span style="color:green;"> normale.</span></p>
+                        {% elseif (zScore >= 2 and zScore < 3) or (zScore <= -2 and zScore > -3) %}
+                            <p> Le Z-score est entre 2 et 3 (ou entre -2 et -3), cela indique <span style="color:orange;"> une situation inhabituelle.</span></p>
+                        {% elseif zScore >= 3 or zScore <= -3 %}
+                            <p> Un Z-score supérieur à 3 (ou inférieur à -3) est généralement considéré comme <span style="color:red;">très inhabituel ou extrême.</span> Veuillez vérifier les données.</p>
+                        {% endif %}
+
+                        {% endif %}
+                        {% if project.diagrams is empty %}
+                        <span> propabilité de complétion : </span> 0 <span> %</span>
+                        {% else %}
+                        <span> propabilité de complétion : </span> {{probability |number_format(2) }}<span> %</span>
+                        {% endif %}
+                        <p> pour en savoir plus sur les calculs, cliquez <a href="">ici</a></p>
+                    </div>
+            </section>
+
              <div class="alert-messages col-12">
                 {% for message in app.flashes('success') %}
                     <div class="alert alert-success">
@@ -46,7 +96,7 @@
                     <p style="text-align:center;"> ce diagramme n'a pas de tâches</p>
                     <img src="{{asset('charts/default.png')}}" alt="no-diagram-yet">
                 {% else %}
-                    <img src="{{asset('charts/' ~ imgName )}}" alt="diagram">
+                    <img src="{{asset('charts/img/' ~ imgName )}}" alt="diagram">
                 {% endif %}
             {% if app.user == project.user or is_granted("ROLE_PROJECT_MANAGER") %}
                 {% if chart.tasks is empty %}

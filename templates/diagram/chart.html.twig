@@ -9,7 +9,7 @@
         <h1>Le Diagramme de PERT</h1>
 
         <figure>
-            <img style="height:300px;" src="{{asset('charts/' ~ imageFilePath)}}" alt="PERT Chart">
+            <img style="height:300px;" src="{{asset('charts/img/' ~ imageFilePath)}}" alt="PERT Chart">
             <figcaption>
                 <a class="btn-chart" href="{{ path('download_diagram', {'diagramId': diagramId,'fileName': imageFilePath}) }}">Télécharger l'image</a>
                 <a class="btn-chart" href="{{ path('download_pdf', {'diagramId': diagramId,'fileName': pdfFilePath}) }}">Télécharger le PDF</a>

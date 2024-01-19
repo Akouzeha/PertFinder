@@ -5,7 +5,14 @@
 {% block body %}
 {% set sommeDuree = 0 %}
 {% set sommeVariance = 0 %}
-
+    <header class="task-header">
+        <h1> <span>Diagramme :</span> {{diagram.title}} ->
+        <span>Projet :
+        <a href="{{path('show_project', {'id': diagram.project.id})}}">
+         {{diagram.project.title}}</a>
+         </span>
+        </h1>
+    </header>
 <div class="task-form-container">
     <div class="task-form">
         <div style="color:red;">{{form_errors(formTask)}}</div>
@@ -191,9 +198,9 @@
             {% endif %}
             {% if tasks | length > 0 %}
                 
-            <div class="col-12" style="margin-top:10px;">
-                <a href="{{path('task_edge', {'diagramId': tasks[0].pertChart.id})}}" class="btn">Les dépendances</a>
-                <a href="" class="btn">Générer le chart</a>
+            <div class="col-12" style="margin-top:10px;margin-bottom:15px;">
+                <a href="{{path('task_edge', {'diagramId': tasks[0].pertChart.id})}}" class="btn btn-primary">Les dépendances</a>
+                <a class="btn btn-primary" href="{{ path('draw_graph', {'diagramId': tasks[0].pertChart.id}) }}">Créer le Diagram</a>
             </div>
             {% endif %}
 

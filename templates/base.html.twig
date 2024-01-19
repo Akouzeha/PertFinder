@@ -43,11 +43,12 @@
                                 {# check if the route is the current page, add a class to highlight it #}
                                 {% if (app.user) %}  
                                     <li class={% if app.request.attributes.get('_route') == 'app_logout' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_logout') }}">logout</a></li>
-                                    {% if  is_granted("ROLE_SUPER_ADMIN") or  is_granted("ROLE_ADMIN") %}
+
+                                    <li class={% if app.request.attributes.get('_route') == 'send_message' %} "activated" {% else %}""{% endif %}><a href="{{path('send_message')}}">Contactez-Nous</a></li>
+                                    {% if  is_granted("ROLE_ADMIN") %}
                                         <li class={% if app.request.attributes.get('_route') == 'app_admin' %} "activated" {% else %}""{% endif %}><a href="{{path('app_admin', {'id': app.user.id})}}">Paramètes</a></li>
                                     {% endif %}
                                     <li class={% if app.request.attributes.get('_route') == 'info_user' %} "activated" {% else %}""{% endif %}><a href="{{path('info_user')}}">Mon Compte</a></li>
-                                    <li class={% if app.request.attributes.get('_route') == 'app_message' %} "activated" {% else %}""{% endif %}><a href="{{path('app_message')}}">Chat</a></li>
                                     <li class={% if app.request.attributes.get('_route') == 'app_project' %} "activated" {% else %}""{% endif %}><a href="{{path('app_project')}}">Projets</a></li>
                                     <li class={% if app.request.attributes.get('_route') == 'create_project' %} "activated" {% else %}""{% endif %}><a href="{{path('create_project')}}">Créer Projet</a></li>
                                     {% else %}
@@ -93,7 +94,7 @@
                 </ul>
                 <ul class="footer-list">
                     <li><a href="{{ path('info_user', {'id': app.user.id}) }}">Mon Compte</a></li>
-                    <li><a href="{{ path('app_message') }}">Chat</a></li>
+                    <li><a href="{{ path('send_message') }}">COntactez-Nous</a></li>
                     {% if app.user %}
                         <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
                     {% else %}

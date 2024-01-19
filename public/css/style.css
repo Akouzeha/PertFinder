@@ -682,6 +682,32 @@ footer {
     cursor: pointer;
 }
 
+.diagram-information{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+}
+.project-description span {
+    margin-bottom: 10px; /* Add some spacing between spans */
+}
+
+.project-description .left-column {
+    flex: 1;
+    text-align: left; /* Align text to the left in the left column */
+}
+
+.project-description .right-column {
+    flex:1;
+    text-align: right; /* Align text to the right in the right column */
+}
+
+.centered {
+    flex:1;
+    text-align: center; /* Center text */
+}
+
+
 /* ============================================== */
 
 
@@ -708,7 +734,7 @@ footer {
 .task-form-container{
     width: auto;
     height: auto;
-    margin-top: 100px;
+    margin-top: 10px;
     margin-bottom: 10px;
     background-color: var(--background);
     border: 2px solid var(--primary);
@@ -758,6 +784,7 @@ footer {
 }
 .task-form .btn{
     margin-top: 0px;
+    
 }
 
 .task-form p{
@@ -775,7 +802,21 @@ footer {
     font-size: 20px;
 }
 
-
+.task-header h1{
+    text-align: center;
+    color: var(--header);
+    font-size: 20px;
+    font-weight: bold;
+    margin-top:70px;
+}
+.task-header span{
+    color: var(--primary);
+    font-weight: bold;
+}
+.task-header a{
+    text-decoration: none;
+    color: var(--header);
+}
 /* ============================================== */
 
 /* Alert */
@@ -1460,12 +1501,13 @@ footer {
     align-items: center; /* Center items horizontally */
     justify-content: center; /* Center items vertically */
     text-align: center; /* Center text within each element */
-    height: 100vh; /* Set the height to 100% of the viewport height */
+    height: auto; /* Set the height to 100% of the viewport height */
 }
 
 .row-dates h1 {
     font-size: 24px;
     margin-bottom: 10px;
+    
     color: var(--header);
     text-align: center;
 }
@@ -1521,7 +1563,8 @@ footer {
 /* Style the section */
 .dowload-chart {
     text-align: center;
-    margin: 20px 0;
+    height: auto;
+    margin: 40px 0;
 }
 
 /* Style the heading */

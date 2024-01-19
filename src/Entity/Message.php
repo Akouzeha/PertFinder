@@ -20,16 +20,12 @@ class Message
     #[Groups(['message'])]
     private ?string $contenu = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $sentAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'sentMessages')]
     #[Groups(['message'])]
     private ?User $user = null;
-
-    #[ORM\ManyToOne(inversedBy: 'messages')]
-    #[Groups(['message'])]
-    private ?Channel $channel = null;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
@@ -81,18 +77,6 @@ class Message
     public function __toString(): string
     {
         return $this->contenu;
-    }
-
-    public function getChannel(): ?Channel
-    {
-        return $this->channel;
-    }
-
-    public function setChannel(?Channel $channel): static
-    {
-        $this->channel = $channel;
-
-        return $this;
     }
 
     public function getEmail(): ?string

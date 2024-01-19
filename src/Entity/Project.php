@@ -225,4 +225,35 @@ class Project
         $interval = $dateDebut->diff($dateFin);
         return $interval->days;
     }
+    public function calculZscore(int $dureeProject, int $dureeDiagram, float $variance)
+    {
+        $zscore = 0;
+        $zscore = ($dureeProject - $dureeDiagram) / sqrt($variance);
+        return $zscore;
+    }
+    
+    function calculateProbabilityAndNormalDistribution($zScore) {
+        $pi = 3.141592653589793;
+        $a1 =  0.254829592;
+        $a2 = -0.284496736;
+        $a3 =  1.421413741;
+        $a4 = -1.453152027;
+        $a5 =  1.061405429;
+        $p  =  0.3275911;
+    
+        $sign = ($zScore < 0) ? -1 : 1;
+        $x = abs($zScore);
+    
+        $t = 1.0 / (1.0 + $p * $x);
+        $y = ((((($a5 * $t + $a4) * $t) + $a3) * $t + $a2) * $t + $a1) * $t;
+    
+        $erfResult = $sign * (1.0 - $y * exp(-$x * $x));
+        
+        $normalDistribution = 0.5 * (1 + $erfResult);
+    
+        $probability = $normalDistribution * 100; // Convert to percentage
+    
+        return $probability;
+    }
+    
 }

@@ -77,6 +77,7 @@ class ProjectController extends AbstractController
                 $diagramName = $diagrams[0]->getTitle();
                 $diagramId = $diagrams[0]->getId();
                 $imgName = str_replace(' ', '_', $diagramName);
+                
             } else {
                 $imgName = 'default.png';
             }
@@ -87,7 +88,6 @@ class ProjectController extends AbstractController
         if(!$comment){
             $comment = new Comment();
         }
-
         $commentId = $comment->getId();
         $comment->setProject($project);
         $comment->setUser($user);
@@ -103,15 +103,16 @@ class ProjectController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('show_project', ['id' => $projectId]);
         }
-        
+        $projectDuree = $project->calculNumberDays();
         return $this->render('project/show.html.twig',[
             'project' => $project,
             'commentId' => $commentId,
-            
+            'projectDuree' => $projectDuree,
             'imgName' => $imgName . '.png',
             'formComment' => $form,
         ]);
     }
+    
 
     /**
      * @Route("/project/show/{commentId}", name="edit_comment")

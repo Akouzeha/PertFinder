@@ -18,33 +18,30 @@ use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 
 class MessageController extends AbstractController
 {
-    #[Route('/message', name: 'app_message')]
-    public function index(Request $request): Response
+    #[Route('/message', name: 'send_message')]
+    public function index(Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(MessageType::class);
         $form->handleRequest($request);
+        $message = new Message();
 
+
+        
         if ($form->isSubmitted() && $form->isValid()) {
-            return new Response($this->render('message/message.stream.html.twig', [
-                'message' => $form->getData(),
-                'form' => $form->createView(),
-            ]));
+            $message = $form->getData(); // $message is an instance of Message
+            $user = $this->getUser();
+            $message->setUser($user);
+            $message->setSentAt(new \DateTime());
+            
+            $em->persist($message);
+            $em->flush();
+            $this->addFlash('success', 'Message a été envoyé!');
+            return $this->redirectToRoute('send_message');
         
         }
         return $this->render('message/index.html.twig', [
             'form' => $form,
         ]);
     
-    }
-
-    /**
-     * @Route("/message/send", name="send_message")
-     */
-
-    #[Route('/message/send', name: 'send_message')]
-    public function sendMessage(Request $request, ChannelRepository $channelRepository,
-    EntityManagerInterface $em): Response
-    {
-        
     }
 }

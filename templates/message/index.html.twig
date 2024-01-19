@@ -32,7 +32,20 @@
                 <li> 07 00 00 00 00</li>
                 <li><a href="mailto:admin@pertfinder.com">admin@pertfinder.com</a></li>
         </aside>
+   
     </div>
+    <div class="alert-messages col-12">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+        </div>
 </section>
 
 

@@ -60,9 +60,13 @@ class TaskController extends AbstractController
             //calculate the duration 
             $duration = ($task->getOptTime() + 4 * $task->getMosTime() + $task->getPesTime())/6;
             $task->setDuree($duration);
+            $diagramDuree = $diagram->getDuree() + $duration;
+            $diagram->setDuree($diagramDuree);
             //calculate the variance
             $variance_format = pow(($task->getPesTime() - $task->getOptTime()), 2) / 36;
             $variance = round($variance_format, 3);
+            $diagramVariance = $diagram->getVariance() + $variance;
+            $diagram->setVariance($diagramVariance);
             $task->setVariance($variance);
             $em->persist($task);
             $em->flush();
@@ -75,6 +79,7 @@ class TaskController extends AbstractController
             'formTask' => $form,
             'showForm' => $showForm,
             'diagramId' => $diagramId,
+            'diagram' => $diagram,
             'tasks' => $tasks,
         ]);
     }

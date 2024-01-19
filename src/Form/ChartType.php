@@ -27,7 +27,6 @@ class ChartType extends AbstractType
                     'class' => 'chart-form-textArea',
                     'placeholder' => 'Description du diagramme'
                 ],
-                'sanitize_html' => true,
             ])
         ;
     }

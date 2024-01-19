@@ -45,6 +45,8 @@ class DiagramController extends AbstractController
         $project = $em->getRepository(Project::class)->find($projectId);
         $user = $this->getUser();
         $diagram->setCreatedAt(new \DateTime());
+        $diagram->setDuree(0);
+        $diagram->setVariance(0);
         $form = $this->createForm(ChartType::class, $diagram);
         $form->handleRequest($request);
         $showForm = true;
@@ -408,6 +410,5 @@ public function generateDotFileContent($tasks, $edges, $ES, $EF, $LS, $LF, $MT, 
             return $this->redirectToRoute('app_project');
         }
     }
-
 
 }
