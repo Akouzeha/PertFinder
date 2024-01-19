@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class ProjectController extends AbstractController
 {
@@ -44,6 +45,10 @@ class ProjectController extends AbstractController
     public function createProject(Project $project = Null, Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
+        if($project->getId() != null && $project->getUser() != $user){
+            $this->addFlash('error', 'Vous n\'avez pas le droit de modifier ce projet');
+            return $this->redirectToRoute('app_project');
+        }
         if(!$project){
             $project = new Project();
         }
@@ -123,6 +128,10 @@ class ProjectController extends AbstractController
     public function editComment($commentId, Request $request, EntityManagerInterface $entityManager): Response
     {
         $comment = $entityManager->getRepository(Comment::class)->find($commentId);
+        $user = $comment->getUser();
+        if ($user != $this->getUser()) {
+            throw new AccessDeniedHttpException('Vous n\'avez pas le droit de modifier ce commentaire');
+        }
         $projectId = $comment->getProject()->getId();
         $project = $entityManager->getRepository(Project::class)->find($projectId);
         if ($project->getDiagrams() == null) {

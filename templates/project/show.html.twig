@@ -12,6 +12,7 @@
     <div class="project-container">
         <div class="show-project">
             <section class="project-description">
+                
                 <a href="{{path('edit_project', {'id': project.id})}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
                 <h1>{{project.title}}</h1> <span>Ce projet a été créé par</span> <a href="{{path('see_user',{'id': project.user.id})}}">{{project.user.username}}</a>
                 le {{project.getCreatedAt|date('d/m/Y')}}

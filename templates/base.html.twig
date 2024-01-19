@@ -105,7 +105,7 @@
                     <li><a href="{{ path('app_project') }}">Projets</a></li>
                 </ul>
                 <ul class="footer-list">
-                    <li><a href="{{ path('info_user', {'id': app.user.id}) }}">Mon Compte</a></li>
+                    <li><a href="{{ path('info_user') }}">Mon Compte</a></li>
                     <li><a href="{{ path('send_message') }}">COntactez-Nous</a></li>
                     {% if app.user %}
                         <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
