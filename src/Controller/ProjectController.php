@@ -45,7 +45,7 @@ class ProjectController extends AbstractController
     public function createProject(Project $project = Null, Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
-        if($project->getId() != null && $project->getUser() != $user){
+        if($project->getId() != null && ($project->getUser() != $user && !$this->isGranted('ROLE_PROJECT_MANAGER'))){
             $this->addFlash('error', 'Vous n\'avez pas le droit de modifier ce projet');
             return $this->redirectToRoute('app_project');
         }
