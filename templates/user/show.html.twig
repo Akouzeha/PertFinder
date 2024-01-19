@@ -39,18 +39,7 @@
             <button class="btn" onclick="toggleComments()">Liste des Commentaires</button>
             <button class="btn" onclick="togglePropos()">À propos de moi</button>
         </div>
-        <div class="alert-messages col-12">
-                {% for message in app.flashes('success') %}
-                    <div class="alert alert-success">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-                {% for message in app.flashes('error') %}
-                    <div class="alert alert-danger">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-        </div>
+      
     <div class="user-row-hidden">
     <div class="user-pro-hidden col-12"  id="projectList" style="display:none;">
         <h2>Projets</h2>

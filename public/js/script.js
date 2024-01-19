@@ -26,7 +26,7 @@ function toggleModifAboutMe() {
   aboutMe.style.display = (aboutMe.style.display === 'none') ? 'block' : 'none';
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+/* document.addEventListener('DOMContentLoaded', function () {
   var alertMessages = document.querySelector('.alert-messages');
 
   if (alertMessages) {
@@ -34,4 +34,12 @@ document.addEventListener('DOMContentLoaded', function () {
           alertMessages.classList.add('hide-after-3s');
       }, 3000);
   }
-});
+}); */
+
+setTimeout(function() {
+  // Récupère le 1er élément ayant la classe message
+  message = document.getElementsByClassName('alert')[0]
+  if (message != undefined) {
+      message.style.display = 'none';
+  }
+}, 3975);
