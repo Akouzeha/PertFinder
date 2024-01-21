@@ -1,6 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TaskController!{% endblock %}
+{% block title %}PertFinder - Task Controller{% endblock %}
+
+{% block metadata %}
+    <meta name="description" content="Manage tasks for {{ diagram.title }} in PertFinder application. 
+    Add, edit, and view task details.">
+    <meta name="keywords" content="PertFinder, task management, project management, {{ diagram.title }}, 
+    task dependencies">
+{% endblock %}
 
 {% block body %}
 {% set sommeDuree = 0 %}

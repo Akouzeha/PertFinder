@@ -7,14 +7,15 @@ use App\Entity\Task;
 use App\Entity\Diagram;
 use App\Entity\Project;
 use App\Form\ChartType;
+use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManager;
+use Symfony\UX\Chartjs\Model\Chart;
 use Symfony\Component\Process\Process;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
-use Symfony\UX\Chartjs\Model\Chart;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -79,10 +80,11 @@ class DiagramController extends AbstractController
      * @return Response
      */
     #[Route('/diagram/{diagramId}/dates', name: 'cal_dates')]
-    public function calculateDates(EntityManagerInterface $em, $diagramId): Response
+    public function calculateDates(EntityManagerInterface $em,LoggerInterface $logger, $diagramId): Response
     {
     // Fetch all tasks of the diagram
     $tasks = $em->getRepository(Task::class)->findBy(['pertChart' => $diagramId]);
+    $edges = $em->getRepository(Edge::class)->findAllEdgesForChart($diagramId);
 
     // Initialize arrays to store Early Start (ES) and Early Finish (EF) of each task
     // Late Start (LS) and Late Finish (LF) of each task
@@ -116,7 +118,7 @@ class DiagramController extends AbstractController
             // Skip tasks of level 1 (already initialized)
             continue;
         }
-
+        
         foreach ($tasksAtLevel as $task) {
             $taskId = $task->getId();
 
@@ -129,6 +131,8 @@ class DiagramController extends AbstractController
 
             $ES[$taskId] = $maxEF;
             $EF[$taskId] = $maxEF + $task->getDuree();
+            
+
         }
     }
     // Calculate LS and LF of each task
@@ -145,8 +149,13 @@ class DiagramController extends AbstractController
 
             // Calculate LF as the minimum LS of all tasks at the next level
             $minLS = PHP_INT_MAX;
-            foreach ($tasksByLevel[$level + 1] as $successor) {
+            /* foreach ($tasksByLevel[$level + 1] as $successor) {
                 $successorId = $successor->getId();
+                $minLS = min($minLS, $LS[$successorId]);
+            } */
+            $predecessors = $em->getRepository(Edge::class)->findBy(['predecessor' => $task]);
+            foreach ($predecessors as $predecessor) {
+                $successorId = $predecessor->getTask()->getId();
                 $minLS = min($minLS, $LS[$successorId]);
             }
 
@@ -154,11 +163,14 @@ class DiagramController extends AbstractController
             $LS[$taskId] = $LF[$taskId] - $task->getDuree();
         }
     }
+       
     //calculate MT and ML of each task
     foreach ($tasks as $task) {
         $taskId = $task->getId();
         $MT[$taskId] = $LF[$taskId] - $EF[$taskId];
         $ML[$taskId] = $LS[$taskId] - $ES[$taskId];
+        
+
     }
 
     return $this->render('diagram/index.html.twig', [
@@ -177,7 +189,7 @@ class DiagramController extends AbstractController
     {
         // Fetch all tasks of the diagram
     $tasks = $em->getRepository(Task::class)->findBy(['pertChart' => $diagramId]);
-
+    $edges = $em->getRepository(Edge::class)->findAllEdgesForChart($diagramId);
     // Initialize arrays to store Early Start (ES) and Early Finish (EF) of each task
     // Late Start (LS) and Late Finish (LF) of each task
     // Margin Total (MT) and Margin Libre (ML) of each task
@@ -239,8 +251,9 @@ class DiagramController extends AbstractController
 
             // Calculate LF as the minimum LS of all tasks at the next level
             $minLS = PHP_INT_MAX;
-            foreach ($tasksByLevel[$level + 1] as $successor) {
-                $successorId = $successor->getId();
+            $predecessors = $em->getRepository(Edge::class)->findBy(['predecessor' => $task]);
+            foreach ($predecessors as $predecessor) {
+                $successorId = $predecessor->getTask()->getId();
                 $minLS = min($minLS, $LS[$successorId]);
             }
 
@@ -354,6 +367,7 @@ public function generateDotFileContent($tasks, $edges, $ES, $EF, $LS, $LF, $MT, 
 
     return $dotContent;
 }
+
     #[Route('/diagram/{diagramId}/download/{fileName}', name: 'download_diagram')]
     public function downloadImageFile($fileName)
     {

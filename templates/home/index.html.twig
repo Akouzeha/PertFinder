@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}PertFinder: Welcome{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <meta name="description" content="Discover the power of PERT diagrams with PertFinder.
+    Create and discuss projects with other users.">
+    <meta name="keywords" content="PERT, project management, PertFinder, diagram, project discussion">
+{% endblock %}
 
 {% block body %}
     <div class="homeContainer">

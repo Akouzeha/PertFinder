@@ -39,16 +39,22 @@ header{
     height:auto;
     margin-top: 60px;
 }
-.info-para li{
-    
-    margin-top: 10px;
-    font-size: 20px;
-    color: var(--header);
-    font-weight: semi-bold;
+#chart-container{
+    width: 1000px;
+    height: 400px;
+    background-color:#fcf9f9;
+    margin:auto;
+    margin-top:40px;
 }
-.info-para span{
-    color: rgb(60, 0, 255);
-    font-weight: bold;
+
+.two-buttons{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
 }
 
 

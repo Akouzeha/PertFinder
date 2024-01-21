@@ -2,17 +2,14 @@
 
 {% block title %}Hello EdgeController!{% endblock %}
 
+
 {% block body %}
-<div class="info-para">
-    <ul>
-        <li> Le graphe ci-dessous représente les tâches du projet. </li>
-        <li> <span>Les tâches entrants</span> sont les tâches qui dépendent d'autres tâches pour être réalisées. </li>
-        <li> <span>Les tâches sortants</span> sont les tâches qui doivent être réalisées avant de pouvoir réaliser d'autres tâches. </li>
-        <li> Dans la <span>Matrice d'adjacence</span>, les relations entre les tâches sont présntées par <span>1</span> </li>
-        <li>La tâche <span>B</span> est un successeur de la tâche <span>A</span> si la tâche <span>B</span> dépend de la tâche <span>A</span> pour être réalisée.</li>
-        <li>ce n'est pas ce que vous cherchez ? <a href="{{path('new_task', {'diagramId': taskData[0]['diagramId']})}}"> modifiez vous tâches ici</a></li>
-    </ul>
-</div>
+
+
+    <div id="chart-container">
+        <a class="btn btn-avatar" href="{{path('new_task', {'diagramId': taskData[0]['diagramId']})}}"> Modifiez vous tâches ici</a></li>
+    </div>
+
 <div class="col-12">
     <div class = "task-list col-6">
         <table class = "task-table">
@@ -90,6 +87,46 @@
         </tr>
 {% endfor %}
     </table>
+    <div class="two-buttons">
+        <a class="btn btn-avatar" href="{{path('cal_dates', {'diagramId': taskData[0]['diagramId'],'diagramId': taskData[0]['diagramId']})}}">Calculer les dates</a>
+        <a href="{{path('draw_graph', {'diagramId': taskData[0].diagramId})}}" class="btn btn-avatar">Téléchargement</a>
+        <a href="{{path('show_project', {'id': taskData[0].task.pertChart.project.id})}}" class="btn btn-avatar">Retour au Projet</a>
+    </div>
 
-    <a href="{{path('cal_dates', {'diagramId': taskData[0]['diagramId'],'diagramId': taskData[0]['diagramId']})}}">Calculer les dates</a>
+    <script>
+    anychart.onDocumentReady(function () {
+	   
+        const pertChartData = {{ pertChartData | json_encode | raw }};
+        const pertChartDataEdges = {{ pertChartDataEdges | json_encode | raw }};
+        // create a PERT chart
+        var chart = anychart.pert();
+
+        // set chart data
+        chart.data(pertChartData, "asTree", pertChartDataEdges);
+
+        // set the title of the chart
+        chart.title("PERT Chart");
+
+        // set the container id for the chart
+        chart.container("chart-container");
+
+        // initiate drawing the chart
+        chart.draw();
+        
+        chart.verticalSpacing("30%");
+        // get project duration
+        var duration = chart.getStat("pertChartProjectDuration");
+
+        // set the chart title to show the duration
+        chart.title("La durée de ce projet est " + duration + " jours");
+        milestones = chart.milestones();
+        milestones.normal().fill("#00acc1", 0.7);
+        milestones.hovered().fill("#80cbc4");
+        milestones.selected().fill("#00acc1");
+        milestones.normal().stroke("#90caf9", 1);
+        milestones.hovered().stroke("#90caf9", 2);
+        milestones.selected().stroke("#90caf9", 4);
+    
+        });
+</script>
 {% endblock %}

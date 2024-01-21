@@ -64,17 +64,17 @@ digraph PERT {
         <TR><TD BGCOLOR= 'cornflowerblue'>LS: 15</TD><TD BGCOLOR= 'chocolate2'>MT: 3</TD><TD BGCOLOR= 'cornflowerblue'>LF: 29</TD></TR>
         
         </TABLE>>]
-  68 -> 65
+  68 -> 65 [color=red]
   68 -> 66 [color=red]
-  64 -> 67
+  64 -> 67 [color=red]
   64 -> 68 [color=red]
-  67 -> 69
+  67 -> 69 [color=red]
   68 -> 69 [color=red]
-  65 -> 70
-  70 -> 71 [color=red]
-  73 -> 72
-  66 -> 72 [color=red]
-  71 -> 72 [color=red]
-  69 -> 72 [color=red]
-  64 -> 73
+  65 -> 70 [color=black]
+  70 -> 71 [color=black]
+  73 -> 72 [color=black]
+  66 -> 72 [color=black]
+  71 -> 72 [color=black]
+  69 -> 72 [color=black]
+  64 -> 73 [color=black]
 }

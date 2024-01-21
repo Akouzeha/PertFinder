@@ -111,6 +111,22 @@ class EdgeController extends AbstractController
         // Fetch the updated tasks from the database
         $tasks = $em->getRepository(Task::class)->findby(['pertChart' => $diagramId]);
 
+        $pertChartData = [];
+        foreach ($tasks as $task) {
+            $pertChartData[] = [
+                'id' => $task->getId(),
+                'duration' => $task->getDuree(),
+                'name' => $task->getName(),
+            ];
+        }
+        $pertChartDataEdges = [];
+        foreach ($edges as $edge) {
+            $pertChartDataEdges[] = [
+                'from' => $edge->getPredecessor()->getId(),
+                'to' => $edge->getTask()->getId(),
+            ];
+        }
+
         // Combine task data with pertChart IDs, the adjacency matrix, and levels
         $taskData = [];
         foreach ($tasks as $task) {
@@ -132,9 +148,12 @@ class EdgeController extends AbstractController
                 'level' => $task->getLevel(),
             ];
         }
+        
 
         return $this->render('edge/show.html.twig', [
             'taskData' => $taskData,
+            'pertChartData' => $pertChartData,
+            'pertChartDataEdges' => $pertChartDataEdges,
         ]);
     }
 

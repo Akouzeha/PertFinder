@@ -37,7 +37,7 @@ digraph PERT {
   97 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
         <TR><TD BGCOLOR= 'aquamarine3'>ES: 10</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 15</TD><TD BGCOLOR= 'aquamarine3'>EF: 25</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>F</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 15</TD><TD BGCOLOR= 'chocolate2'>MT: 5</TD><TD BGCOLOR= 'cornflowerblue'>LF: 30</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 25</TD><TD BGCOLOR= 'chocolate2'>MT: 15</TD><TD BGCOLOR= 'cornflowerblue'>LF: 40</TD></TR>
         
         </TABLE>>]
   98 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
@@ -49,7 +49,7 @@ digraph PERT {
   99 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
         <TR><TD BGCOLOR= 'aquamarine3'>ES: 10</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 15</TD><TD BGCOLOR= 'aquamarine3'>EF: 25</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>H</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 15</TD><TD BGCOLOR= 'chocolate2'>MT: 5</TD><TD BGCOLOR= 'cornflowerblue'>LF: 30</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 30</TD><TD BGCOLOR= 'chocolate2'>MT: 20</TD><TD BGCOLOR= 'cornflowerblue'>LF: 45</TD></TR>
         
         </TABLE>>]
   92 -> 93 [color=red]
