@@ -7,7 +7,7 @@ digraph PERT {
   64 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
         <TR><TD BGCOLOR= 'aquamarine3'>ES: 0</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 12</TD><TD BGCOLOR= 'aquamarine3'>EF: 12</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>A</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 0</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 12</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 3</TD><TD BGCOLOR= 'chocolate2'>MT: 3</TD><TD BGCOLOR= 'cornflowerblue'>LF: 15</TD></TR>
         
         </TABLE>>]
   65 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
@@ -19,25 +19,25 @@ digraph PERT {
   66 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
         <TR><TD BGCOLOR= 'aquamarine3'>ES: 29</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 16</TD><TD BGCOLOR= 'aquamarine3'>EF: 45</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>C</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 29</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 45</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 50</TD><TD BGCOLOR= 'chocolate2'>MT: 21</TD><TD BGCOLOR= 'cornflowerblue'>LF: 66</TD></TR>
         
         </TABLE>>]
   67 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
         <TR><TD BGCOLOR= 'aquamarine3'>ES: 12</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 11</TD><TD BGCOLOR= 'aquamarine3'>EF: 23</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>D</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 18</TD><TD BGCOLOR= 'chocolate2'>MT: 6</TD><TD BGCOLOR= 'cornflowerblue'>LF: 29</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 39</TD><TD BGCOLOR= 'chocolate2'>MT: 27</TD><TD BGCOLOR= 'cornflowerblue'>LF: 50</TD></TR>
         
         </TABLE>>]
   68 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
         <TR><TD BGCOLOR= 'aquamarine3'>ES: 12</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 17</TD><TD BGCOLOR= 'aquamarine3'>EF: 29</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>E</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 12</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 29</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 15</TD><TD BGCOLOR= 'chocolate2'>MT: 3</TD><TD BGCOLOR= 'cornflowerblue'>LF: 32</TD></TR>
         
         </TABLE>>]
   69 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
         <TR><TD BGCOLOR= 'aquamarine3'>ES: 29</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 16</TD><TD BGCOLOR= 'aquamarine3'>EF: 45</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>F</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 29</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 45</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 50</TD><TD BGCOLOR= 'chocolate2'>MT: 21</TD><TD BGCOLOR= 'cornflowerblue'>LF: 66</TD></TR>
         
         </TABLE>>]
   70 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
@@ -61,20 +61,20 @@ digraph PERT {
   73 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
         <TR><TD BGCOLOR= 'aquamarine3'>ES: 12</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 14</TD><TD BGCOLOR= 'aquamarine3'>EF: 26</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>J</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 15</TD><TD BGCOLOR= 'chocolate2'>MT: 3</TD><TD BGCOLOR= 'cornflowerblue'>LF: 29</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 52</TD><TD BGCOLOR= 'chocolate2'>MT: 40</TD><TD BGCOLOR= 'cornflowerblue'>LF: 66</TD></TR>
         
         </TABLE>>]
-  68 -> 65 [color=red]
-  68 -> 66 [color=red]
-  64 -> 67 [color=red]
-  64 -> 68 [color=red]
-  67 -> 69 [color=red]
-  68 -> 69 [color=red]
-  65 -> 70 [color=black]
-  70 -> 71 [color=black]
-  73 -> 72 [color=black]
-  66 -> 72 [color=black]
-  71 -> 72 [color=black]
-  69 -> 72 [color=black]
-  64 -> 73 [color=black]
+  68 -> 65
+  68 -> 66
+  64 -> 67
+  64 -> 68
+  67 -> 69
+  68 -> 69
+  65 -> 70
+  70 -> 71 [color=red]
+  73 -> 72
+  66 -> 72
+  71 -> 72 [color=red]
+  69 -> 72
+  64 -> 73
 }

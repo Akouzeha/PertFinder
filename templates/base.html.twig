@@ -5,63 +5,66 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-       <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  
        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-       <FilesMatch "\.(jpg|jpeg|png|gif|css|js)$">
+       <FilesMatch "\.(jpg|jpeg|png|gif|css|js)$" style="display:none">
          Header set Cache-Control "public, max-age=31536000"
         </FilesMatch>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {# <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>#}
-        <link rel="stylesheet" href="{{ asset('css/agencement.css') }}">
-            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
-       
+        
         {% block stylesheets %}
-        {{ ux_controller_link_tags() }}
-    {% endblock %}
+            <link rel="stylesheet" href="{{ asset('css/agencement.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/layout/global.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/layout/header.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/layout/footer.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/element/banner.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/element/button.css') }}">
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+            
+        {% endblock %}
  
     {% block javascripts %}
             <script src="{{ asset('js/script.js') }}"></script>
+            <script src="https://cdn.anychart.com/releases/8.12.0/js/anychart-base.min.js" type="text/javascript"></script>
             <script src="https://cdn.anychart.com/releases/8.12.0/js/anychart-core.min.js" type="text/javascript"></script>
             <script src="https://cdn.anychart.com/releases/8.12.0/js/anychart-pert.min.js" type="text/javascript"></script>
+            <script src="https://cdn.anychart.com/releases/8.12.0/js/anychart-exports.min.js"></script>
+            <script src="https://cdn.anychart.com/releases/8.12.0/js/anychart-bundle.min.js"></script>
     {% endblock %}
     </head>
     <body>
         
             <header>
-                <div class="topnav" id="myNavBar">
-                        <nav>
-                            <ul>
-                                <li class="navItem"><a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <div class="topnav container" id="myNavBar">
+                        <a href="{{ path('app_home') }}" class="logo-link">
+                            <img class="logo" src="{{ asset('img/logo.svg') }}" alt="logo">
+                        </a>
+                        <ul>
+                            <li class="navItem">
+                                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                                     <i class="fa fa-bars"></i>
-                                    </a>
-                                </li>
-                                <a href="{{ path('app_home') }}" class="logo-link"
-                                style="float:left;padding:0;border:none;margin-left:0px;">
-                                    <img class="logo" src="{{ asset('img/logo.svg') }}" alt="logo">
                                 </a>
-                                {# <li class="navItem"><a href="{{ path('app_home') }}">Home</a></li>
-                                {# check if the route is the current page, add a class to highlight it #}
-                                {% if (app.user) %}  
-                                    <li class={% if app.request.attributes.get('_route') == 'app_logout' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_logout') }}">logout</a></li>
-
-                                    <li class={% if app.request.attributes.get('_route') == 'send_message' %} "activated" {% else %}""{% endif %}><a href="{{path('send_message')}}">Contactez-Nous</a></li>
-                                    {% if  is_granted("ROLE_ADMIN") %}
-                                        <li class={% if app.request.attributes.get('_route') == 'app_admin' %} "activated" {% else %}""{% endif %}><a href="{{path('app_admin', {'id': app.user.id})}}">Paramètes</a></li>
-                                    {% endif %}
-                                    <li class={% if app.request.attributes.get('_route') == 'info_user' %} "activated" {% else %}""{% endif %}><a href="{{path('info_user')}}">Mon Compte</a></li>
-                                    <li class={% if app.request.attributes.get('_route') == 'app_project' %} "activated" {% else %}""{% endif %}><a href="{{path('app_project')}}">Projets</a></li>
-                                    <li class={% if app.request.attributes.get('_route') == 'create_project' %} "activated" {% else %}""{% endif %}><a href="{{path('create_project')}}">Créer Projet</a></li>
-                                    {% else %}
-                                    <li class={% if app.request.attributes.get('_route') == 'app_register' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_register') }}">Inscription</a></li>
-                                    <li class={% if app.request.attributes.get('_route') == 'app_login' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_login') }}">login</a></li>
-
+                            </li>
+                            <li class={% if app.request.attributes.get('_route') == 'app_home' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_home') }}">Home</a></li> 
+                            {% if (app.user) %}  
+                                <li class={% if app.request.attributes.get('_route') == 'info_user' %} "activated" {% else %}""{% endif %}><a href="{{path('info_user')}}">Mon Compte</a></li>
+                                <li class={% if app.request.attributes.get('_route') == 'app_project' %} "activated" {% else %}""{% endif %}><a href="{{path('app_project')}}">Projets</a></li>
+                                <li class={% if app.request.attributes.get('_route') == 'create_project' %} "activated" {% else %}""{% endif %}><a href="{{path('create_project')}}">Créer Projet</a></li>
+                                 <li class={% if app.request.attributes.get('_route') == 'send_message' %} "activated" {% else %}""{% endif %}><a href="{{path('send_message')}}">Contactez-Nous</a></li>
+                                <li class={% if app.request.attributes.get('_route') == 'app_logout' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_logout') }}">logout</a></li>
+                                {% if  is_granted("ROLE_ADMIN") %}
+                                    <li class={% if app.request.attributes.get('_route') == 'app_admin' %} "activated" {% else %}""{% endif %}><a href="{{path('app_admin', {'id': app.user.id})}}">Paramètes</a></li>
                                 {% endif %}
-                                <li class={% if app.request.attributes.get('_route') == 'app_home' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_home') }}">Home</a></li>
-                                
-                            </ul>
-                        </nav>
+                            {% else %}
+                                <li class={% if app.request.attributes.get('_route') == 'app_register' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_register') }}">Inscription</a></li>
+                                <li class={% if app.request.attributes.get('_route') == 'app_login' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_login') }}">login</a></li>
+                            {% endif %}
+                            
+                        </ul>
                 </div>
                
                 {# <div class="dropdown">
@@ -82,18 +85,7 @@
                   </div> #}
             </header>
             
-             <div class="alert-messages col-12">
-                {% for message in app.flashes('success') %}
-                    <div class="alert alert-success">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-                {% for message in app.flashes('error') %}
-                    <div class="alert alert-danger">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            </div>
+            <div class="alert-messages col-12">{% for message in app.flashes('success') %}<div class="alert alert-success">{{ message }}</div>{% endfor %}{% for message in app.flashes('error') %}<div class="alert alert-danger">{{ message }}</div>{% endfor %}</div>
             {% block body %}{% endblock %}
         
         <footer>
@@ -107,7 +99,7 @@
                     <li><a href="{{ path('app_project') }}">Projets</a></li>
                 </ul>
                 <ul class="footer-list">
-                    <li><a href="{{ path('info_user') }}">Mon Compte</a></li>
+                    <li><a href="{{ path('info_user', {'id': app.user}) }}">Mon Compte</a></li>
                     <li><a href="{{ path('send_message') }}">COntactez-Nous</a></li>
                     {% if app.user %}
                         <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>

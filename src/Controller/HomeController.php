@@ -25,12 +25,13 @@ class HomeController extends AbstractController
             }
 
             $diagram = $projet->getDiagrams()[0];
+            $taskNumber = count($diagram->getTasks());
             $imgName = $diagram->getImgName();
             $diagramTitle = $diagram->getTitle();
             $projectId = $projet->getId();
 
             // Store image name and diagram title in the array
-            $imgData[] = ['imgName' => $imgName, 'diagramTitle' => $diagramTitle, 'projectId' => $projectId];
+            $imgData[] = ['imgName' => $imgName, 'diagramTitle' => $diagramTitle, 'projectId' => $projectId, 'taskNumber' => $taskNumber];
         }
 
         return $this->render('home/index.html.twig', [

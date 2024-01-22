@@ -1,0 +1,32 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --background: #fcf9f9;
+    --header: #8C3C03;
+    --primary: #257968;
+}
+
+
+/* var(--header) */
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1520px;
+    margin: auto;
+}
+
+.row {
+    max-width: 1520px;
+    margin: auto;
+}

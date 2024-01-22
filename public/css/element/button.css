@@ -1,0 +1,141 @@
+/* the buttons */
+
+
+/*.btn {
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: lighter;
+    border: var(--header);
+    background-color: var(--header);
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 12px 50px;
+    transition-duration: 0.4s;
+    margin-top: 20px;
+    border: 2px solid #ffffff00;
+    box-shadow: 0 5px rgba(230, 125, 34, 0.447);
+}*/
+
+.btn {
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: block;
+    padding: 14px 32px;
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    animation-delay: 0.8s;
+    background: #5cb874;
+    text-decoration: none;
+    margin: 10px auto;
+}
+
+.btn:hover {
+    background-color: white;
+    color: var(--header);
+    border: 2px solid var(--header);
+    cursor: pointer;
+}
+
+.btn:active {
+    box-shadow: 0 0;
+    transform: translateY(4px);
+}
+
+.btn-danger {
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: lighter;
+    border: red;
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 12px 50px;
+    transition-duration: 0.4s;
+    margin-top: 20px;
+    border: 2px solid #ffffff00;
+    box-shadow: 0 5px rgba(230, 34, 34, 0.306);
+}
+
+.btn-danger:hover {
+    background-color: white;
+    color: red;
+    border: 2px solid red;
+    cursor: pointer;
+}
+
+.btn-primary {
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: lighter;
+    border: var(--primary);
+    background-color: var(--primary);
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 12px 50px;
+    transition-duration: 0.4s;
+    margin-top: 20px;
+    border: 2px solid #ffffff00;
+    box-shadow: 0 5px rgba(26, 188, 156, 0.306);
+}
+
+.btn-primary:hover {
+    background-color: white;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    cursor: pointer;
+}
+
+.delete-bin {
+    width: 25px;
+    height: 20px;
+}
+
+.edit-pen {
+    width: 25px;
+    height: 20px;
+}
+
+.lock,
+.unlock {
+    width: 25px;
+    height: 20px;
+}
+
+.lock:hover,
+.unlock:hover {
+    cursor: pointer;
+}
+
+.projet-option-btn {
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: lighter;
+    border: #f5bd8d;
+    background-color: #ada9a5;
+    color: black;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    transition-duration: 0.4s;
+    margin-top: 20px;
+    border: 2px solid #ffffff00;
+    box-shadow: 0 5px rgba(230, 125, 34, 0.447);
+}
+
+.projet-option-btn:hover {
+    background-color: white;
+    color: var(--header);
+    border: 2px solid var(--header);
+    cursor: pointer;
+}
+
+.projet-option-btn:active {
+    box-shadow: 0 0;
+    transform: translateY(4px);
+}

@@ -1,0 +1,38 @@
+/* Apply styles to the section with the class "home-description" */
+
+.banner {
+    background: url('/img/banner.jpg') center/cover no-repeat;
+    background-attachment: fixed;
+}
+
+.banner .home-description {
+    background-color: rgba(45, 103, 60, 0.7);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 500px;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.banner .home-description .content {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.banner .home-description h1,
+.banner .home-description h2,
+.banner .home-description h3,
+.banner .home-description h4,
+.banner .home-description h5,
+.banner .home-description p {
+    color: #fff;
+    display: inline-flex;
+    float: none;
+    width: auto;
+    justify-content: center;
+    margin: 10px 0px;
+}

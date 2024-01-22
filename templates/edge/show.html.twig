@@ -7,9 +7,9 @@
 
 
     <div id="chart-container">
-        <a class="btn btn-avatar" href="{{path('new_task', {'diagramId': taskData[0]['diagramId']})}}"> Modifiez vous tâches ici</a></li>
-    </div>
 
+        <a class="btn btn-avatar" href="{{path('new_task', {'diagramId': taskData[0]['diagramId']})}}"> Modifiez vous tâches ici</a>
+    </div>
 <div class="col-12">
     <div class = "task-list col-6">
         <table class = "task-table">
@@ -113,10 +113,10 @@
         // initiate drawing the chart
         chart.draw();
         
-        chart.verticalSpacing("30%");
+        chart.verticalSpacing("20%");
         // get project duration
         var duration = chart.getStat("pertChartProjectDuration");
-
+       
         // set the chart title to show the duration
         chart.title("La durée de ce projet est " + duration + " jours");
         milestones = chart.milestones();
@@ -128,5 +128,7 @@
         milestones.selected().stroke("#90caf9", 4);
     
         });
+       
+     
 </script>
 {% endblock %}

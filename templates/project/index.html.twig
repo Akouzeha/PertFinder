@@ -11,9 +11,10 @@
 {% block body %}
             {% if app.user %}    
             <div class ="list-projects">
-                    <form class="projet-form" action="{{ path('create_project') }}" method="post">
+                    {# <form class="projet-form" action="{{ path('create_project') }}" method="post">
                         <button type="submit" class="btn creat-projet">Créer un Projet</button>
-                    </form>
+                    </form> #}
+                    <a href="{{path('create_project')}}" class="btn creat-projet">Créer un Projet</a>
                 {% for project in projects %}
                 <div class="box-row">
                     <div class="list-project-row-1">

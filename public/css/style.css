@@ -1,162 +1,32 @@
-* {
-    box-sizing: border-box;
-}
-
-:root {
-    --background: #fcf9f9;
-    --header: #8C3C03;
-    --primary: #257968;
-}
-/* var(--header) */
-body{
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    box-sizing: border-box;
-    background-color: var(--background);
-    display: flex;
-    flex-direction: column;
-}
-.logo{
-    width:80px;
-    height: 55px;
-    margin-top: 0px;
-    float: left;
-    /* position: fixed; */
-}
-.logo-link a:hover{
-    cursor: pointer;
-}
-
-header{
-    width: 100%;
-
-    float: left;
-}
-
-.info-para{
-    width:100%;
-    height:auto;
-    margin-top: 60px;
-}
-#chart-container{
-    width: 1000px;
-    height: 400px;
-    background-color:#fcf9f9;
-    margin:auto;
-    margin-top:40px;
-}
-
-.two-buttons{
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    
-}
-
-
-/* ============================================== */
-/* Navigation Bar */
-.topnav li {
-    display: inline;
-    margin-top:7px;
-    
-  }
-  .topnav {
-    overflow: hidden;
-    background-color: var(--background);
-  }
-  .topnav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    margin-top: 3px;
-    overflow: hidden;
-    height:65px;
-    background-color: var(--background);
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    border-bottom: 1px solid var(--primary);
-    
-}
-  
-  .topnav a {
-    float: right;
-    display: inline-block;
-    /* color: var(--primary); */
-    color: #159279;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    margin-top: 7px;
-    margin-bottom: 0px;
-    margin-left:30px;
-    font-size: 17px;
-    border-radius: 10px;
-    border: 2px solid #e67d2200;
-  }
-  
-  .topnav .icon {
-    display: none;
-  }
-  .topnav a:hover{
-    color: var(--header);
-    cursor: pointer;
-    padding: 14px 16px;
-    text-decoration: none;
-    margin-left:30px;
-    font-size: 17px;
-    border-radius: 10px;
-    border: 2px solid var(--header);
-    
-}
-.activated a{
-    color: var(--header);
-    cursor: pointer;
-}
-.topnav a:active {
-    box-shadow: 0 0;
-    transform: translateY(1px);
-  }
-
-
-
-/* ============================================== */
-
 /* the forms  */
 
-.form-group{
-    padding : 15px;
-    width:400px;
+.form-group {
+    padding: 15px;
+    width: 400px;
     height: auto;
     border: 2px solid var(--primary);
     border-radius: 20px;
     box-shadow: 5px 10px var(--primary);
     margin: auto;
     margin-top: 150px;
-    
     background-color: white;
     position: relative;
 }
 
-.form-group h2{
+.form-group h2 {
     text-align: center;
     color: var(--header);
     font-size: 30px;
     font-weight: bold;
-    margin: 0 auto; 
+    margin: 0 auto;
 }
-.form-input{
+
+.form-input {
     width: 300px;
     height: 30px;
-    border-radius:10px;
+    border-radius: 10px;
     border: 2px solid var(--primary);
-    box-shadow: 0 5px var(--primary) ;
+    box-shadow: 0 5px var(--primary);
     margin-left: 40px;
     margin-top: 20px;
     padding-left: 20px;
@@ -165,29 +35,31 @@ header{
     color: black;
     background-color: rgb(26, 188, 156, 0.14);
 }
-::placeholder{
-    color:rgba(0, 0, 0, 0.705);
+
+::placeholder {
+    color: rgba(0, 0, 0, 0.705);
     font-size: 15px;
     text-align: center;
     opacity: 0.5;
 }
-.form-check-input{
+
+.form-check-input {
     margin-left: 40px;
     margin-top: 20px;
     font-size: 20px;
 }
-.form-group .btn{
+
+.form-group .btn {
     margin-left: 100px;
 }
 
-
-.agree-terms{
+.agree-terms {
     margin-left: 40px;
     font-size: 16px;
     color: var(--primary);
 }
 
-.compte{
+.compte {
     width: 100%;
     text-align: center;
     font-size: 20px;
@@ -195,198 +67,45 @@ header{
     color: var(--primary);
 }
 
-/* ============================================== */
-
-/* footer */
-
-footer {
-    background-color: var(--primary);
-    padding: 30px 0;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-around;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.footer-list {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-list li {
-    margin-bottom: 10px;
-}
-
-.footer-list a {
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-    transition: color 0.3s ease;
-}
-
-.footer-list a:hover {
-    color: var(--header);
-}
-.footer-logo {
-    margin-bottom: 20px;  
-}
-
-.footer-logo g {
-    width: 600px;  /* Ensure the image doesn't exceed the container width */
-    height: 200px;  /* Maintain the aspect ratio of the image */
-    border-radius: 5px;  /* Apply a small border radius for a subtle rounded corner */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);  /* Add a subtle box shadow for depth */
-}
-
-
 
 /* ============================================== */
 
-/* the buttons */
-.btn{
-    text-decoration: none;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight: lighter;
-    border: var(--header);
-    background-color: var(--header);
-    color: white;
-    font-size: 20px;
-    border-radius: 10px;
-    padding: 12px 50px;
-    transition-duration: 0.4s;
-    margin-top: 20px;
-    border: 2px solid #ffffff00;
-    box-shadow: 0 5px rgba(230, 125, 34, 0.447);
-}
-.btn:hover{
-    background-color: white;
-    color:var(--header);
-    border: 2px solid var(--header);
-    cursor: pointer;
-}
-.btn:active {
-    box-shadow: 0 0;
-    transform: translateY(4px);
-}
 
-.btn-danger{
-    text-decoration: none;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight: lighter;
-    border: red;
-    background-color: red;
-    color: white;
-    font-size: 20px;
-    border-radius: 10px;
-    padding: 12px 50px;
-    transition-duration: 0.4s;
-    margin-top: 20px;
-    border: 2px solid #ffffff00;
-    box-shadow: 0 5px rgba(230, 34, 34, 0.306);
-}
-.btn-danger:hover{
-    background-color: white;
-    color:red;
-    border: 2px solid red;
-    cursor: pointer;
-}
-.btn-primary{
-    text-decoration: none;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight: lighter;
-    border: var(--primary);
-    background-color: var(--primary);
-    color: white;
-    font-size: 20px;
-    border-radius: 10px;
-    padding: 12px 50px;
-    transition-duration: 0.4s;
-    margin-top: 20px;
-    border: 2px solid #ffffff00;
-    box-shadow: 0 5px rgba(26, 188, 156, 0.306);
-}
-.btn-primary:hover{
-    background-color: white;
-    color:var(--primary);
-    border: 2px solid var(--primary);
-    cursor: pointer;
-}
-.delete-bin{
-    width:25px;
-    height:20px;
-}
-
-.edit-pen{
-    width:25px;
-    height:20px;
-}
-.lock, .unlock{
-    width:25px;
-    height:20px;
-}
-.lock:hover, .unlock:hover{
-    cursor: pointer;
-}
-.projet-option-btn{
-    text-decoration: none;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight: lighter;
-    border: #f5bd8d;
-    background-color: #ada9a5;
-    color: black;
-    font-size: 16px;
-    border-radius: 10px;
-    padding: 10px 20px;
-    transition-duration: 0.4s;
-    margin-top: 20px;
-    border: 2px solid #ffffff00;
-    box-shadow: 0 5px rgba(230, 125, 34, 0.447);
-}
-.projet-option-btn:hover{
-    background-color: white;
-    color:var(--header);
-    border: 2px solid var(--header);
-    cursor: pointer;
-}
-.projet-option-btn:active{
-    box-shadow: 0 0;
-    transform: translateY(4px);
-}
-
-/* ============================================== */
 /* home page */
-.homeContainer h2{
+
+.homeContainer h2 {
     width: 100%;
     margin-top: 100px;
     float: left;
-    margin-top:40px;
+    margin-top: 40px;
     margin-bottom: 0px;
     text-align: center;
     font-size: 30px;
     color: var(--header);
 }
-.homeContainer h3{
+
+.homeContainer h3 {
     width: 100%;
-    padding:0;
-    margin-top:3px;
+    padding: 0;
+    margin-top: 3px;
     margin-bottom: 10px;
     float: left;
     text-align: center;
     font-size: 20px;
     color: var(--primary);
 }
-.left-photo{
-    width:100%;
+
+.left-photo {
+    width: 100%;
     height: 380px;
 }
-.right-photo{
-    width:100%;
+
+.right-photo {
+    width: 100%;
     height: 380px;
 }
-.homeContainer h5{
+
+.homeContainer h5 {
     width: 100%;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -395,9 +114,10 @@ footer {
     font-size: 16px;
     color: var(--header);
 }
+
 .petitP {
     width: 100%;
-    height: 100px;
+    height: 50px;
     float: left;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -405,27 +125,21 @@ footer {
     font-size: 20px;
     color: var(--primary);
 }
-.homeContainer .btn{
+
+
+/*.homeContainer .btn {
     margin-left: 140px;
     margin-top: 0;
-    width:50%;
-}
-
-/* Apply styles to the section with the class "home-description" */
-.home-description {
-    background-color: #f0f0f0;
-    padding: 20px;
-    text-align: center;
-}
-
-
+    width: 50%;
+}*/
 
 
 /* ============================================== */
 
+
 /* project form */
 
-.project-form{
+.project-form {
     width: 80%;
     height: 100%;
     /* margin-left:150px; */
@@ -434,81 +148,91 @@ footer {
     margin-bottom: 100px;
     background-color: var(--background);
 }
-.project-form h2{
+
+.project-form h2 {
     text-align: center;
     color: var(--header);
     font-size: 30px;
     font-weight: bold;
-    margin: 0 auto; 
+    margin: 0 auto;
 }
 
-.form-textArea{
-    margin-top:20px;
-    width:320px;
+.form-textArea {
+    margin-top: 20px;
+    width: 320px;
     height: 140px;
     position: relative;
     font-size: 20px;
 }
 
-
-.project-form .btn, .task-form-container .btn{
+.project-form .btn,
+.task-form-container .btn {
     margin-left: 160px;
     width: 60%;
 }
 
-.project-form-input, .chart-form-input{
+.project-form-input,
+.chart-form-input {
     width: 300px;
     height: 30px;
-    border-radius:10px;
+    border-radius: 10px;
     border: 2px solid var(--primary);
-    box-shadow: 0 5px var(--primary) ;
+    box-shadow: 0 5px var(--primary);
     /* margin-left: 40px; */
     position: relative;
     padding-left: 20px;
     font-size: 20px;
     font-weight: semi-bold;
     border: 2px solid #ffffff00;
-    color: black; 
+    color: black;
 }
-.project-form .required{
+
+.project-form .required {
     color: black;
     font-size: 20px;
     margin-left: 40px;
     margin-top: 50px;
 }
-.project-form .required::after{
+
+.project-form .required::after {
     content: " *";
     color: red;
 }
-.project-form .form-row{
-    height: 80px;;
+
+.project-form .form-row {
+    height: 80px;
+    ;
     margin-left: 40px;
 }
 
-.chart-form-textArea{
-    width:70%;
+.chart-form-textArea {
+    width: 70%;
     height: 140px;
     font-size: 20px;
     margin-left: 100px;
 }
 
-.chart-btn{
+.chart-btn {
     margin-top: 20px;
 }
-.chart-form-input{
+
+.chart-form-input {
     width: 70%;
     height: 30px;
-    border-radius:10px;
+    border-radius: 10px;
     border: 2px solid var(--primary);
-    box-shadow: 0 5px var(--primary) ;
-    margin-left: 100px;    
+    box-shadow: 0 5px var(--primary);
+    margin-left: 100px;
     padding-left: 20px;
     font-size: 20px;
     font-weight: semi-bold;
     border: 2px solid #ffffff00;
-    color: black; 
+    color: black;
 }
+
+
 /* add diagramme - chart */
+
 .add-diagram {
     background-color: #f5f5f5;
     padding: 20px;
@@ -538,9 +262,11 @@ footer {
 
 
 /* ============================================== */
+
+
 /* project list */
 
-.list-projects{
+.list-projects {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -550,52 +276,55 @@ footer {
     margin-bottom: 100px;
     background-color: var(--background);
 }
-.box-row{
+
+.box-row {
     width: 75%;
-    height:auto;
-    margin:auto;
-    margin-top:15px;
+    height: auto;
+    margin: auto;
+    margin-top: 15px;
     border: 2px solid var(--primary);
     background-color: white;
 }
-.image{
+
+.image {
     width: 100px;
     height: 100px;
     float: left;
     border-radius: 100px;
     margin-top: 0px;
-    
 }
 
-.list-projects h5{
+.list-projects h5 {
     margin-top: 0px;
     margin-bottom: 0px;
     padding-left: 10px;
-    width:80%;
+    width: 80%;
     float: left;
     text-align: center;
     font-size: 24px;
     color: var(--primary);
 }
-.box-row a{
-    float:right;
+
+.box-row a {
+    float: right;
     margin-top: 0px;
     margin-right: 10px;
-    margin-left:3px;
+    margin-left: 3px;
     text-decoration: none;
     margin-bottom: 0px;
-    color:var(--primary);
+    color: var(--primary);
 }
-.box-row a:hover{
+
+.box-row a:hover {
     color: var(--header);
     cursor: pointer;
 }
 
-.list-projects p{
+.list-projects p {
     margin-top: 30px;
     margin-bottom: 0px;
     padding-left: 10px;
-    margin-right:10px;
+    margin-right: 10px;
     float: left;
     text-align: center;
     font-size: 16px;
@@ -604,15 +333,18 @@ footer {
 
 
 /* ============================================== */
+
+
 /* Show projet */
-.project-container{
-    display:flex;
+
+.project-container {
+    display: flex;
     flex-direction: column;
     width: 100%;
     margin-top: 40px;
-    
 }
-.project-container img{
+
+.project-container img {
     width: 900px;
     height: 400px;
     margin-top: 20px;
@@ -622,9 +354,10 @@ footer {
     margin-right: auto;
 }
 
-.show-project{
-   align-self: center;
+.show-project {
+    align-self: center;
 }
+
 
 /* .show-project h1{
     text-align: center;
@@ -637,6 +370,7 @@ footer {
     font-size: 18px;
     font-weight: bold;
 } */
+
 .project-description {
     background-color: #f8f8f8;
     padding: 20px;
@@ -646,79 +380,90 @@ footer {
     height: auto;
 }
 
+
 /* Style the heading inside the section */
+
 .project-description h1 {
     color: var(--header);
     font-size: 28px;
     margin-bottom: 10px;
 }
 
+
 /* Style the paragraph inside the section */
+
 .project-description p {
     color: #666;
     font-size: 16px;
     line-height: 1.5;
 }
-.show-project p span{
+
+.show-project p span {
     color: var(--primary);
     font-weight: bold;
 }
-.show-project h5{
+
+.show-project h5 {
     text-align: left;
     color: var(--primary);
     font-size: 18px;
     font-weight: semi-bold;
 }
-.show-project .edit-pen{
+
+.show-project .edit-pen {
     float: right;
     width: 30px;
     height: 30px;
-
 }
-.project-description span{
+
+.project-description span {
     color: var(--primary);
     font-weight: bold;
 }
-.project-description a{
+
+.project-description a {
     text-decoration: none;
     color: var(--header);
 }
-.project-description a:hover{
+
+.project-description a:hover {
     color: var(--primary);
     cursor: pointer;
 }
 
-.diagram-information{
+.diagram-information {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    
 }
+
 .project-description span {
-    margin-bottom: 10px; /* Add some spacing between spans */
+    margin-bottom: 10px;
+    /* Add some spacing between spans */
 }
 
 .project-description .left-column {
     flex: 1;
-    text-align: left; /* Align text to the left in the left column */
+    text-align: left;
+    /* Align text to the left in the left column */
 }
 
 .project-description .right-column {
-    flex:1;
-    text-align: right; /* Align text to the right in the right column */
+    flex: 1;
+    text-align: right;
+    /* Align text to the right in the right column */
 }
 
 .centered {
-    flex:1;
-    text-align: center; /* Center text */
+    flex: 1;
+    text-align: center;
+    /* Center text */
 }
 
 
 /* ============================================== */
 
-
-
-.demande-connexion{
+.demande-connexion {
     width: 100%;
     height: 100%;
     float: left;
@@ -727,38 +472,42 @@ footer {
     background-color: var(--background);
 }
 
-.creat-projet{
+.creat-projet a {
     margin-bottom: 0px;
     float: right;
-    margin-right: 180px ;
+    margin-right: 180px;
 }
+
 
 /* ================================================== */
 
+
 /* task form */
 
-.task-form-container{
+.task-form-container {
     width: auto;
     height: auto;
     margin-top: 10px;
     margin-bottom: 10px;
     background-color: var(--background);
     border: 2px solid var(--primary);
-
 }
-.task-form-container h2, .task-list h2{
+
+.task-form-container h2,
+.task-list h2 {
     text-align: center;
     color: var(--header);
     font-size: 20px;
     font-weight: bold;
     margin: 0 auto;
 }
-.task-form-input{
+
+.task-form-input {
     width: 250px;
     height: 25px;
-    border-radius:10px;
+    border-radius: 10px;
     border: 2px solid var(--primary);
-    box-shadow: 0 5px var(--primary) ;
+    box-shadow: 0 5px var(--primary);
     margin-top: 10px;
     padding-left: 20px;
     text-align: center;
@@ -767,63 +516,70 @@ footer {
     color: black;
 }
 
-.task-form .required{
+.task-form .required {
     color: black;
     font-size: 20px;
     margin-left: 30px;
     margin-top: 20px;
 }
-.task-form .required::after{
+
+.task-form .required::after {
     content: " *";
     color: red;
 }
-.task-form .form-row{
-    height: 70px;;
+
+.task-form .form-row {
+    height: 70px;
+    ;
     margin-left: 60px;
 }
-.task-form-textArea{
 
-    width:100%;
+.task-form-textArea {
+    width: 100%;
     height: 70px;
     font-size: 20px;
-
 }
-.task-form .btn{
+
+.task-form .btn {
     margin-top: 0px;
-    
 }
 
-.task-form p{
+.task-form p {
     padding: 0 0 0 0;
     margin: 0 0 0 0;
     margin-left: 80px;
-    color:red;
+    color: red;
 }
 
-.form-errors{
+.form-errors {
     width: auto;
     height: auto;
-    color:red;
+    color: red;
     text-align: center;
     font-size: 20px;
 }
 
-.task-header h1{
+.task-header h1 {
     text-align: center;
     color: var(--header);
     font-size: 20px;
     font-weight: bold;
-    margin-top:70px;
+    margin-top: 70px;
 }
-.task-header span{
+
+.task-header span {
     color: var(--primary);
     font-weight: bold;
 }
-.task-header a{
+
+.task-header a {
     text-decoration: none;
     color: var(--header);
 }
+
+
 /* ============================================== */
+
 
 /* Alert */
 
@@ -832,6 +588,7 @@ footer {
     font-size: 24px;
     font-weight: semi-bold;
 }
+
 .alert-success {
     background-color: #d4edda;
     color: #155724;
@@ -845,11 +602,17 @@ footer {
     border: 1px solid #f5c6cb;
     border-radius: 4px;
 }
-.alert-messages{
-    margin-top: 8px; /* Adjust as needed */
+
+.alert-messages {
+    margin-top: 8px;
+    /* Adjust as needed */
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.alert-messages:empty {
+    display: none;
 }
 
 .hide-after-3s {
@@ -861,40 +624,48 @@ footer {
     opacity: 0;
 }
 
+
 /* ============================================== */
+
 
 /* Tasks table */
 
-.task-list{
+.task-list {
     height: auto;
-    position:relative;
+    position: relative;
 }
+
+
 /* .table-scroll{
     height: 250px;
     overflow-y: auto;
     overflow-x: hidden;
 } */
 
-.task-table{
+.task-table {
     width: 100%;
     height: auto;
     background-color: #D9D9D9;
     border: 1px solid var(--primary);
 }
-.task-table th, td{
+
+.task-table th,
+td {
     border: 2px solid white;
     text-align: center;
 }
-.task-table th{
+
+.task-table th {
     background-color: #BEF5EB;
     font-family: 'Courier New', Courier, monospace;
     font-weight: semi-bold;
 }
+
 .task-table tr:nth-child(even) {
     background-color: white;
 }
 
-.matrix{
+.matrix {
     width: 100%;
     height: auto;
     margin-bottom: 20px;
@@ -902,28 +673,33 @@ footer {
     border: 2px solid var(--primary);
 }
 
-.petit-btn{
+.petit-btn {
     background-color: #6fe2cb;
     border-radius: 20px;
     border: 2px solid var(--primary);
-    box-shadow: 0 2px var(--primary) ;
+    box-shadow: 0 2px var(--primary);
 }
-.petit-btn:hover{
+
+.petit-btn:hover {
     background-color: var(--primary);
     border-radius: 20px;
     border: 2px solid var(--primary);
-    box-shadow: 0 2px var(--primary) ;
+    box-shadow: 0 2px var(--primary);
     cursor: pointer;
 }
+
 .petit-btn:active {
     box-shadow: 0 0;
     transform: translateY(4px);
-  }
+}
+
 
 /* ============================================== */
+
+
 /* comments */
 
-.show-comment{
+.show-comment {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -932,29 +708,32 @@ footer {
     background-color: var(--background);
     border: 2px solid var(--primary);
 }
+
 .show-comment h2 {
     text-align: center;
     color: var(--header);
     font-size: 20px;
     font-weight: bold;
-    margin-top: 10px; 
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.comment-connecxion p{
+.comment-connecxion p {
     text-align: center;
     font-size: 20px;
     color: var(--header);
     font-weight: bold;
 }
-.comment-connecxion a{
+
+.comment-connecxion a {
     text-decoration: none;
     color: var(--primary);
-    margin-left:460px;
+    margin-left: 460px;
     font-size: 20px;
     font-weight: bold;
 }
-.comment{
+
+.comment {
     width: 900px;
     height: auto;
     align-self: center;
@@ -964,7 +743,8 @@ footer {
     background-color: white;
     border: 2px solid var(--header);
 }
-.comment img{
+
+.comment img {
     width: 50px;
     height: 50px;
     border-radius: 100px;
@@ -973,69 +753,81 @@ footer {
     margin-right: 10px;
     float: left;
 }
-.post-comment{
+
+.post-comment {
     width: 100%;
     height: auto;
     align-items: center;
     display: flex;
     flex-direction: column;
-
 }
-.post-comment textarea{
+
+.post-comment textarea {
     width: 900px;
     height: 100px;
     align-self: center;
     font-size: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
-    
     border-radius: 10px;
     border: 2px solid var(--primary);
-    box-shadow: 0 5px var(--primary) ;
+    box-shadow: 0 5px var(--primary);
     padding-left: 20px;
     font-size: 20px;
     font-weight: semi-bold;
     color: black;
 }
 
-.post-comment .btn{
-    width:30%;
-    
+.post-comment .btn {
+    width: 30%;
     justify-content: center;
     align-items: center;
     margin-top: 2px;
     margin-bottom: 9px;
 }
-.comment p{
+
+.comment p {
     width: 50%;
 }
 
-.comment .delete-bin{
-    width:30px;
-    height:30px;
+.comment .delete-bin {
+    width: 30px;
+    height: 30px;
 }
-.comment .edit-pen{
-    width:30px;
-    height:30px;
+
+.comment .edit-pen {
+    width: 30px;
+    height: 30px;
 }
-.comment a{
+
+.comment a {
     text-decoration: none;
     color: var(--primary);
 }
-.comment a:hover{
+
+.comment a:hover {
     color: var(--header);
     cursor: pointer;
 }
+
 .comment a:active {
     box-shadow: 0 0;
     transform: translateY(4px);
-  }
-  .comment a:visited{
+}
+
+.comment a:visited {
     color: var(--primary);
 }
+
+
 /* ============================================== */
+
+
 /* user-info */
+
+
 /* General styling for user rows */
+
 .user-row {
     width: 100%;
     height: auto;
@@ -1047,7 +839,9 @@ footer {
     border-bottom: 2px solid #ccc;
 }
 
+
 /* Styling for user information section */
+
 .user-info {
     display: flex;
     flex-direction: row;
@@ -1062,7 +856,9 @@ footer {
     margin-left: 15px;
 }
 
+
 /* Common styling for user image and settings */
+
 .user-img,
 .user-settings img {
     width: 120px;
@@ -1071,17 +867,23 @@ footer {
     margin-top: 40px;
     display: block;
 }
+
 .user-settings img {
     margin-left: 10px;
 }
-.img-div{
+
+.img-div {
     height: auto;
     padding: 0%;
 }
-.btn-avatar a{
-    color:black;
+
+.btn-avatar a {
+    color: black;
 }
+
+
 /* Styling for user profile section */
+
 .user-pro {
     display: flex;
     flex-direction: column;
@@ -1108,7 +910,9 @@ footer {
     color: #837aa4;
 }
 
+
 /* Styling for links */
+
 .user-row a,
 .user-pro a {
     text-decoration: none;
@@ -1140,7 +944,9 @@ footer {
     text-decoration: none;
 }
 
+
 /* Styling for image button */
+
 .img-btn {
     width: 80px;
     height: 30px;
@@ -1148,7 +954,9 @@ footer {
     margin-top: 150px;
 }
 
+
 /* Styling for user information heading */
+
 .user-info h2 {
     color: var(--header);
     font-size: 20px;
@@ -1157,7 +965,9 @@ footer {
     margin-left: 160px;
 }
 
+
 /* Styling for user settings section */
+
 .user-settings {
     width: 100%;
     height: auto;
@@ -1165,7 +975,9 @@ footer {
     box-shadow: 0 4px var(--primary)82;
 }
 
+
 /* Styling for user information container */
+
 .user-info-container {
     display: flex;
     align-items: center;
@@ -1174,14 +986,18 @@ footer {
     margin: 0;
 }
 
+
 /* Styling for user coordinates section */
+
 .user-coordonne {
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
 
+
 /* Styling for user table */
+
 .user-table {
     width: 100%;
     border-collapse: collapse;
@@ -1215,6 +1031,7 @@ footer {
     justify-content: center;
     margin-bottom: 40px;
 }
+
 .user-row-hidden h2 {
     font-size: 24px;
     margin-bottom: 10px;
@@ -1247,7 +1064,6 @@ footer {
 
 .project-list li::after,
 .comment-list li::after {
-    
     position: absolute;
     top: 0;
     left: 0;
@@ -1283,12 +1099,16 @@ footer {
 .comment-list a:hover {
     color: #fff;
 }
-.button-container{
+
+.button-container {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
-.button-container button, .btn-mod-profil, .btn-avatar{
+
+.button-container button,
+.btn-mod-profil,
+.btn-avatar {
     margin-right: 20px;
     padding: 10px;
     background-color: #aeacac;
@@ -1305,6 +1125,7 @@ footer {
     color: #333;
     box-shadow: none;
 }
+
 .about-me {
     text-align: center;
     margin-top: 20px;
@@ -1319,12 +1140,14 @@ footer {
     color: #333;
     font-size: 16px;
 }
+
 .about-me p::first-letter {
     font-size: 1.5em;
     text-transform: capitalize;
     font-weight: semi-bold;
     margin-right: 4px;
 }
+
 #user_propos {
     width: 100%;
     max-width: 600px;
@@ -1343,72 +1166,84 @@ footer {
     box-shadow: 0 0 5px rgba(26, 188, 156, 0.7);
 }
 
+
 /* ============================================== */
+
+
 /* form change */
 
-.edit-btn{
+.edit-btn {
     background-color: #6fe2cb;
     border-radius: 20px;
     border: 2px solid var(--primary);
-    box-shadow: 0 2px var(--primary) ;
+    box-shadow: 0 2px var(--primary);
 }
-.edit-btn:hover{
+
+.edit-btn:hover {
     background-color: var(--primary);
     border-radius: 20px;
     border: 2px solid var(--primary);
-    box-shadow: 0 2px var(--primary) ;
+    box-shadow: 0 2px var(--primary);
     cursor: pointer;
 }
+
 .edit-btn:active {
     box-shadow: 0 0;
     transform: translateY(4px);
-  }
+}
 
-  .form-change{
+.form-change {
     width: 300px;
     height: 30px;
-    border-radius:10px;
+    border-radius: 10px;
     border: 2px solid var(--primary);
-    box-shadow: 0 5px var(--primary) ;
+    box-shadow: 0 5px var(--primary);
     margin-top: 10px;
     padding-left: 20px;
     text-align: center;
     font-size: 16px;
     font-weight: semi-bold;
     color: black;
-  }
+}
 
 
 /* ============================================== */
- /* control panel */
 
- .user-info-panel h1{
-    
+
+/* control panel */
+
+.user-info-panel h1 {
     color: var(--header);
     font-size: 30px;
     font-weight: bold;
     text-align: center;
     margin-top: 50px;
- }
+}
 
- .user-info-panel h3{
-        color: var(--primary) ;
-        font-size: 20px;
-        font-weight: bold;
- }
-
- .user-info-panel a:visited{
+.user-info-panel h3 {
     color: var(--primary);
-    
- }
-    .user-info-panel a:hover{
-        color: var(--header);
-        cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+}
 
-    }
+.user-info-panel a:visited {
+    color: var(--primary);
+}
+
+.user-info-panel a:hover {
+    color: var(--header);
+    cursor: pointer;
+}
+
+
 /* ============================================== */
+
+
 /* admin edit user */
+
+
 /* Style for the admin-edit-row container */
+
 .admin-edit-row {
     display: flex;
     justify-content: center;
@@ -1418,7 +1253,9 @@ footer {
     color: black;
 }
 
+
 /* Style for the admin-edit-panel */
+
 .admin-edit-panel {
     background-color: #ffffff;
     padding: 40px;
@@ -1429,94 +1266,117 @@ footer {
     width: 100%;
 }
 
+
 /* Style for the welcome message */
+
 .admin-edit-panel h1 {
     font-size: 28px;
     margin-bottom: 20px;
     color: #1048ba;
 }
 
+
 /* Style for the col-6 div */
+
 .admin-edit-panel .col-6 {
     font-size: 18px;
     margin-bottom: 20px;
 }
 
+
 /* Style for the roles */
+
 .admin-edit-panel .col-6 span {
     font-weight: bold;
     color: #61dafb;
 }
 
+
 /* Style for the form */
+
 .admin-edit-panel form {
     margin-top: 20px;
 }
+
+
 /* Style for the <p> elements */
+
 .admin-edit-panel .col-6 p {
     margin-bottom: 13px;
     font-size: 16px;
 }
 
+
 /* ============================================== */
+
+
 /* image-grid in the home page */
+
 .image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 400px));
-    grid-gap: 20px;
-    width:90%;
-    justify-content:center;
-    margin:auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .responsive-img-grid {
-    padding: 0 6px;
-    float: left;
-    
-}
-.clearfix:after {
-    content: "";
-    display: table;
-    clear: both;
+    flex: 0 0 calc(33.33% - 20px); 
 }
 
 .gallery {
     border: 1px solid #ccc;
-    width: 400px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /*Add a subtle box shadow */
+    transition: box-shadow 0.3s ease-in-out;
 }
 
 .gallery:hover {
-    border: 1px solid #777;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /*  Increase shadow on hover */
 }
 
 .gallery img {
-    width: 400px;
+    width: 100%;
     height: auto;
+    display: block;
+    border-radius: 8px; 
 }
+
 .desc {
-    padding: 15px;
-    text-align: center;
+    
+    top: 10px;
+    left: 10px;
+    margin: 0;
+    color: black;
+    font-size: 16px;
 }
-.gallery a{
+
+
+.gallery a {
     cursor: pointer;
 }
 
+
 /* ============================================== */
+
+
 /* dates table */
+
 .row-dates {
     display: flex;
     flex-direction: column;
-    margin-top:70px;
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
-    text-align: center; /* Center text within each element */
-    height: auto; /* Set the height to 100% of the viewport height */
+    margin-top: 70px;
+    align-items: center;
+    /* Center items horizontally */
+    justify-content: center;
+    /* Center items vertically */
+    text-align: center;
+    /* Center text within each element */
+    height: auto;
+    /* Set the height to 100% of the viewport height */
 }
 
 .row-dates h1 {
     font-size: 24px;
     margin-bottom: 10px;
-    
     color: var(--header);
     text-align: center;
 }
@@ -1528,10 +1388,10 @@ footer {
     text-align: center;
 }
 
-.dates th, .dates td {
+.dates th,
+.dates td {
     border: 1px solid #ddd;
     padding: 8px;
-    
 }
 
 .dates th {
@@ -1541,69 +1401,93 @@ footer {
 .dates tr:hover {
     background-color: #f5f5f5;
 }
+
 .vocab {
-    max-width: 800px; 
+    max-width: 800px;
 }
 
+
 /* Add a class for the wider table */
+
 .wider-table {
-    width: 100%; /* Make the table 100% width */
+    width: 100%;
+    /* Make the table 100% width */
 }
+
 .dates td.task-name {
     color: blue;
 }
 
-.dates th{
+.dates th {
     color: #156756;
 }
 
+
 /* ============================================== */
+
 
 /* messages */
 
-.grid-message{
+.grid-message {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 
 /* ============================================== */
+
+
 /* download chart page  */
 
+
 /* Style the section */
+
 .dowload-chart {
     text-align: center;
     height: auto;
     margin: 40px 0;
 }
 
+
 /* Style the heading */
+
 .dowload-chart h1 {
     color: #3498db;
     font-size: 28px;
     margin-bottom: 10px;
 }
 
+
 /* Style the figure */
+
 .dowload-chart figure {
     margin: 0;
     position: relative;
 }
 
+
 /* Style the image */
+
 .dowload-chart img {
     max-width: 100%;
     height: auto;
-    border: 1px solid #ddd; /* Add a light border around the image */
-    border-radius: 8px; /* Optional: Add rounded corners to the image */
+    border: 1px solid #ddd;
+    /* Add a light border around the image */
+    border-radius: 8px;
+    /* Optional: Add rounded corners to the image */
 }
 
+
 /* Style the figcaption */
+
 .dowload-chart figcaption {
     margin-top: 10px;
 }
 
+
 /* Style the download buttons */
-.dowload-chart a.btn-chart, .add-chart {
+
+.dowload-chart a.btn-chart,
+.add-chart {
     display: inline-block;
     margin: 0 10px;
     padding: 10px 20px;
@@ -1614,13 +1498,18 @@ footer {
     transition: background-color 0.3s ease;
 }
 
-.dowload-chart a.btn-chart:hover, .add-chart:hover {
+.dowload-chart a.btn-chart:hover,
+.add-chart:hover {
     background-color: #2980b9;
 }
 
+
 /* ============================================== */
+
+
 /* chat channel message */
-.channel-row{
+
+.channel-row {
     width: 100%;
     height: auto;
     display: flex;
@@ -1630,13 +1519,15 @@ footer {
     padding: 20px;
     border-bottom: 2px solid #ccc;
 }
-.channel-row h3{
+
+.channel-row h3 {
     color: var(--header);
     font-size: 18px;
     font-weight: bold;
     text-align: center;
 }
-.channel-row span{
+
+.channel-row span {
     color: var(--primary);
     font-size: 16px;
     font-weight: bold;
@@ -1644,9 +1535,12 @@ footer {
     text-align: center;
 }
 
+
 /* ======================================= */
 
+
 /* contact form */
+
 .contact-container {
     display: flex;
     justify-content: space-between;
@@ -1664,22 +1558,22 @@ footer {
 }
 
 .contact-form {
-    width: 48%; /* Adjust the width as needed */
+    width: 48%;
+    /* Adjust the width as needed */
     height: 100%;
     padding: 20px;
-    
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .contact-info {
-    width: 48%; /* Adjust the width as needed */
+    width: 48%;
+    /* Adjust the width as needed */
     padding: 20px;
     margin-right: 15px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 
 .contact-form h3 {
     text-align: center;
@@ -1705,9 +1599,9 @@ footer {
     box-sizing: border-box;
     font-size: 16px;
 }
+
 .contact-form textarea {
     height: 150px;
-    
 }
 
 .contact-form button {
@@ -1720,5 +1614,14 @@ footer {
     width: 100%;
     font-size: 16px;
 }
-
-
+#chart-container{
+    width: 900px;
+    height: 400px;
+    margin: auto;
+}
+#chart-container .btn{
+    margin-left: 0px;
+    margin-top: 20px;
+    width: 20%;
+    
+}

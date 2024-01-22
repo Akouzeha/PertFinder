@@ -228,7 +228,9 @@ class Project
     public function calculZscore(int $dureeProject, int $dureeDiagram, float $variance)
     {
         $zscore = 0;
-        $zscore = ($dureeProject - $dureeDiagram) / sqrt($variance);
+        if($variance != 0){
+            $zscore = ($dureeProject - $dureeDiagram) / sqrt($variance);
+        }
         return $zscore;
     }
     

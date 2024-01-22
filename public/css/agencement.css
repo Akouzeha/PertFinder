@@ -60,7 +60,7 @@
 
 }
 /* navBar and logo for mobile phones: */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
     .topnav a {display: none;}
     .topnav a.icon {
       float: right;
@@ -68,7 +68,7 @@
     }
   }
   
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 768px) {
     .topnav.responsive {position: relative;}
     .topnav.responsive .icon {
       position: absolute;
@@ -84,7 +84,8 @@
         width: 100%;
         height: auto;
     }
-  }
+  } 
+ 
 /* ============================================== */
 
 /* homePage */
@@ -223,7 +224,7 @@
 /* ============================================== */
 /* image grid in the home page */
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 768px) {
     .responsive-img-grid {
         width: 100%;
         margin: 6px 0;
@@ -235,13 +236,14 @@
         margin-right:5px;
     }
     .gallery img{
-        width: 548px !important;
+        width: 90% !important;
     }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 1024px) {
     .responsive-img-grid {
         width: 100%;
+        margin:auto;
     }
     .gallery img{
         width: 100% !important;
