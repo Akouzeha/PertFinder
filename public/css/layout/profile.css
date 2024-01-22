@@ -15,8 +15,9 @@
 }
 
 .user-info-1 img {
-    max-width: 100%;
-    border-radius: 50%;
+    width: 50%;
+    height: 200px;
+    border-radius: 30%;
 }
 
 .user-info-1 h1 {
