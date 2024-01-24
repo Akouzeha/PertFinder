@@ -77,7 +77,8 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
-                //password must be at least 8 caracter and have at least one majuscule, one minuscule, one number and one special caracter
+                //password must be at least 8 caracter and have at least one majuscule, 
+                //one minuscule, one number and one special caracter
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -90,7 +91,8 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Regex([
                         'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/',
-                        'message' => 'Votre mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial'
+                        'message' => 'Votre mot de passe doit contenir au moins une majuscule, une minuscule, 
+                            un chiffre et un caractère spécial'
                     ])
                 ],
                 'options' => ['attr' => ['class' => 'password-field']],

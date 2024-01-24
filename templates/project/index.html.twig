@@ -19,7 +19,7 @@
                 <div class="box-row">
                     <div class="list-project-row-1">
                         <div class="col-12">
-                            {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_PROJECT_MANAGER") %}  
+                            {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_PROJECT_MANAGER") or (app.user.id == project.user.id) %}  
                                 <a href="{{path('edit_project', {'id': project.id})}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
                                 <a href="{{path('delete_project', {'id': project.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
                             {% endif %}

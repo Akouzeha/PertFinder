@@ -68,22 +68,6 @@
                         </ul>
                 </div>
                
-                {# <div class="dropdown">
-                    <button class="dropbtn">Dropdown</button>
-                    <div class="dropdown-content">
-                        <a href="{{ path('app_home') }}">Home</a>
-                        <a href="{{path('create_project')}}">Créer Projet</a>
-                        <a href="{{path('app_project')}}">Projets</a>
-                        <a href="">Mon Compte</a>
-                        <a href="">Chat</a>
-                        {% if (app.user) %}
-                            <a href="{{ path('app_logout') }}">logout</a>
-                        {% else %}
-                            <a href="{{ path('app_register') }}">Inscription</a>
-                            <a href="{{ path('app_login') }}">login</a>
-                        {% endif %}
-                    </div>
-                  </div> #}
             </header>
             
             <div class="alert-messages col-12">{% for message in app.flashes('success') %}<div class="alert alert-success">{{ message }}</div>{% endfor %}{% for message in app.flashes('error') %}<div class="alert alert-danger">{{ message }}</div>{% endfor %}</div>

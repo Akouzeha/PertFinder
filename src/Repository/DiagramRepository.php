@@ -46,15 +46,15 @@ class DiagramRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-    public function findAllTasks(Diagram $diagram): array
+    
+    public function findTasksByDiagram($diagramId)
     {
-        $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery(
-            'SELECT t
-            FROM App\Entity\Task t
-            WHERE t.pertChart = :diagram
-            ORDER BY t.id ASC'
-        )->setParameter('diagram', $diagram);
-        return $query->getResult();
+        return $this->createQueryBuilder('d')
+            ->select('t')
+            ->join('d.tasks', 't')
+            ->where('d.id = :diagramId')
+            ->setParameter('diagramId', $diagramId)
+            ->getQuery()
+            ->getResult();
     }
 }

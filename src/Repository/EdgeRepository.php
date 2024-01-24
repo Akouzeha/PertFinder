@@ -49,16 +49,12 @@ class EdgeRepository extends ServiceEntityRepository
     // find all edges for a given chart
     public function findAllEdgesForChart($chartId): array
     {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT e
-            FROM App\Entity\Edge e
-            JOIN e.task t
-            WHERE t.pertChart = :chartId'
-        )->setParameter('chartId', $chartId);
-        
-        // returns an array of Edge objects
-        return $query->getResult();
+        return $this->createQueryBuilder('e')
+            ->select('e')
+            ->join('e.task', 't')
+            ->where('t.pertChart = :chartId')
+            ->setParameter('chartId', $chartId)
+            ->getQuery()
+            ->getResult();
     }
 }

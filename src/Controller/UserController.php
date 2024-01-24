@@ -182,7 +182,7 @@ class UserController extends AbstractController
             $imageFile = $form->get('imageFile')->getData();
             if ($imageFile === null) {
                 $this->addFlash('error', 'Veuillez choisir une photo!');
-                return $this->redirectToRoute('show_user', ['id' => $id]);
+                return $this->redirectToRoute('show_user');
             }
             $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
             $safeFilename = $slugger->slug($originalFilename);
@@ -198,13 +198,13 @@ class UserController extends AbstractController
                 $user->setImgName($imgFilePath);
             } catch (FileException $e) {
                 // ... handle exception if something happens during file upload
-                $this->addFlash('error', 'Erreur lors de l\'upload de la photo!');
-                return $this->redirectToRoute('show_user', ['id' => $id]);
+                $this->addFlash('error', 'Erreur lors de l\'upload de la photo!, veuillez réessayer ultérieurment !');
+                return $this->redirectToRoute('show_user');
             }
 
             $em->flush();
             $this->addFlash('success', 'Photo est modifié avec sucées!');
-            return $this->redirectToRoute('show_user', ['id' => $id]);
+            return $this->redirectToRoute('show_user');
         }
         return $this->render('user/info.html.twig', [
             'profilePicForm' => $form,
