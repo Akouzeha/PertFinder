@@ -1625,3 +1625,80 @@ td {
     width: 20%;
     
 }
+
+/* ======================================= */
+/* admin control panel */
+.content-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    width: 300px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3498db;
+    color: #fff;
+}
+
+.card-header h3 {
+    margin: 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-footer {
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.toggle {
+    display: inline-block;
+    position: relative;
+}
+
+.toggle input {
+    display: none;
+}
+
+.toggle span {
+    display: block;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    position: absolute;
+    border-radius: 20px;
+    top: 0;
+    left: 0;
+    transition: background-color 0.3s;
+}
+
+.toggle input:checked + span {
+    background-color: #4caf50;
+}

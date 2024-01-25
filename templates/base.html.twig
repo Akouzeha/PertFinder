@@ -40,15 +40,15 @@
     <body>
         
             <header>
-                <div class="topnav container" id="myNavBar">
+                <div class="topnav container">
                         <a href="{{ path('app_home') }}" class="logo-link">
                             <img class="logo" src="{{ asset('img/logo.svg') }}" alt="logo">
                         </a>
-                        <ul>
+                        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <ul class="nav-list" id="myNavList">
                             <li class="navItem">
-                                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                                    <i class="fa fa-bars"></i>
-                                </a>
                             </li>
                             <li class={% if app.request.attributes.get('_route') == 'app_home' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_home') }}">Home</a></li> 
                             {% if (app.user) %}  

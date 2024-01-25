@@ -1,11 +1,11 @@
 
 
 function myFunction() {
-  var x = document.getElementById("myNavBar");
-  if (x.className === "topnav") {
+  var x = document.getElementById("myNavList");
+  if (x.className === "nav-list") {
       x.className += " responsive";
   } else {
-      x.className = "topnav";
+      x.className = "nav-list";
   }
 }
 function toggleProjects() {

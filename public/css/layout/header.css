@@ -48,6 +48,7 @@ header {
 
 /* Navigation Bar */
 
+
 .topnav {
     display: block;
 }
@@ -68,7 +69,7 @@ header {
     display: inline-block;
 }
 
-.topnav ul li a {
+.topnav ul li a, .icon{
     display: inline-block;
     color: #159279;
     text-align: center;
@@ -85,7 +86,7 @@ header {
     display: none;
 }
 
-.topnav ul li a:hover {
+.topnav ul li a:hover, .icon:hover {
     color: var(--header);
     cursor: pointer;
     padding: 14px 16px;
@@ -96,12 +97,12 @@ header {
     border: 2px solid var(--header);
 }
 
-.topnav .activated a {
+.topnav .activated a, .icon.activated {
     color: var(--header);
     cursor: pointer;
 }
 
-.topnav a:active {
+.topnav a:active, .icon:active {
     box-shadow: 0 0;
     transform: translateY(1px);
 }
