@@ -60,8 +60,10 @@
 
                         {% endif %}
                         {% if project.diagrams is empty %}
+                        <span style="color:blue;"> La durée la plus courte ( Chemin Critique) : </span>  <span style="color:red;"> 0 </span><span style="color:blue;"> Jours </span><br>
                         <span> propabilité de complétion : </span> 0 <span> %</span>
                         {% else %}
+                        <span style="color:blue;"> La durée la plus courte ( Chemin Critique) : </span>  <span style="color:red;"> {{chart.dureeCritique}} </span><span style="color:blue;"> Jours </span><br>
                         <span> propabilité de complétion : </span> {{probability |number_format(2) }}<span> %</span>
                         {% endif %}
                         <p> pour en savoir plus sur les calculs, cliquez <a href="">ici</a></p>
@@ -167,8 +169,7 @@
             {% endif %}
         </div>
         <script>
-    anychart.onDocumentReady(function () {
-	   
+        anychart.onDocumentReady(function () {
         const pertChartData = {{ pertChartData | json_encode | raw }};
         const pertChartDataEdges = {{ pertChartDataEdges | json_encode | raw }};
         // create a PERT chart

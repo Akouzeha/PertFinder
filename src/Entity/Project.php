@@ -27,13 +27,13 @@ class Project
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'project', targetEntity: Diagram::class)]
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: Diagram::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $diagrams;
 
     #[ORM\ManyToOne(inversedBy: 'projects')]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'project', targetEntity: Comment::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: Comment::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $comments;
 
     #[ORM\Column(length: 100)]

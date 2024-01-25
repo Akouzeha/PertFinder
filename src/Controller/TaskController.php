@@ -69,6 +69,7 @@ class TaskController extends AbstractController
             $diagram->setVariance($diagramVariance);
             $task->setVariance($variance);
             $em->persist($task);
+            $em->persist($diagram);
             $em->flush();
             $this->addFlash('success', 'Tâche ajoutée avec succès');
 
@@ -85,11 +86,15 @@ class TaskController extends AbstractController
     }
 
     //delete a task
-    #[Route('/task/{taskId}', name: 'delete_task')]
+    #[Route('/task/{taskId}delete', name: 'delete_task')]
     public function deleteTask($taskId, EntityManagerInterface $em): Response
     {
-        
         $task = $em->getRepository(Task::class)->findOneBy(['id' => $taskId]);
+        $diagram = $task->getPertChart();
+        if($this->isGranted('ROLE_PROJECT_MANAGER') == false || $diagram->getUser() != $this->getUser()){
+            $this->addFlash('error', 'Vous n\'avez pas le droit de supprimer une tâche');
+            return $this->redirectToRoute('app_task');
+        }
 
         $em->remove($task);
         $em->flush();

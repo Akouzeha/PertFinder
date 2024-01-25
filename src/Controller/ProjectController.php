@@ -76,11 +76,16 @@ class ProjectController extends AbstractController
     #[Route('/project/show/{id}', name: 'show_project')]
     public function showProject(Project $project, EntityManagerInterface $em,Request $request, Comment $comment = NULL): Response
     {
-        if ($project->getDiagrams() == null) {
+        if (count($project->getDiagrams()) == 0) {
+          
             $imgName = 'default.png';
+            $pertChartData = [];
+            $pertChartDataEdges = [];
+            
         } else {
             $diagrams = $project->getDiagrams();
-            if ($diagrams[0] != null) {
+            if ($diagrams != null) {
+                if($diagrams[0]->getTasks() != null){
                 $diagramName = $diagrams[0]->getTitle();
                 $diagramId = $diagrams[0]->getId();
                 $imgName = str_replace(' ', '_', $diagramName);
@@ -101,6 +106,7 @@ class ProjectController extends AbstractController
                         'from' => $edge->getPredecessor()->getId(),
                         'to' => $edge->getTask()->getId(),
                     ];
+                }
                 }
             } else {
                 $imgName = 'default.png';
@@ -128,15 +134,7 @@ class ProjectController extends AbstractController
             return $this->redirectToRoute('show_project', ['id' => $projectId]);
         }
         $projectDuree = $project->calculNumberDays();
-        if ($project->getDiagrams() == null){
-            return $this->render('project/show.html.twig',[
-                'project' => $project,
-                'commentId' => $commentId,
-                'projectDuree' => $projectDuree,
-                'imgName' => $imgName . '.png',
-                'formComment' => $form,
-            ]);
-        }else{
+       
             return $this->render('project/show.html.twig',[
                 'project' => $project,
                 'commentId' => $commentId,
@@ -146,7 +144,7 @@ class ProjectController extends AbstractController
                 'pertChartData' => $pertChartData,
                 'pertChartDataEdges' => $pertChartDataEdges,
             ]);
-        }
+        
     }
     
 
@@ -199,13 +197,39 @@ class ProjectController extends AbstractController
      * delete a project
      */
 
-     #[Route('/project/{id}', name: 'delete_project')]
-     public function deleteProject(Project $project, EntityManagerInterface $entityManager): Response
-     {
-         $entityManager->remove($project);
-         $entityManager->flush();
-         return $this->redirectToRoute('app_project');
-     }
+     #[Route('/project/{id}/delete', name: 'delete_project')]
+public function deleteProject(Project $project, EntityManagerInterface $entityManager): Response
+{
+    if (!$this->isGranted('ROLE_PROJECT_MANAGER') || $project->getUser() !== $this->getUser()) {
+        throw new AccessDeniedHttpException('Vous n\'avez pas le droit de supprimer ce projet');
+    }
+
+    $diagrams = $project->getDiagrams();
+    foreach ($diagrams as $diagram) {
+        $tasks = $diagram->getTasks();
+        foreach ($tasks as $task) {
+            $edges = $task->getEdges();
+            foreach ($edges as $edge) {
+                $task->removeEdge($edge);
+            }
+            $predecessors = $task->getTaskPredecessors();
+            foreach ($predecessors as $predecessor) {
+                $task->removeTaskPredecessor($predecessor);
+            }
+            $entityManager->remove($task);
+        }
+        $entityManager->remove($diagram);
+    }
+    // Remove the project itself
+    $entityManager->remove($project);
+
+    // Flush changes to the database
+    $entityManager->flush();
+
+    return $this->redirectToRoute('app_project');
+}
+
+
 
      #[Route('/project/{id}/lock', name: 'lock_project')]
      public function lockProject(EntityManagerInterface $em, $id): Response

@@ -76,6 +76,7 @@ class EdgeController extends AbstractController
     public function tasksWithDependencies(EntityManagerInterface $em, Request $request): Response
     {
         $diagramId = $request->get('diagramId');
+        
         // Fetch all tasks of this diagram
         $tasks = $em->getRepository(Task::class)->findBy(['pertChart' => $diagramId]);
         //fetch all edges of this diagram
@@ -141,6 +142,7 @@ class EdgeController extends AbstractController
 
             $taskData[] = [
                 'task' => $task,
+                'diagram' => $diagram,
                 'diagramId' => $task->getPertChart()->getId(),
                 'edges' => $edges,
                 'predecessors' => $predecessor,

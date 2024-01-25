@@ -42,10 +42,10 @@ class Task
     #[ORM\ManyToMany(targetEntity: self::class)]
     private Collection $dependentTasks;
 
-    #[ORM\OneToMany(mappedBy: 'task', targetEntity: Edge::class)]
+    #[ORM\OneToMany(mappedBy: 'task', targetEntity: Edge::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $edges;
 
-    #[ORM\OneToMany(mappedBy: 'Predecessor', targetEntity: Edge::class)]
+    #[ORM\OneToMany(mappedBy: 'task', targetEntity: Edge::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $taskPredecessors;
 
     #[ORM\Column(nullable: true)]

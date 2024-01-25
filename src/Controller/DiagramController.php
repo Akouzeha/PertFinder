@@ -84,7 +84,7 @@ class DiagramController extends AbstractController
     {
     // Fetch all tasks of the diagram
     $tasks = $em->getRepository(Task::class)->findBy(['pertChart' => $diagramId]);
-    $edges = $em->getRepository(Edge::class)->findAllEdgesForChart($diagramId);
+    
 
     // Initialize arrays to store Early Start (ES) and Early Finish (EF) of each task
     // Late Start (LS) and Late Finish (LF) of each task
@@ -95,21 +95,26 @@ class DiagramController extends AbstractController
     $LF = [];
     $MT = [];
     $ML = [];
-
+  
     // Stock the tasks in an array ordered by level
     $tasksByLevel = [];
     foreach ($tasks as $task) {
         $tasksByLevel[$task->getLevel()][] = $task;
     }
-
+    
     // Sort the tasks by their level
     ksort($tasksByLevel);
 
     // Calculate the ES and EF of each task
     // Set the ES of the tasks of level 1 to 0
+    //stocker les taches de niveau 1 dans un tableau
+        
+    
     foreach ($tasksByLevel[1] as $task) {
-        $ES[$task->getId()] = 0;
-        $EF[$task->getId()] = $task->getDuree();
+            
+            $ES[$task->getId()] = 0;
+            $EF[$task->getId()] = $task->getDuree();
+        
     }
 
     // Calculate the ES and EF of the other tasks
@@ -169,9 +174,8 @@ class DiagramController extends AbstractController
         $taskId = $task->getId();
         $MT[$taskId] = $LF[$taskId] - $EF[$taskId];
         $ML[$taskId] = $LS[$taskId] - $ES[$taskId];
-        
-
     }
+    
 
     return $this->render('diagram/index.html.twig', [
         'tasksByLevel' => $tasksByLevel,
@@ -190,6 +194,8 @@ class DiagramController extends AbstractController
         // Fetch all tasks of the diagram
     $tasks = $em->getRepository(Task::class)->findBy(['pertChart' => $diagramId]);
     $edges = $em->getRepository(Edge::class)->findAllEdgesForChart($diagramId);
+    $diagram = $em->getRepository(Diagram::class)->find($diagramId);
+    $criticalDuration = 0;
     // Initialize arrays to store Early Start (ES) and Early Finish (EF) of each task
     // Late Start (LS) and Late Finish (LF) of each task
     // Margin Total (MT) and Margin Libre (ML) of each task
@@ -212,8 +218,10 @@ class DiagramController extends AbstractController
     // Calculate the ES and EF of each task
     // Set the ES of the tasks of level 1 to 0
     foreach ($tasksByLevel[1] as $task) {
-        $ES[$task->getId()] = 0;
-        $EF[$task->getId()] = $task->getDuree();
+        
+            $ES[$task->getId()] = 0;
+            $EF[$task->getId()] = $task->getDuree();
+        
     }
 
     // Calculate the ES and EF of the other tasks
@@ -266,7 +274,13 @@ class DiagramController extends AbstractController
         $taskId = $task->getId();
         $MT[$taskId] = $LF[$taskId] - $EF[$taskId];
         $ML[$taskId] = $LS[$taskId] - $ES[$taskId];
+        if($MT[$taskId] == 0){
+            $criticalDuration += $task->getDuree();
+        }
     }
+    $diagram->setDureeCritique($criticalDuration);
+    $em->persist($diagram);
+    $em->flush();
         $results = [
             'ES' => $ES,
             'EF' => $EF,
@@ -411,7 +425,16 @@ public function generateDotFileContent($tasks, $edges, $ES, $EF, $LS, $LF, $MT, 
         $diagram = $em->getRepository(Diagram::class)->find($diagramId);
         $user = $diagram->getUser();
         $project = $diagram->getProject();
+        $tasks = $diagram->getTasks();
+        
         if($this->isGranted('ROLE_PROJECT_MANAGER') or $user == $this->getUser()){
+            foreach($tasks as $task){
+                $edges = $task->getEdges();
+                foreach($edges as $edge){
+                    $em->remove($edge);
+                }
+                $em->remove($task);
+            }
             $project->removeDiagram($diagram);
             $user->removeDiagram($diagram);
             $em->remove($diagram);

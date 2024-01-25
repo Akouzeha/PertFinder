@@ -25,7 +25,7 @@ class Diagram
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'pertChart', targetEntity: Task::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'pertChart', targetEntity: Task::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $tasks;
 
     #[ORM\ManyToOne(inversedBy: 'diagrams')]
@@ -48,6 +48,9 @@ class Diagram
 
     #[ORM\Column]
     private ?float $variance = null;
+
+    #[ORM\Column]
+    private ?int $dureeCritique = null;
 
     public function __construct()
     {
@@ -210,6 +213,18 @@ class Diagram
     public function setVariance(float $variance): static
     {
         $this->variance = $variance;
+
+        return $this;
+    }
+
+    public function getDureeCritique(): ?int
+    {
+        return $this->dureeCritique;
+    }
+
+    public function setDureeCritique(int $dureeCritique): static
+    {
+        $this->dureeCritique = $dureeCritique;
 
         return $this;
     }
