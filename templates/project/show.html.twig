@@ -89,7 +89,7 @@
                     <p style="text-align:center;"> ce diagramme n'a pas de tâches</p>
                     <img src="{{asset('charts/default.png')}}" alt="no-diagram-yet">
                 {% else %}
-                    <img src="{{asset('charts/img/' ~ imgName )}}" alt="diagram">
+                    <div id="chart-container" class="project-chart-container"></div>
                 {% endif %}
                 <div class="project-options">
                     {% if app.user == project.user or is_granted("ROLE_PROJECT_MANAGER") %}
@@ -166,5 +166,43 @@
                 </div>
             {% endif %}
         </div>
+        <script>
+    anychart.onDocumentReady(function () {
+	   
+        const pertChartData = {{ pertChartData | json_encode | raw }};
+        const pertChartDataEdges = {{ pertChartDataEdges | json_encode | raw }};
+        // create a PERT chart
+        var chart = anychart.pert();
+
+        // set chart data
+        chart.data(pertChartData, "asTree", pertChartDataEdges);
+
+        // set the title of the chart
+        chart.title("PERT Chart");
+
+        // set the container id for the chart
+        chart.container("chart-container");
+
+        // initiate drawing the chart
+        chart.draw();
+        
+        chart.verticalSpacing("20%");
+        // get project duration
+        var duration = chart.getStat("pertChartProjectDuration");
+       
+        // set the chart title to show the duration
+        chart.title("La durée de ce projet est " + duration + " jours");
+        milestones = chart.milestones();
+        milestones.normal().fill("#00acc1", 0.7);
+        milestones.hovered().fill("#80cbc4");
+        milestones.selected().fill("#00acc1");
+        milestones.normal().stroke("#90caf9", 1);
+        milestones.hovered().stroke("#90caf9", 2);
+        milestones.selected().stroke("#90caf9", 4);
+    
+        });
+       
+     
+</script>
 
 {% endblock %}

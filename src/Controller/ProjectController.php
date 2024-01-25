@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Edge;
+use App\Entity\Task;
 use App\Entity\Comment;
 use App\Entity\Diagram;
 use App\Entity\Project;
@@ -82,7 +84,24 @@ class ProjectController extends AbstractController
                 $diagramName = $diagrams[0]->getTitle();
                 $diagramId = $diagrams[0]->getId();
                 $imgName = str_replace(' ', '_', $diagramName);
-                
+                $tasks = $em->getRepository(Task::class)->findBy(['pertChart' => $diagramId]);
+                //fetch all edges of this diagram
+                $edges = $em->getRepository(Edge::class)->findAllEdgesForChart($diagramId);
+                $pertChartData = [];
+                foreach ($tasks as $task) {
+                    $pertChartData[] = [
+                        'id' => $task->getId(),
+                        'duration' => $task->getDuree(),
+                        'name' => $task->getName(),
+                    ];
+                }
+                $pertChartDataEdges = [];
+                foreach ($edges as $edge) {
+                    $pertChartDataEdges[] = [
+                        'from' => $edge->getPredecessor()->getId(),
+                        'to' => $edge->getTask()->getId(),
+                    ];
+                }
             } else {
                 $imgName = 'default.png';
             }
@@ -109,13 +128,25 @@ class ProjectController extends AbstractController
             return $this->redirectToRoute('show_project', ['id' => $projectId]);
         }
         $projectDuree = $project->calculNumberDays();
-        return $this->render('project/show.html.twig',[
-            'project' => $project,
-            'commentId' => $commentId,
-            'projectDuree' => $projectDuree,
-            'imgName' => $imgName . '.png',
-            'formComment' => $form,
-        ]);
+        if ($project->getDiagrams() == null){
+            return $this->render('project/show.html.twig',[
+                'project' => $project,
+                'commentId' => $commentId,
+                'projectDuree' => $projectDuree,
+                'imgName' => $imgName . '.png',
+                'formComment' => $form,
+            ]);
+        }else{
+            return $this->render('project/show.html.twig',[
+                'project' => $project,
+                'commentId' => $commentId,
+                'projectDuree' => $projectDuree,
+                'imgName' => $imgName . '.png',
+                'formComment' => $form,
+                'pertChartData' => $pertChartData,
+                'pertChartDataEdges' => $pertChartDataEdges,
+            ]);
+        }
     }
     
 

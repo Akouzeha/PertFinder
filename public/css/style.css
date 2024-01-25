@@ -1614,16 +1614,23 @@ td {
     width: 100%;
     font-size: 16px;
 }
-#chart-container{
+.edge-chart-container{
     width: 900px;
     height: 400px;
     margin: auto;
 }
-#chart-container .btn{
+.edge-chart-container .btn{
     margin-left: 0px;
     margin-top: 20px;
     width: 20%;
     
+}
+.project-chart-container{
+    width: 900px;
+    height: 300px;
+    margin: auto;
+    z-index: -1;
+    margin-bottom: 20px !important;
 }
 
 /* ======================================= */

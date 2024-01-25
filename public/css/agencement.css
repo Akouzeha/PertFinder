@@ -203,6 +203,11 @@
         width: 100%;
         margin-left: 0px;
     }
+    .project-chart-container{
+        width: 760px !important;
+        height: 200px;
+        margin-left: 0px;
+    }
 }
 @media screen and (max-width: 480px) {
     .project-container{
@@ -219,6 +224,11 @@
     .project-options{
         display: grid;
         grid-template-columns: 1fr 1fr;
+    }
+    .project-chart-container{
+        width: 470px !important;
+        height: 200px;
+        margin-left: 0px;
     }
 }
 
