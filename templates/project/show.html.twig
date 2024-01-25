@@ -9,7 +9,7 @@
     {% set probability = project.calculateProbabilityAndNormalDistribution(zScore) %}
 {% endif %}
     
-    <div class="project-container">
+    <div class="project-container container">
         <div class="show-project">
             <section class="project-description">
                 {% if app.user == project.user or is_granted("ROLE_PROJECT_MANAGER") %}
@@ -91,25 +91,26 @@
                 {% else %}
                     <img src="{{asset('charts/img/' ~ imgName )}}" alt="diagram">
                 {% endif %}
-            {% if app.user == project.user or is_granted("ROLE_PROJECT_MANAGER") %}
-                {% if chart.tasks is empty %}
-                    <a href="{{path('new_task', {'diagramId': chart.id})}}" class="projet-option-btn" >Ajouter des Tâches</a>
-                {% else %}
-                    <a href="{{path('new_task', {'diagramId': chart.id})}}" class="projet-option-btn" >Modifier</a>
-                {% endif %}
+                <div class="project-options">
+                    {% if app.user == project.user or is_granted("ROLE_PROJECT_MANAGER") %}
+                    {% if chart.tasks is empty %}
+                        <a href="{{path('new_task', {'diagramId': chart.id})}}" class="projet-option-btn" >Ajouter des Tâches</a>
+                    {% else %}
+                        <a href="{{path('new_task', {'diagramId': chart.id})}}" class="projet-option-btn" >Modifier</a>
+                    {% endif %}
 
-                {% if not project.isIsLocked %}
-                    <a href="{{path('lock_project', {'id': project.id})}}" class="projet-option-btn" >Verrouiller</a>
-                {% else %}
-                    <a href="{{path('lock_project', {'id': project.id})}}" class="projet-option-btn" >Déverrouiller</a>
-                {% endif %}
-                <a href="{{path('task_edge', {'diagramId': chart.id})}}" class="projet-option-btn">Visualiser</a>
-                <a href="{{path('cal_dates', {'diagramId': chart.id})}}" class="projet-option-btn">Les dates</a>
-                <a href="{{path('draw_graph', {'diagramId': chart.id})}}" class="projet-option-btn">Téléchargement</a>
-                <a href="{{path('delete_diagram', {'diagramId': chart.id})}}" class="projet-option-btn"
-                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce diagramme ?');"
-                >Supprimer</a>
-
+                    {% if not project.isIsLocked %}
+                        <a href="{{path('lock_project', {'id': project.id})}}" class="projet-option-btn" >Verrouiller</a>
+                    {% else %}
+                        <a href="{{path('lock_project', {'id': project.id})}}" class="projet-option-btn" >Déverrouiller</a>
+                    {% endif %}
+                    <a href="{{path('task_edge', {'diagramId': chart.id})}}" class="projet-option-btn">Visualiser</a>
+                    <a href="{{path('cal_dates', {'diagramId': chart.id})}}" class="projet-option-btn">Les dates</a>
+                    <a href="{{path('draw_graph', {'diagramId': chart.id})}}" class="projet-option-btn">Téléchargement</a>
+                    <a href="{{path('delete_diagram', {'diagramId': chart.id})}}" class="projet-option-btn"
+                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce diagramme ?');"
+                    >Supprimer</a>
+                </div>
             {% endif %}
             {% endfor %}
         </div>
