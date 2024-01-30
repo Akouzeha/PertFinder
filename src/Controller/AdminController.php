@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Message;
 use App\Entity\User;
+use App\Form\ResponseType;
 use App\Form\UserPromoteType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -70,7 +72,7 @@ class AdminController extends AbstractController
             $this->addFlash('warning', 'You cannot pseudonymize a super admin.');
             return $this->redirectToRoute('app_admin');
         }
-    
+        else if($this->isGranted('ROLE_ADMIN')){
         // Pseudonymize or anonymize personal data
         $hashedUsername = hash('sha256', $user->getUsername());
         $hashedEmail = hash('sha256', $user->getEmail());
@@ -83,8 +85,21 @@ class AdminController extends AbstractController
     
         $em->persist($user);
         $em->flush();
-    
+        
         $this->addFlash('success', 'L\'utilisateur a été pseudonymisé avec succès.');
+    }
         return $this->redirectToRoute('app_admin');
     }
+    #[Route('/admin/messages', name: 'recevoir_messages')]
+    public function recevoirMessages(EntityManagerInterface $em): Response
+    {
+        //find parent messages only
+        $messages = $em->getRepository(Message::class)->findBy(['parentMessage' => null]);
+        return $this->render('admin/message.html.twig', [
+            
+            'messages' => $messages,
+        ]);
+    }
+   
+
 }

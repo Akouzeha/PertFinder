@@ -55,7 +55,12 @@
                                 <li class={% if app.request.attributes.get('_route') == 'info_user' %} "activated" {% else %}""{% endif %}><a href="{{path('info_user')}}">Mon Compte</a></li>
                                 <li class={% if app.request.attributes.get('_route') == 'app_project' %} "activated" {% else %}""{% endif %}><a href="{{path('app_project')}}">Projets</a></li>
                                 <li class={% if app.request.attributes.get('_route') == 'create_project' %} "activated" {% else %}""{% endif %}><a href="{{path('create_project')}}">Créer Projet</a></li>
-                                 <li class={% if app.request.attributes.get('_route') == 'send_message' %} "activated" {% else %}""{% endif %}><a href="{{path('send_message')}}">Contactez-Nous</a></li>
+                                {% if is_granted("ROLE_ADMIN") %}
+                                    <li class={% if app.request.attributes.get('_route') == 'recevoir_messages' %} "activated" {% else %}""{% endif %}><a href="{{path('recevoir_messages')}}">Messagerie</a></li>
+                                {% else %}
+                                    <li class={% if app.request.attributes.get('_route') == 'send_message' %} "activated" {% else %}""{% endif %}><a href="{{path('send_message')}}">Messagerie</a></li>
+                                {% endif %}
+                                   
                                 <li class={% if app.request.attributes.get('_route') == 'app_logout' %} "activated" {% else %}""{% endif %}><a href="{{ path('app_logout') }}">logout</a></li>
                                 {% if  is_granted("ROLE_ADMIN") %}
                                     <li class={% if app.request.attributes.get('_route') == 'app_admin' %} "activated" {% else %}""{% endif %}><a href="{{path('app_admin', {'id': app.user.id})}}">Paramètes</a></li>

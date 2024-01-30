@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Message Response{% endblock %}
+
+
+{% block body %}
+    <div class="container basic-container">
+        <section class="message-section">
+            <h4><span>Sujet : </span>{{messageParent.sujet}}</h4>
+            <p>{{ messageParent.contenu }}</p>
+        </section>
+
+        <div class="message-body">
+            <h3>Responses</h3>
+            {% for response in responses %}
+                <div class="response {{ is_granted("ROLE_ADMIN") ? 'admin-message' : 'user-message' }}">
+                    <p class="sender">{{ is_granted("ROLE_ADMIN") ? 'Admin' : response.user.username }}: </p>
+                    <p>{{ response.contenu }}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="send-response-container">
+            {{ form_start(formResponse) }}
+            {{ form_widget(formResponse) }}
+            {{ form_end(formResponse) }}
+        </div>
+    </div>
+{% endblock %}
+
