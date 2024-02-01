@@ -736,7 +736,7 @@ td {
 }
 
 .comment {
-    width: 900px;
+    width: 1000px;
     height: auto;
     align-self: center;
     border-radius: 4px;
@@ -765,7 +765,7 @@ td {
 }
 
 .post-comment textarea {
-    width: 900px;
+    width: 1000px;
     height: 100px;
     align-self: center;
     font-size: 20px;
@@ -1628,7 +1628,7 @@ td {
     
 }
 .project-chart-container{
-    width: 900px;
+    width: 1000px;
     height: 300px;
     margin: auto;
     z-index: -1;
@@ -1762,7 +1762,7 @@ tr.message:hover {
 /* ====================================== */
 /* message service  */
 .basic-container {
-    width: 500px;
+    width: 520px;
     margin: auto;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -1781,7 +1781,23 @@ tr.message:hover {
     margin-top: 0;
     color: #333;
 }
-
+.message-contenu {
+    
+    border: 1px solid #ddd;
+    padding: 10px; 
+    border-radius: 5px; 
+    background-color: #f9f9f9;
+}
+/* admn span */
+.message-body .admin{
+    color: #007BFF;
+    font-weight: bold;
+}
+/* user span */
+.message-body .user{
+    color: #4CAF50;
+    font-weight: bold;
+}
 .message-body {
     height: 300px; /* Set a fixed height for the message container */
     overflow-y: auto; 
@@ -1819,7 +1835,7 @@ tr.message:hover {
     margin-bottom: 10px;
 }
 
-.send-button {
+.send-button,.lock-button {
     background-color: #007BFF;
     color: #fff;
     padding: 10px 20px;
@@ -1828,6 +1844,17 @@ tr.message:hover {
     border-radius: 5px;
 }
 
-.send-button:hover {
+.send-button:hover, .lock-button:hover {
     background-color: #0056b3;
+}
+.lock-button{
+    float: right;
+    margin-top: 0px;
+}
+
+.answered{
+    color: #4CAF50;
+}
+.not-answered{
+    color: #f44336;
 }

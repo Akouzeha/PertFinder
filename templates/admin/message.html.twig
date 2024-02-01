@@ -13,6 +13,7 @@
                         <th>Email</th>
                         <th>Reçu</th>
                         <th>Actions</th>
+                        <th>Répondu</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,8 +24,14 @@
                             <td>{{ message.email }}</td>
                             <td>{{ message.messageTime() }}</td>
                             <td>
-                                <a href="{{path('respond_message', {'id': message.id, 'messageId': message.id})}}"> <button class="answer-button"> Answer</button></a>
+                                <a href="{{path('respond_message', {'messageId': message.id})}}"> <button class="answer-button"> Ouvrir</button></a>
                             </td>
+                            <td>
+                                {% if message.isAnsewred %}
+                                    <span class="answered">Répondu</span>
+                                {% else %}
+                                    <span class="not-answered">Pas encore</span>
+                                {% endif %}
                         </tr>
                     {% endfor %}
                 </tbody>

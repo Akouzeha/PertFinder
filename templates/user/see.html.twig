@@ -10,8 +10,10 @@
         <div class="user-info col-2">
             {% if userInfo.isDeleted %}
                 <img src="{{ asset('img/deleted.jpg') }}" alt="user" class="user-img">
-            {% else %}
+            {% elseif not userInfo.imgName %}
                 <img src="{{ asset('charts/default.png') }}" alt="user" class="user-img">
+            {% else %}
+                <img src="{{ asset('' ~ userInfo.imgName) }}" alt="user" class="user-img">
             {% endif %}
         </div>
         <div class="user-info col-8">

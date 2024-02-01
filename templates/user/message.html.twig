@@ -23,7 +23,8 @@
                             <td>{{ message.email }}</td>
                             <td>{{ message.messageTime() }}</td>
                             <td>
-                                <button class="answer-button">Answer</button>
+                                <a href="{{path('respond_message', {'messageId': message.id})}}"> <button class="answer-button"> Ouvrir</button></a>
+
                             </td>
                         </tr>
                     {% endfor %}

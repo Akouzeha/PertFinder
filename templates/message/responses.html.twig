@@ -6,25 +6,44 @@
 {% block body %}
     <div class="container basic-container">
         <section class="message-section">
-            <h4><span>Sujet : </span>{{messageParent.sujet}}</h4>
-            <p>{{ messageParent.contenu }}</p>
+            <h4><span>Sujet : </span>{{messageParent.sujet}}
+            {% if not messageParent.isAnsewred %}
+                
+                <a href="{{ path('lock_message', {'id': messageParent.id}) }}" ><button class=" lock-button">Marquez répondu</button></a>
+            {% endif %}
+            </h4>
+            <div class="message-contenu">
+                {{ messageParent.contenu }}
+            </div>
         </section>
 
         <div class="message-body">
-            <h3>Responses</h3>
             {% for response in responses %}
-                <div class="response {{ is_granted("ROLE_ADMIN") ? 'admin-message' : 'user-message' }}">
-                    <p class="sender">{{ is_granted("ROLE_ADMIN") ? 'Admin' : response.user.username }}: </p>
-                    <p>{{ response.contenu }}</p>
+                <div class="response">
+                    <p class="sender">
+                        {% if "ROLE_ADMIN" in response.user.roles or "ROLE_SUPER_ADMIN" in response.user.roles %}
+                         <span class="admin">Admin :</span>
+                        <p>{{ response.contenu }}</p>
+                        {% else %}
+                            <span class="user">{% if is_granted("ROLE_ADMIN")  %}
+                                {{ response.user.username }}
+                                {% else %} Vous
+                            {% endif %} :</span>
+                            <p>{{ response.contenu }}</p> 
+                        {% endif %}
+                    </p>
                 </div>
             {% endfor %}
         </div>
 
+    {% if not messageParent.isAnsewred %}
+        
         <div class="send-response-container">
             {{ form_start(formResponse) }}
             {{ form_widget(formResponse) }}
             {{ form_end(formResponse) }}
         </div>
+    {% endif %}
     </div>
 {% endblock %}
 

@@ -99,8 +99,7 @@ header {
 .topnav .activated a, .icon.activated {
     color: var(--header);
     cursor: pointer;
-    border-bottom: 2px solid var(--header);
-    border-radius: 0px;
+    
 }
 
 .topnav a:active, .icon:active {

@@ -100,6 +100,19 @@ class AdminController extends AbstractController
             'messages' => $messages,
         ]);
     }
+    #[Route('/admin/message-lock/{id}', name: 'lock_message')]
+    public function lockMessage(EntityManagerInterface $em, $id): Response
+    {
+        $message = $em->getRepository(Message::class)->find($id);
+        if (!$message) {
+            throw $this->createNotFoundException('Message not found');
+        }
+        $message->setAnsewred(true);
+        $em->persist($message);
+        $em->flush();
+        $this->addFlash('success', 'Message a été traité!');
+        return $this->redirectToRoute('respond_message', ['messageId' => $id]);
+    }
    
 
 }

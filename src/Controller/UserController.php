@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\UploadImageType;
 use App\Form\UserType;
+use App\Entity\Message;
+use App\Form\UploadImageType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,11 +38,7 @@ class UserController extends AbstractController
     {   
         $user = $this->getUser();
         
-        //check if the user is changing his own aboutMe
-        /* if($this->getUser() != $user) {
-            $this->addFlash('error', 'Vous n\'avez pas le droit de modifier ce profil!');
-            return $this->redirectToRoute('info_user', ['id' => $this->getUser()->getId()]);
-        } */
+        
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -246,5 +243,15 @@ class UserController extends AbstractController
             'userInfo' => $user,
         ]);
     }
-    
+
+    #[Route('/user/messages', name: 'user_messages')]
+    public function userMessages(EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        //find parentMessage only
+        $messages = $em->getRepository(Message::class)->findBy(['parentMessage' => null, 'user' => $user]);
+        return $this->render('user/message.html.twig', [
+            'messages' => $messages,
+        ]);
+    }
 }

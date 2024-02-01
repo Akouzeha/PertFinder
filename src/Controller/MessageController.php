@@ -33,7 +33,7 @@ class MessageController extends AbstractController
             $user = $this->getUser();
             $message->setUser($user);
             $message->setSentAt(new \DateTime());
-            
+            $message->setAnsewred(false);
             $em->persist($message);
             $em->flush();
             $this->addFlash('success', 'Message a été envoyé!');
@@ -45,7 +45,7 @@ class MessageController extends AbstractController
         ]);
     
     }
-    #[Route('/message/respond/{id}/{messageId}', name: 'respond_message')]
+    #[Route('/message/respond/{messageId}', name: 'respond_message')]
     public function respond(Request $request, EntityManagerInterface $em, $messageId): Response
     {
         
@@ -53,6 +53,11 @@ class MessageController extends AbstractController
         if (!$messageParent) {
             throw $this->createNotFoundException('Parent message not found');
         }
+        if(!$this->isGranted('ROLE_ADMIN') and $this->getUser() != $messageParent->getUser()){
+            $this->addFlash('warning', 'Vous n\'avez pas le droit de répondre à ce message');
+            return $this->redirectToRoute('app_home');
+        }
+            
         $form = $this->createForm(ResponseType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -69,7 +74,7 @@ class MessageController extends AbstractController
             $message->setSujet($messageParent->getSujet());
             $message->setSentAt(new \DateTime());
             $message->setParentMessage($messageParent);
-            $message->setAnsewred(true);
+            $message->setAnsewred(false);
             $em->persist($message);
             $em->flush();
             $this->addFlash('success', 'Message a été envoyé!');
@@ -84,6 +89,19 @@ class MessageController extends AbstractController
             'responses' => $responses,
         ]);
     }
-
+    #[Route('/message/newresponses', name: 'new_responses')]
+    public function fetchNewresponses(EntityManagerInterface $em, Message $messageParent): Response
+    {
+        $messageParentId = $messageParent->getId();
+        if (!$messageParent) {
+            throw $this->createNotFoundException('Parent message not found');
+        }
+        //find all responses
+        $responses = $em->getRepository(Message::class)->findBy(['parentMessage' => $messageParentId]);
+        return $this->render('message/newresponses.html.twig', [
+            'messageParentId' => $messageParentId,
+            'responses' => $responses,
+        ]);
+    }
     
 }
