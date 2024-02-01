@@ -17,7 +17,7 @@
                         {% endif %}
                     {% endfor %}
                 </p>
-                <a href="{{ path('admin_delete_user', {'id': user.id}) }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Delete User</a>
+                <a href="{{ path('admin_delete_user', {'id': user.id}) }}" class="btn-admin btn-admin-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Delete User</a>
             </div>
             <div class="col-6">
                 {{ form_start(form) }}

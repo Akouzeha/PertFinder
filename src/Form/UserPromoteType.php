@@ -28,7 +28,7 @@ class UserPromoteType extends AbstractType
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Changez les rôles',
-                'attr' => ['class' => 'btn btn-primary'],
+                'attr' => ['class' => 'btn-admin'],
             ])
             
         ;

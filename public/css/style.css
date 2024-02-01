@@ -1645,6 +1645,14 @@ td {
     min-height: 100vh;
     background-color: #f4f4f4;
 }
+.admin-row h1{
+    text-align: center;
+    color: var(--header);
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 70px;
+
+}
 
 .card-grid {
     display: flex;
@@ -1674,9 +1682,23 @@ td {
     background-color: #3498db;
     color: #fff;
 }
+.card-header .user-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
 
 .card-header h3 {
     margin: 0;
+}
+.card-body a{
+    text-decoration: none;
+    color: var(--primary);
+
+}
+.card-body .deleted-users a{
+    color: red;
 }
 
 .card-body {
@@ -1688,30 +1710,21 @@ td {
     background-color: #f4f4f4;
 }
 
-.toggle {
-    display: inline-block;
-    position: relative;
+.delete-flag {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 10px;
 }
 
-.toggle input {
-    display: none;
+.delete-flag-green {
+    background-color: green;
 }
 
-.toggle span {
-    display: block;
-    width: 40px;
-    height: 20px;
-    background-color: #ccc;
-    position: absolute;
-    border-radius: 20px;
-    top: 0;
-    left: 0;
-    transition: background-color 0.3s;
+.delete-flag-red {
+    background-color: rgba(201, 46, 46, 0.901);
 }
 
-.toggle input:checked + span {
-    background-color: #4caf50;
-}
 
 /* ======================================= */
 /* recieved messages  */

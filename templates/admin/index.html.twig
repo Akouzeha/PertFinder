@@ -3,88 +3,56 @@
 {% block title %}Hello AdminController!{% endblock %}
 
 {% block body %}
-    
-            <div class="content-main">
-				<div class="card-grid">
-					<article class="card">
-						<div class="card-header">
-							<div>
-								<span><img src="https://assets.codepen.io/285131/zeplin.svg" /></span>
-								<h3>Zeplin</h3>
-							</div>
-							<label class="toggle">
-								<input type="checkbox" checked>
-								<span></span>
-							</label>
-						</div>
-						<div class="card-body">
-							<p>Collaboration between designers and developers.</p>
-						</div>
-						<div class="card-footer">
-							<a href="#">View integration</a>
-						</div>
-					</article>
-                </div>
-            </div>
-            
-    
+
     <div class="admin-row">
         <div class="admin-info-panel col-12">
-            <h1>Bienvenu dans le Panneau de contrôle</h1>
-            <div class="col-6">
-                <h3>Liste Utilisateurs</h3>
-                <table class="admin-task-table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Pseudo</th>
-                        <th scope="col">Rôle</th>
-                        <th scope="col">Demande Suppression</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for user in users %}
-                        <tr>
-                            <td>
+        <h1>Bienvenue dans le Panneau de contrôle</h1>
+        <div class="content-main">
+            <div class="card-grid">
+                {% for user in users %}
+                    <article class="card">
+                        <div class="card-header">
+                            <div>
                                 {% if user.isDeleted %}
-                                    <a style="color:red;" href="{{path('see_user', {'id':user.id})}}">utilisateur supprimé</a>
+                                    <span><img src="{{ asset('img/deleted.jpg') }}" alt="user" class="user-img"></span>
+                                {% elseif not user.imgName %}
+                                    <span><img src="{{ asset('charts/default.png') }}" alt="user" class="user-img"></span>
                                 {% else %}
-                                    <a href="{{path('see_user', {'id':user.id})}}">{{ user.username }}</a>
+                                    <span><img src="{{ asset(user.imgName) }}" alt="user" class="user-img"></span>
                                 {% endif %}
-                            </td>
-                            <td>
-                                {% if user.isDeleted %}
-                                    Supprimé
-                                {% else %}
+                            </div>
+                            {% if user.isRequestDelete %}
+                                <div class="delete-flag delete-flag-red delete-flag-green"></div>
+                            {% elseif  not user.isDeleted %}
+                                <div class="delete-flag delete-flag-green"></div>
+                            {% endif %}
+                        </div>
+                        <div class="card-body">
+                            {% if user.isDeleted %}
+                                    <h3 class="deleted-users"><a href="{{path('see_user', {'id':user.id})}}">Utilisateur Supprimé</a></h3>
+                            {% elseif not user.isDeleted %}
+                                <h3><a href="{{path('see_user', {'id':user.id})}}">{{ user.username }}</a></h3>
+                                <p>Liste des rôles :</p>
+                                <ul>
                                     {% for role in user.roles %}
-                                            {{ role }}
-                                            {% if not loop.last %},{% endif %}
+                                        <li>{{ role }}</li>
                                     {% endfor %}
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if user.isDeleted %}
-                                     - - -
-                                {% elseif user.requestDelete %}
-                                    <p style="color:red;">Oui<p>
-                                {% else %}
-                                    <p style="color:green;">Non<p>
-                                {% endif %}
-                            </td>
-                            <td>
-                            {% if "ROLE_SUPER_ADMIN" not in user.roles  %}
-                            {% if not user.isDeleted %}
-                                <a href="{{path('admin_edit_user', {'id':user.id})}}"><button class="btn btn-primary">Modifier</button></a>
+                                </ul>
+                                <p>Demande de suppression : {% if user.requestDelete %}<span style="color: red;">Oui</span>{% else %}<span style="color: green;">Non</span>{% endif %}</p>
                             {% endif %}
+                        </div>
+                        <div class="card-footer">
+                            {% if "ROLE_SUPER_ADMIN"  in user.roles %}
+                                <p>Super Admin</p>
+                            {% elseif "ROLE_SUPER_ADMIN" not in user.roles and not user.isDeleted %}
+                                <a href="{{ path('admin_edit_user', {'id': user.id}) }}"><button class="btn-admin">Modifier</button></a>
                             {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </div>
+                    </article>
+                {% endfor %}
             </div>
         </div>
-        
+        </div>
     </div>
     <div id="deleteRequestCountElement" data-delete-request-count="{{ requestCount }}"></div>
 
