@@ -13,6 +13,7 @@
             <figcaption>
                 <a class="btn-chart" href="{{ path('download_diagram', {'diagramId': diagramId,'fileName': imageFilePath}) }}">Télécharger l'image</a>
                 <a class="btn-chart" href="{{ path('download_pdf', {'diagramId': diagramId,'fileName': pdfFilePath}) }}">Télécharger le PDF</a>
+                <a class="btn-chart" href="{{path('show_project', {'id': project.id}) }}" >Retour au Projet</a>
             </figcaption>
         </figure>
     </section>

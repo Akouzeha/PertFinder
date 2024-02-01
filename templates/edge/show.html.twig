@@ -5,13 +5,12 @@
 
 {% block body %}
 
-
     <div id="chart-container" class="edge-chart-container">
         <a class="btn btn-avatar" href="{{path('new_task', {'diagramId': taskData[0]['diagramId']})}}"> Modifiez vous tâches ici</a>
     </div>
 <div class="col-12">
     <div class = "task-list col-6">
-        <table class = "task-table">
+        <table class = "task-table responsive-edge-table">
             <thead>
             <tr>
                 <th>Task</th>

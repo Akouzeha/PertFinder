@@ -299,6 +299,7 @@ class DiagramController extends AbstractController
     $tasks = $em->getRepository(Task::class)->findBy(['pertChart' => $diagramId]);
     $edges = $em->getRepository(Edge::class)->findAllEdgesForChart($diagramId);
     $diagram = $em->getRepository(Diagram::class)->find($diagramId);
+    $project = $diagram->getProject();
     //$imgName = str_replace(' ', '_', $diagram->getTitle());
     $imgName = $diagram->getImgName();
     $dates = $this->calculDatesInternal($diagramId, $em);
@@ -336,6 +337,7 @@ class DiagramController extends AbstractController
         'imageFilePath' => $imgName . '.png',
         'pdfFilePath' => $imgName . '.pdf',
         'diagramId' => $diagramId,
+        'project' => $project,
     ]);
 }
 

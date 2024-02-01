@@ -48,7 +48,7 @@
 }
 
 /* Registeration et login forms For mobile phones: */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
     .form-group, .form-input{
         width: 95%;
         margin-left:10px;
@@ -60,7 +60,7 @@
 
 }
 
-  @media screen and (max-width: 768px){
+  @media screen and (max-width: 1024px){
     .nav-list{
         display: none !important;
     }
@@ -70,7 +70,7 @@
       }
   }
 
- @media screen and (max-width: 768px){
+ @media screen and (max-width: 1024px){
     .nav-list.responsive {
         position: relative !important;
     }
@@ -191,6 +191,35 @@
 }
 /* ============================================== */
 /* show project */
+@media screen and (max-width: 1024px) {
+    .project-container{
+        width: 100%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .show-project{
+        width:95% !important;
+        margin: auto !important;
+    }
+    .project-description{
+        width: 100% !important;
+        margin: auto !important;
+    }
+    .project-chart-container{
+        width: 100% !important;
+        margin: auto !important;
+    }
+    .project-container img{
+        width:100% !important;
+    }
+    .show-project-comment{
+        width: 100% !important;
+        margin: auto !important;
+    }
+}
+
+
 @media screen and (max-width: 768px) {
     .project-container{
         width: 100%;
@@ -208,6 +237,11 @@
         height: 200px;
         margin-left: 0px;
     }
+    .project-options{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
 }
 @media screen and (max-width: 480px) {
     .project-container{
@@ -383,3 +417,67 @@
         margin-bottom: 20px; /* Add some margin between the form and aside */
     }
 }
+
+@media screen and (max-width: 1024px)  {
+    .responsive-edge-table{
+        width: 100% !important;
+        margin: auto !important;
+    }
+    .matrix{
+        width: 100% !important;
+        margin: auto !important;
+    }
+
+}
+@media screen and (max-width: 768px)  {
+    .responsive-edge-table{
+        width: 90% !important;
+        margin: auto !important;
+    }
+    .matrix{
+        width: 90% !important;
+        margin: auto !important;
+    }
+
+}
+@media screen and (max-width: 480px)  {
+    .responsive-edge-table{
+        width: 90% !important;
+        margin: auto !important;
+    }
+    .matrix{
+        width: 90% !important;
+        margin: auto !important;
+    }
+
+}
+
+@media screen and (max-width: 480px)  {
+    .basic-container{
+        width: 100% !important;
+        margin: auto !important;
+    }
+    .message-section{
+        width: 95% !important;
+        margin: auto !important;
+    }
+    
+}
+
+@media screen and (max-width: 768px) {
+    .button-container-1{
+       
+        flex-direction: column !important;
+        width: 90% !important;
+    }
+    .button-container-1 .btn{
+        width: 100% !important;
+        margin-left: 30px !important;
+        
+    }
+    .user-row-hidden-1{
+        flex-direction: column !important;
+        width: 90% !important;
+    }
+}
+

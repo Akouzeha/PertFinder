@@ -1618,8 +1618,9 @@ td {
 }
 .edge-chart-container{
     width: 900px;
-    height: 400px;
+    height: 300px;
     margin: auto;
+    margin-bottom: 10px;
 }
 .edge-chart-container .btn{
     margin-left: 0px;

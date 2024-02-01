@@ -8,7 +8,7 @@
     {% set zScore = project.calculZScore(projectDuree, chart.duree, chart.variance) %}
     {% set probability = project.calculateProbabilityAndNormalDistribution(zScore) %}
 {% endif %}
-    
+     
     <div class="project-container container">
         <div class="show-project">
             <section class="project-description">
@@ -118,7 +118,7 @@
         </div>
         
     </div>
-        <div class="show-comment">
+        <div class="show-comment show-project-comment">
             <h2>Commentaires</h2>
             {% for comment in project.comments %}
                 <div class="comment">
