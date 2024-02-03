@@ -20,10 +20,9 @@ class CommentType extends AbstractType
         ->add('contenu', TextareaType::class,
         [
             'attr' => [
-                'class' => 'form-textArea',
+                'class' => 'project-textArea',
                 'placeholder' => 'Votre commentaire'
             ],
-            'sanitize_html' => true,
         ])
         ->add('poster', SubmitType::class,
         [

@@ -25,7 +25,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'attr' => [
-                    'placeholder' => 'Nom d\'utilisateur'
+                    'placeholder' => 'Pseudo'
                 ],
                 'constraints' => [
                     new NotBlank([

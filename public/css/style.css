@@ -759,21 +759,21 @@ td {
 .post-comment {
     width: 100%;
     height: auto;
-    align-items: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    margin: auto;
 }
 
 .post-comment textarea {
     width: 1000px;
     height: 100px;
-    align-self: center;
+    align-self: center !important;
     font-size: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
     border: 2px solid var(--primary);
-    
     padding-left: 20px;
     font-size: 20px;
     font-weight: semi-bold;
@@ -1009,12 +1009,12 @@ td {
 .user-table td {
     padding: 10px;
     width: 300px;
-    border: 2px solid #312f2f83;
+    border-bottom: 2px solid #312f2f83;
 }
 
 .user-table th {
     padding-right: 20px;
-    border: none;
+    border-bottom: 2px solid #312f2f83;
 }
 
 .user-table td {
@@ -1736,7 +1736,7 @@ body {
     background-color: #f4f4f4;
 }
 
-table {
+.message-list {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -1744,19 +1744,19 @@ table {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-th, td {
+.message-list th, .message-list td {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
     font-weight: lighter;
 }
 
-th {
+.message-list th {
     background-color: #4CAF50;
     color: white;
 }
 
-tr.message:hover {
+.message-list tr.message:hover {
     background-color: #f5f5f5;
 }
 

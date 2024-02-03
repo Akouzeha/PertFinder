@@ -216,6 +216,21 @@
     .show-project-comment{
         width: 100% !important;
         margin: auto !important;
+        margin-bottom: 10px;
+    }
+    .show-project-comment .comment{
+        width: 90% !important;
+        margin: auto !important;
+    }
+    .show-project-comment .post-comment{
+        width: 90% !important;
+        display: block;
+        margin: auto !important;
+    }
+    .show-project-comment textarea{
+        width: 100% !important;
+        margin-top: 20px;
+        
     }
 }
 
@@ -466,14 +481,13 @@
 
 @media screen and (max-width: 768px) {
     .button-container-1{
-       
-        flex-direction: column !important;
-        width: 90% !important;
+        flex-direction: column;
+        width: 90%;
     }
+
     .button-container-1 .btn{
         width: 100% !important;
         margin-left: 30px !important;
-        
     }
     .user-row-hidden-1{
         flex-direction: column !important;

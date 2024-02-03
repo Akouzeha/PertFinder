@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AdminController extends AbstractController
 {
@@ -65,7 +66,7 @@ class AdminController extends AbstractController
      * @return Response
      */
     #[Route('/admin/{id}/delete', name: 'admin_delete_user')]
-    public function deleteUser(User $user, EntityManagerInterface $em): Response
+    public function deleteUser(User $user, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
         // Check if the user has the "super admin" role
         if (in_array('ROLE_SUPER_ADMIN', $user->getRoles(), true)) {
@@ -74,6 +75,12 @@ class AdminController extends AbstractController
         }
         else if($this->isGranted('ROLE_ADMIN')){
         // Pseudonymize or anonymize personal data
+        
+       /*  //hash the user name with slugger starting from the third letter 
+        $hashedUsername = $slugger->slug($user->getUsername())->slice(3);
+        //hash the user email with slugger from the begining to the @
+        $hashedEmail = $slugger->slug($user->getEmail())->slice(0, strpos($user->getEmail(), '@')); */
+
         $hashedUsername = hash('sha256', $user->getUsername());
         $hashedEmail = hash('sha256', $user->getEmail());
         // Disable the user's account
