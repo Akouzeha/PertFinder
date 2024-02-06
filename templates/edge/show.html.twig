@@ -63,9 +63,15 @@
                         {{ task.task.name }}
                     </td>
                     {% for value in task.adjacencyMatrix %}
-                        <td>
-                            {{ value }}
-                        </td>
+                        {% if value == 1 %}
+                            <td style="color:red;">
+                                {{ value }}
+                            </td>
+                        {% else %}
+                            <td>
+                                {{ value }}
+                            </td>
+                        {% endif %}
                     {% endfor %}
                 </tr>
             {% endfor %}

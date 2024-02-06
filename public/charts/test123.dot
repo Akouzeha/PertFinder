@@ -11,45 +11,45 @@ digraph PERT {
         
         </TABLE>>]
   93 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
-        <TR><TD BGCOLOR= 'aquamarine3'>ES: 10</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 20</TD><TD BGCOLOR= 'aquamarine3'>EF: 30</TD></TR>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: 10</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 21</TD><TD BGCOLOR= 'aquamarine3'>EF: 31</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>B</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 10</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 30</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 10</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 31</TD></TR>
         
         </TABLE>>]
   94 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
-        <TR><TD BGCOLOR= 'aquamarine3'>ES: 30</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 5</TD><TD BGCOLOR= 'aquamarine3'>EF: 35</TD></TR>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: 31</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 5</TD><TD BGCOLOR= 'aquamarine3'>EF: 36</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>C</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 30</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 35</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 31</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 36</TD></TR>
         
         </TABLE>>]
   95 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
-        <TR><TD BGCOLOR= 'aquamarine3'>ES: 35</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 10</TD><TD BGCOLOR= 'aquamarine3'>EF: 45</TD></TR>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: 36</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 10</TD><TD BGCOLOR= 'aquamarine3'>EF: 46</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>D</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 35</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 45</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 36</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 46</TD></TR>
         
         </TABLE>>]
   96 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
-        <TR><TD BGCOLOR= 'aquamarine3'>ES: 45</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 20</TD><TD BGCOLOR= 'aquamarine3'>EF: 65</TD></TR>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: 46</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 20</TD><TD BGCOLOR= 'aquamarine3'>EF: 66</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>E</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 45</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 65</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 46</TD><TD BGCOLOR= 'chocolate2'>MT: 0</TD><TD BGCOLOR= 'cornflowerblue'>LF: 66</TD></TR>
         
         </TABLE>>]
   97 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
         <TR><TD BGCOLOR= 'aquamarine3'>ES: 10</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 15</TD><TD BGCOLOR= 'aquamarine3'>EF: 25</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>F</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 25</TD><TD BGCOLOR= 'chocolate2'>MT: 15</TD><TD BGCOLOR= 'cornflowerblue'>LF: 40</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 26</TD><TD BGCOLOR= 'chocolate2'>MT: 16</TD><TD BGCOLOR= 'cornflowerblue'>LF: 41</TD></TR>
         
         </TABLE>>]
   98 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
-        <TR><TD BGCOLOR= 'aquamarine3'>ES: 35</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 5</TD><TD BGCOLOR= 'aquamarine3'>EF: 40</TD></TR>
+        <TR><TD BGCOLOR= 'aquamarine3'>ES: 36</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 5</TD><TD BGCOLOR= 'aquamarine3'>EF: 41</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>G</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 40</TD><TD BGCOLOR= 'chocolate2'>MT: 5</TD><TD BGCOLOR= 'cornflowerblue'>LF: 45</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 41</TD><TD BGCOLOR= 'chocolate2'>MT: 5</TD><TD BGCOLOR= 'cornflowerblue'>LF: 46</TD></TR>
         
         </TABLE>>]
   99 [label=<<TABLE BORDER='0' CELLBORDER='1' CELLSPACING='0' CELLPADDING='4'>
         <TR><TD BGCOLOR= 'aquamarine3'>ES: 10</TD><TD BGCOLOR= 'antiquewhite3'>Duree: 15</TD><TD BGCOLOR= 'aquamarine3'>EF: 25</TD></TR>
         <TR><TD BGCOLOR= 'white' COLSPAN='3'>H</TD></TR>
-        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 30</TD><TD BGCOLOR= 'chocolate2'>MT: 20</TD><TD BGCOLOR= 'cornflowerblue'>LF: 45</TD></TR>
+        <TR><TD BGCOLOR= 'cornflowerblue'>LS: 31</TD><TD BGCOLOR= 'chocolate2'>MT: 21</TD><TD BGCOLOR= 'cornflowerblue'>LF: 46</TD></TR>
         
         </TABLE>>]
   92 -> 93 [color=red]

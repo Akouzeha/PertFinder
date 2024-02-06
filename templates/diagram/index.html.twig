@@ -6,7 +6,7 @@
     
     <div class="row-dates">
         <div class="col-12">
-            <h1>Tasks by Level</h1>
+            <h1>Les Dates</h1>
             <table class="dates" border="1">
                 <tr>
                     <th>Task</th>
@@ -32,7 +32,7 @@
                     {% endfor %}
                 {% endfor %}
             </table>
-            <a class="btn btn-primary" href="{{ path('draw_graph', {'diagramId': diagramId}) }}">Créer le Diagram</a>
+            <a class="btn" href="{{ path('draw_graph', {'diagramId': diagramId}) }}">Créer le Diagram</a>
         </div>
         <div class="vocab col-12">
             <h1>Vocabulaire</h1>

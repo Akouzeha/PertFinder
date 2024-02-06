@@ -87,7 +87,6 @@ class EdgeController extends AbstractController
         foreach ($tasks as $index => $task) {
             $taskIndices[$task->getId()] = $index;
         }
-
         // Create an empty adjacency matrix
         $numberOfTasks = count($tasks);
         $adjacencyMatrix = array_fill(0, $numberOfTasks, array_fill(0, $numberOfTasks, 0));
@@ -97,7 +96,7 @@ class EdgeController extends AbstractController
             $taskIndex = $taskIndices[$edge->getTask()->getId()];
             $predecessorIndex = $taskIndices[$edge->getPredecessor()->getId()];
 
-            // Assuming a directed graph, set the adjacency matrix value to 1
+            //set the adjacency matrix value to 1
             $adjacencyMatrix[$taskIndex][$predecessorIndex] = 1;
         }
 
@@ -187,11 +186,11 @@ private function calculateTaskLevel(Task $currentTask, array $tasks, array $adja
     }
 
     $currentTaskIndex = array_search($currentTask, $tasks);
+    
     $maxPredecessorLevel = 0;
 
     foreach ($tasks as $predecessorTask) {
         $predecessorIndex = array_search($predecessorTask, $tasks);
-
         if ($adjacencyMatrix[$currentTaskIndex][$predecessorIndex] == 1) {
             $predecessorLevel = $this->calculateTaskLevel($predecessorTask, $tasks, $adjacencyMatrix, $levels);
             $maxPredecessorLevel = max($maxPredecessorLevel, $predecessorLevel);

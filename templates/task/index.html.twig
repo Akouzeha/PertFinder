@@ -194,9 +194,9 @@
             {% endif %}
             {% if tasks | length > 0 %}
                 
-            <div class="col-12" style="margin-top:10px;margin-bottom:15px;">
-                <a href="{{path('task_edge', {'diagramId': tasks[0].pertChart.id})}}" class="btn btn-primary">Les dépendances</a>
-                <a class="btn btn-primary" href="{{ path('draw_graph', {'diagramId': tasks[0].pertChart.id}) }}">Créer le Diagram</a>
+            <div class="col-4" style="margin-top:10px;margin-bottom:15px;">
+                <a href="{{path('task_edge', {'diagramId': tasks[0].pertChart.id})}}" class="btn">Les dépendances</a>
+                <a class="btn" href="{{ path('draw_graph', {'diagramId': tasks[0].pertChart.id}) }}">Créer le Diagram</a>
             </div>
             {% endif %}
 
