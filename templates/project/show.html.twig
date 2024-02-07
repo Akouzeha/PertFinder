@@ -48,7 +48,7 @@
                         {% if project.diagrams is empty %}
                         <p> pas encore de diagramme pour ce projet</p>
                         {% else %}
-                        {% if zScore == 0 %}
+                       {#  {% if zScore == 0 %}
                             <p> Le Z-score est exactement 0, cela signifie que le point de données est à la moyenne de la distribution.</p>
                         {% elseif zScore > -2 and zScore < 2 %}
                             <p> Le Z-score est entre -2 et 2, cela signifie que le point de données est dans la distribution <span style="color:green;"> normale.</span></p>
@@ -56,7 +56,7 @@
                             <p> Le Z-score est entre 2 et 3 (ou entre -2 et -3), cela indique <span style="color:orange;"> une situation inhabituelle.</span></p>
                         {% elseif zScore >= 3 or zScore <= -3 %}
                             <p> Un Z-score supérieur à 3 (ou inférieur à -3) est généralement considéré comme <span style="color:red;">très inhabituel ou extrême.</span> Veuillez vérifier les données.</p>
-                        {% endif %}
+                        {% endif %} #}
 
                         {% endif %}
                         {% if project.diagrams is empty %}
