@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
-use App\Entity\Message;
 use App\Entity\User;
+use App\Entity\Message;
 use App\Form\ResponseType;
 use App\Form\UserPromoteType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AdminController extends AbstractController
 {
@@ -66,7 +68,7 @@ class AdminController extends AbstractController
      * @return Response
      */
     #[Route('/admin/{id}/delete', name: 'admin_delete_user')]
-    public function deleteUser(User $user, EntityManagerInterface $em, SluggerInterface $slugger): Response
+    public function deleteUser(User $user, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
         // Check if the user has the "super admin" role
         if (in_array('ROLE_SUPER_ADMIN', $user->getRoles(), true)) {
@@ -75,26 +77,29 @@ class AdminController extends AbstractController
         }
         else if($this->isGranted('ROLE_ADMIN')){
         // Pseudonymize or anonymize personal data
-        
-       /*  //hash the user name with slugger starting from the third letter 
-        $hashedUsername = $slugger->slug($user->getUsername())->slice(3);
-        //hash the user email with slugger from the begining to the @
-        $hashedEmail = $slugger->slug($user->getEmail())->slice(0, strpos($user->getEmail(), '@')); */
-
         $hashedUsername = hash('sha256', $user->getUsername());
         $hashedEmail = hash('sha256', $user->getEmail());
         // Disable the user's account
         $user->setIsDeleted(true);
         
+        $email = (new TemplatedEmail())
+        ->from('noReplay@admin.com')
+        ->to($user->getEmail())
+        ->subject('Confirmation de suppression de compte')
+        ->htmlTemplate('message/account_delete_confirmation.html.twig')
+        ->context([
+            'user' => $user,
+        ]);
+        $mailer->send($email);
+        
         // Set the pseudonymized data
         $user->setUsername($hashedUsername);
         $user->setEmail($hashedEmail);
-    
         $em->persist($user);
         $em->flush();
-        
         $this->addFlash('success', 'L\'utilisateur a été pseudonymisé avec succès.');
     }
+
         return $this->redirectToRoute('app_admin');
     }
     #[Route('/admin/messages', name: 'recevoir_messages')]

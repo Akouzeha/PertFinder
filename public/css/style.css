@@ -1797,10 +1797,10 @@ body {
 }
 .message-contenu {
     
-    border: 1px solid #ddd;
+    border: 1px solid green;
     padding: 10px; 
     border-radius: 5px; 
-    background-color: #f9f9f9;
+    background-color: #e2dfdf;
 }
 /* admn span */
 .message-body .admin{

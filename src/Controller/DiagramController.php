@@ -57,6 +57,7 @@ class DiagramController extends AbstractController
             $diagram->setUser($user);
             $imgName = str_replace(' ', '_', $diagram->getTitle());
             $diagram->setImgName($imgName);
+            $diagram->setDureeCritique(0);
             $em->persist($diagram);
             $em->flush();
             $showForm = false;

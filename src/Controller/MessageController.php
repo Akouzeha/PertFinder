@@ -9,7 +9,9 @@ use App\Repository\ChannelRepository;
 use Symfony\Component\Mercure\Update;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mercure\HubInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -46,10 +48,11 @@ class MessageController extends AbstractController
     
     }
     #[Route('/message/respond/{messageId}', name: 'respond_message')]
-    public function respond(Request $request, EntityManagerInterface $em, $messageId): Response
+    public function respond(Request $request, EntityManagerInterface $em, $messageId, MailerInterface $mailer): Response
     {
         
         $messageParent = $em->getRepository(Message::class)->find($messageId);
+        $user = $messageParent->getUser();
         if (!$messageParent) {
             throw $this->createNotFoundException('Parent message not found');
         }
@@ -77,6 +80,19 @@ class MessageController extends AbstractController
             $message->setAnsewred(false);
             $em->persist($message);
             $em->flush();
+            
+            //send email to the user
+            $email = (new TemplatedEmail())
+            ->from('noreplay@pertfinder.com')
+            ->to($user->getEmail())
+            ->subject('Réponse à votre message')
+            ->htmlTemplate('message/reponse_confirmation.html.twig')
+            ->context([
+            'user' => $user,
+            'message' => $messageParent,
+        ]);
+        $mailer->send($email);
+
             $this->addFlash('success', 'Message a été envoyé!');
             return $this->redirectToRoute('respond_message', ['id' => $messageId, 'messageId' => $messageId]);
             

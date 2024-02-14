@@ -43,6 +43,10 @@
             {{ form_widget(formResponse) }}
             {{ form_end(formResponse) }}
         </div>
+    {% else %}
+        <p> Ce message a été marqué comme répondu</p>
+        <p> si vous avez d'autres questions, veuillez en créer un nouveau</p>
+        <a href="{{path('send_message')}}"><button class="answer-button">Nouveau message</button></a>
     {% endif %}
     </div>
 {% endblock %}

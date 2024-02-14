@@ -28,7 +28,7 @@ class CommentType extends AbstractType
         [
             'label' => 'Poster',
             'attr' => [
-                'class' => 'btn btn-primary'
+                'class' => 'btn-primary'
             ]
         ])
         ;
