@@ -301,7 +301,6 @@ class DiagramController extends AbstractController
     $edges = $em->getRepository(Edge::class)->findAllEdgesForChart($diagramId);
     $diagram = $em->getRepository(Diagram::class)->find($diagramId);
     $project = $diagram->getProject();
-    //$imgName = str_replace(' ', '_', $diagram->getTitle());
     $imgName = $diagram->getImgName();
     $dates = $this->calculDatesInternal($diagramId, $em);
     $ES = $dates['ES'];
@@ -310,10 +309,7 @@ class DiagramController extends AbstractController
     $LF = $dates['LF'];
     $MT = $dates['MT'];
     $ML = $dates['ML'];
-    
- 
     $dotContent = $this->generateDotFileContent($tasks, $edges, $ES, $EF, $LS, $LF, $MT, $ML);
-
     // Save DOT file
     $dotFilePath = '/Applications/MAMP/htdocs/KOUZEHA_Ammar/PertFinder/public/charts/' . $imgName . '.dot';
     file_put_contents($dotFilePath, $dotContent);
@@ -334,6 +330,7 @@ class DiagramController extends AbstractController
     }
 
     //return new BinaryFileResponse($imageFilePath);
+    
     return $this->render('diagram/chart.html.twig', [
         'imageFilePath' => $imgName . '.png',
         'pdfFilePath' => $imgName . '.pdf',

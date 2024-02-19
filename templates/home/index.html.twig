@@ -1,6 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% block title %}PERT Finder: Home Page{% endblock %}
+
+{% block metaDes %} "Discover the perfect pert chart for your projects with our intuitive Pert Finder web app. Streamline project management, visualize timelines, 
+    and optimize task dependencies effortlessly. Empower your team with a user-friendly interface and dynamic features. Simplify project planning and execution with Pert Finder – 
+    your go-to solution for efficient project management" {% endblock %}
+
+{% block keywords %} "projects, pert, milestones, list, discover, share" {% endblock %}
+    
+{% endblock %}
 
 {% block body %}
     <div class="homeContainer">
@@ -42,7 +53,9 @@
                             <div class="gallery">
                                 <h3 class="desc">{{ imgInfo.diagramTitle }}</h3>
                                 <a href="{{ path('show_project', {'id': imgInfo.projectId}) }}">
+
                                     <img src="{{ asset('charts/img/' ~ imgInfo.imgName ~ '.png') }}" alt="{{ imgInfo.diagramTitle }}">
+                                    
                                 {% endif %}
                                 </a>
                             </div>

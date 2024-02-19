@@ -40,5 +40,12 @@ class HomeController extends AbstractController
             'imgData' => $imgData,
         ]);
     }
+    #[Route('/home/conditions', name: 'app_conditions')]
+    public function conditions(): Response
+    {
+        return $this->render('home/conditions.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 
 }

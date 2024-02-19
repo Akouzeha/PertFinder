@@ -5,16 +5,19 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+        
+        <meta name="description" content={% block metaDes %} {% endblock %}>
+        <meta name="keywords" content={% block keywords %} {% endblock %}>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        
        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
        <FilesMatch "\.(jpg|jpeg|png|gif|css|js)$" style="display:none">
          Header set Cache-Control "public, max-age=31536000"
         </FilesMatch>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {# <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>#}
-        
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('css/agencement.css') }}">
             <link rel="stylesheet" href="{{ asset('css/style.css') }}">

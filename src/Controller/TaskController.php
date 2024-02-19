@@ -63,7 +63,7 @@ class TaskController extends AbstractController
             $diagramDuree = $diagram->getDuree() + $duration;
             $diagram->setDuree($diagramDuree);
             //calculate the variance
-            $variance_format = pow(($task->getPesTime() - $task->getOptTime()), 2) / 36;
+            $variance_format = pow(($task->getPesTime() - $task->getOptTime()), 2) / 6;
             $variance = round($variance_format, 3);
             $diagramVariance = $diagram->getVariance() + $variance;
             $diagram->setVariance($diagramVariance);

@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}PERT Finder: Explore Projects!{% endblock %}
 {% block head %}
     {{ parent() }}
-    <meta name="description" content="Discover a comprehensive list of projects in the PERT Finder app. 
-    Effortlessly manage project timelines, tasks, and milestones. 
-    Stay organized and boost productivity with our intuitive project management solution.">
+{% block title %}PERT Finder: Explore Projects!{% endblock %}
+
+{% block metaDes %} "Explore our dedicated page showcasing relevant projects that have left a lasting impact on our journey." {% endblock %}
+
+{% block keywords %} "projects, pert, milestones, list, discover, share" {% endblock %}
+    
 {% endblock %}
 
 
@@ -21,11 +23,11 @@
                     <div class="list-project-row-1">
                         <div class="col-12">
                             {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_PROJECT_MANAGER") or (app.user.id == project.user.id) %}  
-                                <a href="{{path('edit_project', {'id': project.id})}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}"></a>
-                                <a href="{{path('delete_project', {'id': project.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}"></a>
+                                <a href="{{path('edit_project', {'id': project.id})}}"><img class="edit-pen" src="{{ asset('img/pencil-fill.svg') }}" alt="edit a project"></a>
+                                <a href="{{path('delete_project', {'id': project.id})}}"><img class="delete-bin" src="{{ asset('img/delete-bin.svg') }}" alt="delete a project"></a>
                             {% endif %}
-                                <a href="{{path('show_project', {'id': project.id})}}" >{{ commentCounts[project.id] }} <img class="delete-bin" src="{{ asset('img/icons8-comment.svg') }}"></a>
-                                <img class="image" src="{{ asset('img/pertFinderLogo.png') }}" alt="image">
+                                <a href="{{path('show_project', {'id': project.id})}}" >{{ commentCounts[project.id] }} <img class="delete-bin" src="{{ asset('img/icons8-comment.svg') }}" alt="comments number"></a>
+                                <img class="image" src="{{ asset('img/pertFinderLogo.png') }}" alt="pertFinder logo">
                                 <h5><a style="float:left;margin-top:0px;" href="{{path('show_project', {'id': project.id}) }}" >{{project.title}}</a></h5> 
                                 <p>Ce Project a été créé par  <a href="{{path('see_user',{'id': project.user.id})}}"> {{project.user}}</a></p>
                            {% if project.comments is empty() %}

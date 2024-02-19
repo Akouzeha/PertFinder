@@ -177,3 +177,8 @@
     background-color: #e74c3c;
     color: #fff;
 }
+
+.btn-centre{
+    width:25% !important;
+    margin: 0 auto;
+}
